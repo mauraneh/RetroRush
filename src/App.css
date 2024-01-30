@@ -1,20 +1,20 @@
 /* ------------------- APP --------------------- */
-.App {
+.app {
   text-align: center;
 }
 
-.App-logo {
+.app-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .app-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.app-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -25,7 +25,7 @@
   color: white;
 }
 
-.App-link {
+.app-link {
   color: #61dafb;
 }
 
@@ -38,7 +38,7 @@
   }
 }
 
-.App-input {
+.app-input {
   width: 100%;
   height: 20px;
   border: 1px solid #ccc;
@@ -52,18 +52,18 @@
   text-align: center;
 }
 
-.App-input:focus {
+.app-input:focus {
   outline: none;
   border-color: #81e6d3;
 }
-.App-input::placeholder {
+.app-input::placeholder {
   color: #99b3ae;
 }
-.App-input:hover {
+.app-input:hover {
   border-color: #ffd826;
 }
 
-.App-button {
+.app-button {
   background-color: #fa519a; 
   color: #ffeef5;
   padding: 40px 25px;
@@ -77,18 +77,20 @@
   box-shadow: 0 10px #e91571;
 }
 
-.App-button:hover {
+.app-button:hover {
   background-color: #f74d90; 
   transform: scale(1.1);
 }
 
-.App-button:active {
+.app-button:active {
   box-shadow: 0 1px #f74d90; 
   transform: translateY(3px); 
 }
 
 /* --------------------- HOMEPAGE --------------------- */
-.Container-hp {
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.container-hp {
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/images/background.png');
@@ -96,24 +98,24 @@
   background-position: center;
   backdrop-filter: blur(100px);
 }
-.Header-hp{
+.header-hp{
   height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #282c34;
+  background-color: #000;
   border-bottom: 2px solid #ffd826;
 }
-.Logo {
+.logo {
   margin-top: 80px;
   height: 30vmin;
 }
 
-.Logo:hover {
+.logo:hover {
   animation: App-logo-spin infinite 20s linear;
 }
 
-.Title-hp {
+.title-hp {
   font-size: 3rem;
   text-transform: uppercase;
   text-align: center;
@@ -125,3 +127,156 @@
   0 0 9px rgba(0, 255, 255, 0.7),
   0 0 12px rgba(0, 255, 255, 0.7);
 }
+
+.container-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  margin: 20px;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(44, 43, 43, 0);
+  width: 760px;
+  margin: auto;
+  height: 400px;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-inner > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 50%;
+  margin: 10px;
+}
+
+.carousel-button {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffe100; 
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 0px 20px;
+  border-radius: 50%;
+  font-size: 3rem;
+  border: none;
+  box-shadow: 0 10px #b39f07;
+}
+
+.carousel-button.prev {
+  left: 20px;
+}
+
+.carousel-button.next {
+  right: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background: white;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.card:hover .card-image {
+  opacity: 1;
+}
+.card:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3); 
+}
+
+.subtitle-hp {
+  font-size: 48px;
+  color: #F0F; 
+  text-shadow: 
+    1px 1px 0 #EB0,   
+    2px 2px 0 #0D6,   
+    3px 3px 0 #09F; 
+  font-family: 'Press Start 2P', cursive; 
+}
+.jouer-button {
+  position: relative;
+  z-index: 4;
+  background-color: #09F;
+  border: none;
+  color: white;
+  padding: 30px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+  box-shadow: 0 10px rgb(1, 85, 141);
+}
+
+.jouer-button:hover {
+  animation: clignotement-vif 0.5s infinite; 
+}
+
+.bouton-jouer:active {
+  box-shadow: 0 1px #09F; 
+  transform: translateY(3px); 
+}
+
+.relief-text {
+  z-index: 10; 
+  position: relative;
+  bottom: 60px;
+  font-size: 2rem;
+  color: #e55800;
+  text-shadow: 
+      1px 1px 0 #000,   
+      2px 2px 0 #000,   
+      3px 3px 0 #000;
+}
+
+/* --------  KEYFRAME ---------- */
+@keyframes clignotement {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes clignotement-vif {
+  0%, 100% {
+    background-color: #09F; 
+  }
+  50% {
+    background-color: #F00;
+    box-shadow: 0 10px rgb(218, 12, 12);
+  }
+}
+

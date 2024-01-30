@@ -27,18 +27,18 @@ function EnterNickname() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="app">
+      <header className="app-header">
+        <img src={logo} className="app-logo" alt="logo" />
         <div>
           <input
-            className="App-input"
+            className="app-input"
             type="text"
             placeholder="Enter your nickname"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <button className="App-button" onClick={handleEnter}>Enter</button>
+          <button className="app-button" onClick={handleEnter}>Enter</button>
         </div>
       </header>
     </div>

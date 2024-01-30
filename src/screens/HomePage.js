@@ -1,17 +1,50 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import logo from '../assets/images/logoRR.png';
+import { Link } from 'react-router-dom';
+import Carousel from './Carousel';
+
+import snakeImage from '../assets/images/snakes.png';
+import breakoutImage from '../assets/images/breakout.png';
+import motusImage from '../assets/images/motus.png';
+import tictactoeImage from '../assets/images/tictactoe.png';
+
 
 function HomePage() {
   const location = useLocation();
   const { nickname } = location.state || { nickname: 'Anonymous' };
 
   return (
-    <div className='Container-hp'>
-      <div className='Header-hp'>
-        <img src={logo} className="Logo" alt="logo" />
-        <h1 className='Title-hp'>Let's play, {nickname} !</h1>
+    <div className='container-hp'>
+      <div className='header-hp'>
+        <img src={logo} className="logo" alt="logo" />
+        <h1 className='title-hp'>Let's play, {nickname} !</h1>
       </div>
+      <div className='container-carousel'>
+            <h2 className='subtitle-hp'>Mini Jeux Rétro</h2>
+            <Carousel>
+              <div className='card'>
+                <img src={snakeImage} alt="Snake" className="card-image"/>
+                {/* <h3 className='relief-text'>Snake</h3> */}
+                <Link to="/snake"><button className='jouer-button'>Jouez</button></Link>
+              </div>
+                <div className='card'>
+                <img src={breakoutImage} alt="Snake" className="card-image"/>
+                {/* <h3 className='relief-text'>Breakout</h3> */}
+                <Link to="/breakout"><button className='jouer-button'>Jouez</button></Link>
+              </div>
+              <div className='card'>
+              <img src={motusImage} alt="Snake" className="card-image"/>
+                {/* <h3 className='relief-text'>Motus</h3> */}
+                <Link to="/motus"><button className='jouer-button'>Jouez</button></Link>
+              </div>
+              <div className='card'>
+                <img src={tictactoeImage} alt="Snake" className="card-image"/>
+                {/* <h3 className='relief-text'>TicTacToe</h3> */}
+                <Link to="/tictactoe"><button className='jouer-button'>Jouez</button></Link>
+              </div>
+            </Carousel>
+        </div>
     </div>
   );
 }
