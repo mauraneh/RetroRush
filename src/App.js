@@ -3,6 +3,8 @@ import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './screens/HomePage';
+import SnakeGame from './screens/SnakeGame';
+
 import { useNavigate } from 'react-router-dom';
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<EnterNickname />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/snake" element={<SnakeGame />} />
       </Routes>
     </Router>
   );
