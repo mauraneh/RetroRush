@@ -25,26 +25,25 @@ function HomePage() {
             <Carousel>
               <div className='card'>
                 <img src={snakeImage} alt="Snake" className="card-image"/>
-                {/* <h3 className='relief-text'>Snake</h3> */}
                 <Link to="/snake"><button className='jouer-button'>Jouez</button></Link>
               </div>
                 <div className='card'>
                 <img src={breakoutImage} alt="Snake" className="card-image"/>
-                {/* <h3 className='relief-text'>Breakout</h3> */}
                 <Link to="/breakout"><button className='jouer-button'>Jouez</button></Link>
               </div>
               <div className='card'>
               <img src={motusImage} alt="Snake" className="card-image"/>
-                {/* <h3 className='relief-text'>Motus</h3> */}
                 <Link to="/motus"><button className='jouer-button'>Jouez</button></Link>
               </div>
               <div className='card'>
                 <img src={tictactoeImage} alt="Snake" className="card-image"/>
-                {/* <h3 className='relief-text'>TicTacToe</h3> */}
                 <Link to="/tictactoe"><button className='jouer-button'>Jouez</button></Link>
               </div>
             </Carousel>
         </div>
+        <Link to="/">
+          <button className='retour-button'>Retour</button>
+        </Link>
     </div>
   );
 }
