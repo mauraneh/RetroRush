@@ -124,7 +124,7 @@ const SnakeGame = () => {
       {!isGameActive && (
           <button id="start-button" onClick={initializeGame}>▶</button>
         )}
-        <Link to="/">
+        <Link to="/homepage">
           <button className='retour-button'>Retour</button>
         </Link>
     </div>
