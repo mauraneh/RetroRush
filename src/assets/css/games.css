@@ -56,7 +56,7 @@
 }
 
 #start-button{
-  background-color: #fd028c; 
+  background-color: #fd028c;
   border-radius: 50%;
   padding: 20px 30px;
   font-size: 2rem;
@@ -92,4 +92,10 @@
 #snakeScore, #snakeBestScore {
   margin: 10px;
   color: #FFF;
+}
+
+/* breakout.css */
+
+.breakout {
+  background-image: url('/src/assets/images/breakoutBG.png');
 }
