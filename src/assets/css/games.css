@@ -13,18 +13,26 @@
   background-size: cover;
 }
 #gamesContainer {
-  box-shadow: 0 0 10px #fd028c;
-  padding: 10px 50px;
-  border-radius: 10px;
-  background-color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  animation: blinkShadow 1.5s infinite;
-  opacity: 0.8;
 }
 
+#snakeCanvas {
+  border: 1px solid #ffd826;
+  background-color: #000;
+  animation: blinkShadow 1.5s infinite;
+  opacity: 0.9;
+  box-shadow: 0 0 10px #fd028c;
+  border-radius: 10px;
+}
+#snakeScore {
+  color: #ffd826;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #000;
+}
 @keyframes color {
   0% { color: red; }
   15% { color: rgb(255, 0, 149); }
@@ -87,11 +95,6 @@
 @keyframes blinkShadow {
   0%, 100% { box-shadow: 0 0 20px #FF69B4; }
   50% { box-shadow: 0 0 5px #FF69B4; }
-}
-
-#snakeCanvas {
-  margin-top: 20px;
-  border: 1px solid #FFF;
 }
 
 .gameScoreWrapper {

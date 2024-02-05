@@ -15,8 +15,12 @@ const SnakeGame = () => {
     <div className='games' style={{backgroundImage: `url(${require('../assets/images/snakesBG.png')})`}}>
       <GameTitle text="Snake" />
       <div id="gamesContainer">
-        <SnakeCanvas id="snakeCanvas" canvasRef={canvasRef} snake={snake} food={food} isGameActive={isGameActive} />
-        <SnakeScore isGameActive={isGameActive} score={score} bestScore={bestScore} initializeGame={initializeGame} />
+        <div id='snakeCanvas'>
+          <SnakeCanvas canvasRef={canvasRef} snake={snake} food={food} isGameActive={isGameActive} />
+        </div>
+        <div id='snakeScore'>
+          <SnakeScore isGameActive={isGameActive} score={score} bestScore={bestScore} initializeGame={initializeGame} />
+        </div>
       </div>
       {!isGameActive && (
         <PlayButton initializeGame={initializeGame} />

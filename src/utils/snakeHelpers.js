@@ -46,8 +46,7 @@ if (newHead.x < 0 || newHead.x >= 25 || newHead.y < 0 || newHead.y >= 25 || coll
     alert(`Game Over! Votre score est de ${score}.`);
     return;
 }
-
-    newSnake.unshift(newHead); // Ajouter la nouvelle tête en avant du corps
+    newSnake.unshift(newHead);
     setSnake(newSnake);
 };
 
@@ -56,7 +55,7 @@ const collisionWithSelf = (head, snake) => {
     return snake.some(segment => segment.x === head.x && segment.y === head.y);
 };
 
-// Fonction pour gérer les pressions des touches
+// Fonction pour gérer les touches
 export const handleKeyPress = (e, setDirection, currentDirection, isGameActive) => {
     if (!isGameActive) return;
     switch (e.key) {
@@ -69,7 +68,7 @@ export const handleKeyPress = (e, setDirection, currentDirection, isGameActive) 
 };
 
 // Fonction pour dessiner le jeu sur le canvas
-export const drawGame = (canvasRef, snake, food, isGameActive) => {
+export const drawGame = (canvasRef, snake, food) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
