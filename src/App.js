@@ -1,9 +1,10 @@
-import logo from './assets/images/logoRR.png';
-import './App.css';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './screens/HomePage';
-import { useNavigate } from 'react-router-dom';
+import logo from "./assets/images/logoRR.png";
+import "./App.css";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./screens/HomePage";
+import { useNavigate } from "react-router-dom";
+import TicTacToeGame from "./screens/TicTacToeGame";
 
 function App() {
   return (
@@ -11,18 +12,19 @@ function App() {
       <Routes>
         <Route path="/" element={<EnterNickname />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/tictactoe" element={<TicTacToeGame />} />
       </Routes>
     </Router>
   );
 }
 
 function EnterNickname() {
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
   const handleEnter = () => {
     if (nickname) {
-      navigate('/homepage', { state: { nickname } });
+      navigate("/homepage", { state: { nickname } });
     }
   };
 
@@ -38,7 +40,9 @@ function EnterNickname() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <button className="app-button" onClick={handleEnter}>Enter</button>
+          <button className="app-button" onClick={handleEnter}>
+            Enter
+          </button>
         </div>
       </header>
     </div>
