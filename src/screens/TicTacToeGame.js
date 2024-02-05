@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Cell from "../components/TicTacToeCell";
+import Scoreboard from "../components/TicTacToeScoreBoard";
 
 const TicTacToe = () => {
   const [playerTurnFlag, setPlayerTurnFlag] = useState(true);
@@ -15,16 +17,14 @@ const TicTacToe = () => {
   const [isGameActive, setIsGameActive] = useState(false);
   const [botWins, setBotWins] = useState(0);
   const text = "TicTacToe - Game";
+  const cellRefs = useRef([]);
 
   // Affiche le contenu de la grille
   const displayBoard = () => {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        const cellId = `tictactoe-cell-${i}-${j}`;
-        const cell = document.getElementById(cellId);
-
-        // Vérifie si l'élément existe avant de le manipuler
-        if (cell) {
+    board.forEach((row, i) => {
+      row.forEach((_, j) => {
+        if (cellRefs.current[i] && cellRefs.current[i][j]) {
+          const cell = cellRefs.current[i][j];
           cell.textContent = board[i][j];
 
           if (board[i][j] === playerSymbol) {
@@ -33,21 +33,16 @@ const TicTacToe = () => {
             cell.classList.add("bot-symbol");
           }
         }
-      }
-    }
+      });
+    });
   };
 
   const removeClickEventHandlers = () => {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        const cellId = `tictactoe-cell-${i}-${j}`;
-        const cell = document.getElementById(cellId);
-
-        if (cell) {
-          cell.removeEventListener("click", () => handleCellClick(i, j));
-        }
-      }
-    }
+    cellRefs.current.forEach((row) => {
+      row.forEach((cell) => {
+        cell.onClick = null;
+      });
+    });
   };
 
   // Ajoute des gestionnaires d'événements aux cellules
@@ -56,30 +51,11 @@ const TicTacToe = () => {
       return;
     }
 
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        const cellId = `tictactoe-cell-${i}-${j}`;
-        const cell = document.getElementById(cellId);
-
-        // Vérifie si l'élément existe avant d'ajouter l'événement
-        if (cell) {
-          cell.addEventListener("click", () => handleCellClick(i, j));
-        }
-      }
-    }
-  };
-
-  // Met à jour le tableau des scores
-  const updateScoreboard = () => {
-    document.getElementById(
-      "tictactoe-player-score"
-    ).textContent = `Joueur : ${playerWins}`;
-    document.getElementById(
-      "tictactoe-draw-score"
-    ).textContent = `Matchs nuls : ${draws}`;
-    document.getElementById(
-      "tictactoe-bot-score"
-    ).textContent = `Bot : ${botWins}`;
+    cellRefs.current.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        cell.onClick = () => handleCellClick(rowIndex, colIndex);
+      });
+    });
   };
 
   // Vérifie si un joueur a gagné
@@ -132,24 +108,6 @@ const TicTacToe = () => {
       }
     }
     return true;
-  };
-
-  // Gère le tour du joueur
-  const playerTurn = (row, col) => {
-    if (playerTurnFlag && board[row][col] === "") {
-      const updatedBoard = [...board];
-      updatedBoard[row][col] = playerSymbol;
-      setBoard(updatedBoard);
-
-      if (checkWinner(playerSymbol)) {
-        handleGameEnd("Tu as gagné !", setPlayerWins);
-      } else if (checkDraw()) {
-        handleGameEnd("Match Nul !", setDraws);
-      } else {
-        setPlayerTurnFlag(false);
-        setTimeout(botTurn, 500);
-      }
-    }
   };
 
   // Gère le tour du bot
@@ -255,7 +213,6 @@ const TicTacToe = () => {
       setIsGameActive(false);
       alert(message);
       setScore((prevScore) => prevScore + 1);
-      updateScoreboard();
       removeClickEventHandlers(); // Supprimer les gestionnaires d'événements
       resetGame();
     }, 100);
@@ -293,7 +250,7 @@ const TicTacToe = () => {
   useEffect(() => {
     displayBoard();
     addClickEventHandlers();
-  }, [addClickEventHandlers, displayBoard, isGameActive]);
+  }, [displayBoard, isGameActive]);
 
   return (
     <>
@@ -316,37 +273,32 @@ const TicTacToe = () => {
               {board.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   {row.map((cell, colIndex) => (
-                    <td
+                    <Cell
                       key={colIndex}
+                      value={cell}
                       onClick={() => handleCellClick(rowIndex, colIndex)}
-                      className={`tictactoe-cell ${
-                        board[rowIndex][colIndex] === playerSymbol
-                          ? "player-symbol"
-                          : ""
-                      } ${
-                        board[rowIndex][colIndex] === botSymbol
-                          ? "bot-symbol"
-                          : ""
-                      }`}
-                    >
-                      {cell}
-                    </td>
+                      isPlayerSymbol={cell === playerSymbol}
+                      isBotSymbol={cell === botSymbol}
+                      ref={(cellRef) => {
+                        if (!cellRefs.current[rowIndex]) {
+                          cellRefs.current[rowIndex] = [];
+                        }
+                        cellRefs.current[rowIndex][colIndex] = cellRef;
+                      }}
+                      row={rowIndex}
+                      col={colIndex}
+                    />
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-
-          <div id="gamesContainer">
-            <div
-              id="snakeScoreWrapper"
-              style={{ display: isGameActive ? "flex" : "none" }}
-            >
-              <div id="tictactoe-player-score">Joueur : {playerWins}</div>
-              <div id="tictactoe-draw-score">Matchs nuls : {draws}</div>
-              <div id="tictactoe-bot-score">Bot : {botWins}</div>
-            </div>
-          </div>
+          <Scoreboard
+            playerWins={playerWins}
+            draws={draws}
+            botWins={botWins}
+            isGameActive={isGameActive}
+          />
         </div>
         {!isGameActive && (
           <button id="start-button" onClick={() => setIsGameActive(true)}>
