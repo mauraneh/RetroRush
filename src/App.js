@@ -6,6 +6,7 @@ import HomePage from './screens/HomePage';
 import SnakeGame from './screens/SnakeGame';
 
 import { useNavigate } from 'react-router-dom';
+import BreakOut from "./screens/BreakOut";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<EnterNickname />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/snake" element={<SnakeGame />} />
+        <Route path="/breakout" element={<BreakOut />} />
       </Routes>
     </Router>
   );

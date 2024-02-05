@@ -28,7 +28,7 @@ function HomePage() {
                 <Link to="/snake"><button className='jouer-button'>Jouez</button></Link>
               </div>
                 <div className='card'>
-                <img src={breakoutImage} alt="Snake" className="card-image"/>
+                <img src={breakoutImage} alt="casse-brique" className="card-image"/>
                 <Link to="/breakout"><button className='jouer-button'>Jouez</button></Link>
               </div>
               <div className='card'>
