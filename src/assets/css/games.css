@@ -1,6 +1,6 @@
 /* snake.css */
 
-.games{
+.games {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/src/assets/images/snakesBG.png');
   background-size: cover;
 }
 #gamesContainer {
@@ -30,13 +29,27 @@
 }
 
 @keyframes color {
-  0% { color: red; }
-  15% { color: rgb(255, 0, 149); }
-  25% { color: orange; }
-  35% { color: rgb(255, 234, 0); }
-  50% { color: yellow; }
-  75% { color: green; }
-  100% { color: blue; }
+  0% {
+    color: red;
+  }
+  15% {
+    color: rgb(255, 0, 149);
+  }
+  25% {
+    color: orange;
+  }
+  35% {
+    color: rgb(255, 234, 0);
+  }
+  50% {
+    color: yellow;
+  }
+  75% {
+    color: green;
+  }
+  100% {
+    color: blue;
+  }
 }
 
 .title {
@@ -46,8 +59,13 @@
 }
 
 @keyframes fade {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .title span {
@@ -55,8 +73,8 @@
   animation: fade 2s infinite, color 5s infinite;
 }
 
-#start-button{
-  background-color: #fd028c; 
+#start-button {
+  background-color: #fd028c;
   border-radius: 50%;
   padding: 20px 30px;
   font-size: 2rem;
@@ -75,13 +93,18 @@
 }
 
 @keyframes blinkShadow {
-  0%, 100% { box-shadow: 0 0 20px #FF69B4; }
-  50% { box-shadow: 0 0 5px #FF69B4; }
+  0%,
+  100% {
+    box-shadow: 0 0 20px #ff69b4;
+  }
+  50% {
+    box-shadow: 0 0 5px #ff69b4;
+  }
 }
 
 #snakeCanvas {
   margin-top: 20px;
-  border: 1px solid #FFF;
+  border: 1px solid #fff;
 }
 
 #snakeScoreWrapper {
@@ -89,7 +112,55 @@
   margin-top: 20px;
 }
 
-#snakeScore, #snakeBestScore {
+#snakeScore,
+#snakeBestScore {
   margin: 10px;
-  color: #FFF;
+  color: #fff;
+}
+
+/* Style du tictactoe */
+table {
+  border-collapse: collapse;
+  margin: 1.25rem auto;
+  background-color: #101010;
+}
+
+td {
+  width: 9.375rem;
+  height: 9.375rem;
+  text-align: center;
+  font-size: 4.5rem;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+#tictactoe-scoreboard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.tictactoe-cell {
+  position: relative;
+}
+
+.player-symbol {
+  color: #fdd33c; /* Couleur orange */
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+.bot-symbol {
+  color: #fd028c;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
