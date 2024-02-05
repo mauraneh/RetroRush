@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 import App from "./App";
+import SnakeGame from "./screens/SnakeGame";
 import HomePage from "./screens/HomePage";
 import TicTacToeGame from "./screens/TicTacToeGame";
 
@@ -12,6 +13,10 @@ const Router = createBrowserRouter([
   {
     path: "/homepage",
     element: <HomePage />,
+  },
+  {
+    path: "/snake",
+    element: <SnakeGame />,
   },
   {
     path: "/tictactoe",

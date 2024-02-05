@@ -3,8 +3,9 @@ import "./App.css";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./screens/HomePage";
-import { useNavigate } from "react-router-dom";
+import SnakeGame from "./screens/SnakeGame";
 import TicTacToeGame from "./screens/TicTacToeGame";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<EnterNickname />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/snake" element={<SnakeGame />} />
         <Route path="/tictactoe" element={<TicTacToeGame />} />
       </Routes>
     </Router>

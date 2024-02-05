@@ -1,0 +1,95 @@
+/* snake.css */
+
+.games{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  margin: 10px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/src/assets/images/snakesBG.png');
+  background-size: cover;
+}
+#gamesContainer {
+  box-shadow: 0 0 10px #fd028c;
+  padding: 10px 50px;
+  border-radius: 10px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: blinkShadow 1.5s infinite;
+  opacity: 0.9;
+}
+
+@keyframes color {
+  0% { color: red; }
+  15% { color: rgb(255, 0, 149); }
+  25% { color: orange; }
+  35% { color: rgb(255, 234, 0); }
+  50% { color: yellow; }
+  75% { color: green; }
+  100% { color: blue; }
+}
+
+.title {
+  font-size: 6em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.title span {
+  display: inline-block;
+  animation: fade 2s infinite, color 5s infinite;
+}
+
+#start-button{
+  background-color: #fd028c; 
+  border-radius: 50%;
+  padding: 20px 30px;
+  font-size: 2rem;
+  color: #fcd60c;
+  cursor: pointer;
+  box-shadow: 0 0 10px #fd028c;
+  animation: blinkShadow 1.5s infinite;
+  margin: 10px;
+}
+#start-button:hover {
+  background-color: aquamarine;
+  color: #fd028c;
+}
+#start-button:active {
+  box-shadow: inset 0 0 10px #000;
+}
+
+@keyframes blinkShadow {
+  0%, 100% { box-shadow: 0 0 20px #FF69B4; }
+  50% { box-shadow: 0 0 5px #FF69B4; }
+}
+
+#snakeCanvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
+}
+
+#snakeScoreWrapper {
+  display: none;
+  margin-top: 20px;
+}
+
+#snakeScore, #snakeBestScore {
+  margin: 10px;
+  color: #FFF;
+}
