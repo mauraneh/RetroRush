@@ -108,7 +108,7 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className='games'>
+    <div className='games' style={{backgroundImage: `url(${require('../assets/images/snakesBG.png')})`}}>
       <h1 className="title">
         {text.split('').map((char, index) => (
           <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
