@@ -1,16 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const BreakOut = () => {
     const canvasRef = useRef(null);
     const [rightPressed, setRightPressed] = useState(false);
     const [leftPressed, setLeftPressed] = useState(false);
-    const [isGameActive, setIsGameActive] = useState(true);
+    const [isGameActive, setIsGameActive] = useState(false); // Le jeu ne commence pas actif
+    const [score, setScore] = useState(0);
+    const [bestScore, setBestScore] = useState(0);
+    const [canvas, setCanvas] = useState(null);
+
+    const text = 'BreakOut-Game';
+
+
+    let x;
+    let y;
+    let paddleX;
+    let paddleWidth;
+    let initBricks;
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-        canvas.width = 800;
-        canvas.height = 600;
+        canvas.width = 500;
+        canvas.height = 500;
 
         let x = canvas.width / 2;
         let y = canvas.height - 30;
@@ -27,7 +41,6 @@ const BreakOut = () => {
         const brickPadding = 10;
         const brickOffsetTop = 30;
         const brickOffsetLeft = 30;
-        let score = 0;
         let bricks = [];
 
         function initBricks() {
@@ -42,9 +55,11 @@ const BreakOut = () => {
 
         initBricks();
 
+
+
         function drawBall() {
             ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
             ctx.fillStyle = "#0095DD";
             ctx.fill();
             ctx.closePath();
@@ -62,8 +77,8 @@ const BreakOut = () => {
             for (let c = 0; c < brickColumnCount; c++) {
                 for (let r = 0; r < brickRowCount; r++) {
                     if (bricks[c][r].status === 1) {
-                        let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-                        let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        let brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+                        let brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
                         bricks[c][r].x = brickX;
                         bricks[c][r].y = brickY;
                         ctx.beginPath();
@@ -84,7 +99,7 @@ const BreakOut = () => {
                         if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                             dy = -dy;
                             b.status = 0;
-                            score++;
+                            setScore(score + 1);
                         }
                     }
                 }
@@ -107,9 +122,11 @@ const BreakOut = () => {
                 if (x > paddleX && x < paddleX + paddleWidth) {
                     dy = -dy;
                 } else {
-                    alert("GAME OVER");
-                    document.location.reload();
-                    return;
+                    // Game over logic
+                    setIsGameActive(false);
+                    if (score > bestScore) {
+                        setBestScore(score);
+                    }
                 }
             }
 
@@ -129,36 +146,78 @@ const BreakOut = () => {
 
         draw();
 
-        const handleKeyDown = (event) => {
-            if (event.key === "ArrowRight" || event.key === "d") {
-
-                setRightPressed(true);
-            } else if (event.key === "ArrowLeft" || event.key === "q") {
-                setLeftPressed(true);
+        const handleKeyPress = (event) => {
+            switch (event.key) {
+                case "ArrowRight":
+                case "d":
+                    setRightPressed(true);
+                    break;
+                case "ArrowLeft":
+                case "q":
+                    setLeftPressed(true);
+                    break;
+                default:
+                    break;
             }
         };
 
         const handleKeyUp = (event) => {
-            if (event.key === "ArrowRight" || event.key === "d") {
-                setRightPressed(false);
-            } else if (event.key === "ArrowLeft" || event.key === "q") {
-                setLeftPressed(false);
+            switch (event.key) {
+                case "ArrowRight":
+                case "d":
+                    setRightPressed(false);
+                    break;
+                case "ArrowLeft":
+                case "q":
+                    setLeftPressed(false);
+                    break;
+                default:
+                    break;
             }
         };
 
-        window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("keydown", handleKeyPress);
         window.addEventListener("keyup", handleKeyUp);
+    }, []);
 
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-            window.removeEventListener("keyup", handleKeyUp);
-        };
-    }, [isGameActive]);
+    function initializeGame() {
+        if (!isGameActive) {
+            // Réinitialiser les positions de la balle et de la raquette
+            x = canvas.width / 2;
+            y = canvas.height - 30;
+            paddleX = (canvas.width - paddleWidth) / 2;
+
+            // Créer un nouveau tableau de briques
+            initBricks();
+
+            // Réinitialiser le score
+            setScore(0);
+
+            // Définir l'état isGameActive à true pour démarrer le jeu
+            setIsGameActive(true);
+        }
+    }
 
     return (
-        <div>
-            <canvas ref={canvasRef} width="800" height="600"></canvas>
-            <button onClick={() => setIsGameActive(!isGameActive)}>{isGameActive ? 'Pause' : 'Start'}</button>
+        <div className='games'>
+            <h1 className="title">
+                {text.split('').map((char, index) => (
+                    <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
+                ))}
+            </h1>
+            <div id="gamesContainer">
+                <canvas ref={canvasRef} id="snakeCanvas" width="500" height="500"></canvas>
+                <div id="snakeScoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
+                    <div id="snakeScore">Score : {score}</div>
+                    <div id="snakeBestScore">Meilleur Score : {bestScore}</div>
+                </div>
+            </div>
+            {!isGameActive && (
+                <button id="start-button" onClick={initializeGame}>▶</button>
+            )}
+            <Link to="/homepage">
+                <button className='retour-button'>Retour</button>
+            </Link>
         </div>
     );
 };
