@@ -10,7 +10,10 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000;
+  background-size: contain;
 }
 #gamesContainer {
   display: flex;
@@ -20,9 +23,8 @@
 
 #snakeCanvas {
   border: 1px solid #ffd826;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.7); 
   animation: blinkShadow 1.5s infinite;
-  opacity: 0.9;
   box-shadow: 0 0 10px #fd028c;
   border-radius: 10px;
 }
@@ -33,15 +35,6 @@
   text-align: center;
   background-color: #000;
 }
-@keyframes color {
-  0% { color: red; }
-  15% { color: rgb(255, 0, 149); }
-  25% { color: orange; }
-  35% { color: rgb(255, 234, 0); }
-  50% { color: yellow; }
-  75% { color: green; }
-  100% { color: blue; }
-}
 
 .title {
   font-size: 6em;
@@ -49,23 +42,9 @@
   margin: 0 auto;
 }
 
-@keyframes fade {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 .title span {
   display: inline-block;
   animation: fade 2s infinite, color 5s infinite;
-}
-
-@keyframes neon {
-  from {
-    box-shadow: 0 0 5px #00ff00, 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 200px #00ff00;
-  }
-  to {
-    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00;
-  }
 }
 
 #start-button {
@@ -92,14 +71,9 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-@keyframes blinkShadow {
-  0%, 100% { box-shadow: 0 0 20px #FF69B4; }
-  50% { box-shadow: 0 0 5px #FF69B4; }
-}
-
 .gameScoreWrapper {
   display: none;
-  margin-top: 20px;
+  margin: 10px;
   border: #fcd60c 2px solid;
 }
 
@@ -107,4 +81,34 @@
   margin: 10px;
   color: #81e6d3;
   text-transform: uppercase;
+}
+
+/* ------------ KEYFRAME -------------- */
+@keyframes neon {
+  from {
+    box-shadow: 0 0 5px #00ff00, 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 200px #00ff00;
+  }
+  to {
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00;
+  }
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes blinkShadow {
+  0%, 100% { box-shadow: 0 0 20px #FF69B4; }
+  50% { box-shadow: 0 0 5px #FF69B4; }
+}
+
+@keyframes color {
+  0% { color: red; }
+  15% { color: rgb(255, 0, 149); }
+  25% { color: orange; }
+  35% { color: rgb(255, 234, 0); }
+  50% { color: yellow; }
+  75% { color: green; }
+  100% { color: blue; }
 }

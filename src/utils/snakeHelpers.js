@@ -80,6 +80,6 @@ export const drawGame = (canvasRef, snake, food) => {
     });
 
     // Dessiner la nourriture
-    ctx.fillStyle = '#fd028c'; 
-    ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
+    ctx.font = `${cellSize}px Arial`;
+    ctx.fillText('🍎', food.x * cellSize, (food.y + 1) * cellSize);
     };
