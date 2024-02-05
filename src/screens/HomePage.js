@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import logo from '../assets/images/logoRR.png';
 import { Link } from 'react-router-dom';
-import Carousel from './Carousel';
+import Carousel from '../components/Carousel';
 
 import snakeImage from '../assets/images/snakes.png';
 import breakoutImage from '../assets/images/breakout.png';
