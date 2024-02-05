@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
+import Alert  from '../components/Alert';
 const BreakOut = () => {
     const canvasRef = useRef(null);
     const [rightPressed, setRightPressed] = useState(false);
@@ -13,6 +13,7 @@ const BreakOut = () => {
     const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
     const [bricks, setBricks] = useState([]);
     const text = 'Breakout - Game';
+    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
 
     const initBricks = () => {
         const brickRowCount = 5;
@@ -121,7 +122,8 @@ const BreakOut = () => {
                         dy: -speed * Math.cos(angle)
                     });
                 } else {
-                    setIsGameActive(false); // Ball missed paddle
+                    setAlert({ show: true, type: 'error', message: 'Vous avez perdu ! ' });
+                    setIsGameActive(false);
                     if (score > bestScore) {
                         setBestScore(score);
                     }
@@ -136,10 +138,6 @@ const BreakOut = () => {
 
             setBallPosition({ x: newX, y: newY });
             setPaddlePosition(prev => ({ ...prev, paddleX: newPaddleX }));
-
-            if (isGameActive) {
-                requestAnimationFrame(updateGame);
-            }
         };
 
         if (isGameActive) {
@@ -172,6 +170,7 @@ const BreakOut = () => {
     }, [isGameActive, ballPosition, ballDirection, paddlePosition, bricks, score, rightPressed, leftPressed, bestScore]);
 
     const initializeGame = () => {
+        setAlert({ show: false, type: '', message: '' });
         setBallPosition({ x: 250, y: 470 });
         setBallDirection({ dx: 2, dy: -2 });
         setPaddlePosition({ paddleX: 212.5, paddleWidth: 75 });
@@ -181,25 +180,24 @@ const BreakOut = () => {
     };
 
     return (
-        <div className="games">
-            <h1 className="title">
-                {text.split('').map((char, index) => (
-                    <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
-                ))}
-            </h1>
+        <div className="games breakout">
+            <h1 className="title">{text.split('').map((char, index) => (<span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>))}</h1>
             <div id="gamesContainer">
                 <canvas ref={canvasRef} id="breakOutCanvas" width="500" height="500"></canvas>
                 <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
                     <div id="score">Score: {score}</div>
                     <div id="bestScore">Best Score: {bestScore}</div>
                 </div>
+                {!isGameActive && (
+                    <button id="start-button" onClick={initializeGame}>▶</button>
+                )}
+                <Link to="/homepage">
+                    <button className="retour-button">Retour</button>
+                </Link>
             </div>
-            {!isGameActive && (
-                <button id="start-button" onClick={initializeGame}>▶</button>
-            )}
-            <Link to="/homepage">
-                <button className="retour-button">Retour</button>
-            </Link>
+            {alert.show &&
+                <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
+            }
         </div>
     );
 };
