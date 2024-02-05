@@ -64,11 +64,11 @@
 }
 
 .app-button {
-  background-color: #fa519a; 
+  background-color: #fa519a;
   color: #ffeef5;
   padding: 40px 25px;
   border: none;
-  border-radius: 100%; 
+  border-radius: 100%;
   cursor: pointer;
   font-size: 2rem;
   font-weight: 900;
@@ -78,13 +78,13 @@
 }
 
 .app-button:hover {
-  background-color: #f74d90; 
+  background-color: #f74d90;
   transform: scale(1.1);
 }
 
 .app-button:active {
-  box-shadow: 0 1px #f74d90; 
-  transform: translateY(3px); 
+  box-shadow: 0 1px #f74d90;
+  transform: translateY(3px);
 }
 
 /* --------------------- HOMEPAGE --------------------- */
@@ -166,7 +166,7 @@
   z-index: 4;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #ffe100; 
+  background-color: #ffe100;
   color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 0px 20px;
@@ -195,7 +195,7 @@
   background: white;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
 
@@ -213,18 +213,18 @@
   opacity: 1;
 }
 .card:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3); 
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .subtitle-hp {
   font-size: 48px;
-  color: #F0F; 
-  text-shadow: 
-    1px 1px 0 #EB0,   
-    2px 2px 0 #0D6,   
-    3px 3px 0 #09F; 
-  font-family: 'Press Start 2P', cursive; 
+  color: #F0F;
+  text-shadow:
+    1px 1px 0 #EB0,
+    2px 2px 0 #0D6,
+    3px 3px 0 #09F;
+  font-family: 'Press Start 2P', cursive;
 }
 .jouer-button {
   position: relative;
@@ -240,23 +240,23 @@
 }
 
 .jouer-button:hover {
-  animation: clignotement-vif 0.5s infinite; 
+  animation: clignotement-vif 0.5s infinite;
 }
 
 .bouton-jouer:active {
-  box-shadow: 0 1px #09F; 
-  transform: translateY(3px); 
+  box-shadow: 0 1px #09F;
+  transform: translateY(3px);
 }
 
 .relief-text {
-  z-index: 10; 
+  z-index: 10;
   position: relative;
   bottom: 60px;
   font-size: 2rem;
   color: #e55800;
-  text-shadow: 
-      1px 1px 0 #000,   
-      2px 2px 0 #000,   
+  text-shadow:
+      1px 1px 0 #000,
+      2px 2px 0 #000,
       3px 3px 0 #000;
 }
 
@@ -300,7 +300,7 @@
 
 @keyframes clignotement-vif {
   0%, 100% {
-    background-color: #09F; 
+    background-color: #09F;
   }
   50% {
     background-color: #F00;
@@ -312,4 +312,12 @@
   0% { opacity: 1; }
   50% { opacity: 0.5; }
   100% { opacity: 1; }
+}
+
+.alert {
+  position: absolute;
+  background-color: #61dafb;
+  width: 150px;
+  height: 150px;
+
 }
