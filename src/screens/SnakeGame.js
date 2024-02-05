@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../assets/css/snake.css';
+import '../assets/css/games.css';
 import { Link } from 'react-router-dom';
 
 const cellSize = 20;
@@ -108,13 +108,13 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className='gameSnake'>
+    <div className='games'>
       <h1 className="title">
         {text.split('').map((char, index) => (
           <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
         ))}
       </h1>
-      <div id="snakeContainer">
+      <div id="gamesContainer">
         <canvas ref={canvasRef} id="snakeCanvas" width="500" height="500"></canvas>
         <div id="snakeScoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
           <div id="snakeScore">Score : {score}</div>
