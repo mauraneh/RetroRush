@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 import App from "./App";
-import BreakOut from "./screens/BreakOut";
+import BreakOut from "./screens/BreakOut/BreakOut";
 import HomePage from "./screens/HomePage";
 
 const Router = createBrowserRouter(

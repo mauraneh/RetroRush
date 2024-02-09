@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../assets/css/games.css';
 import { Link } from 'react-router-dom';
+import Alert from "../components/Alert";
 
 const cellSize = 20;
 
@@ -12,6 +13,8 @@ const SnakeGame = () => {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [isGameActive, setIsGameActive] = useState(false);
+  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+
   const text = "Snake - Game";
 
 
@@ -38,6 +41,8 @@ const SnakeGame = () => {
   }, [isGameActive, snake, direction, food, score]);
 
   const initializeGame = () => {
+    setAlert({ show: false, type: '', message: '' });
+
     setTimeout(() => {
       setIsGameActive(true);
     setSnake([{ x: 10, y: 10 }]);
@@ -92,7 +97,7 @@ const SnakeGame = () => {
       newSnake.some(segment => segment.x === head.x && segment.y === head.y)
     ) {
       setIsGameActive(false);
-      alert(`Game Over! Votre score est de ${score}.`);
+      setAlert({ show: true, type: 'error', message: 'Vous avez perdu ! ' });
       return;
     }
 
@@ -124,8 +129,11 @@ const SnakeGame = () => {
       {!isGameActive && (
           <button id="start-button" onClick={initializeGame}>▶</button>
         )}
+      {alert.show &&
+          <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
+      }
         <Link to="/homepage">
-          <button className='retour-button'>Retour</button>
+          <button className='retour-button button'>Retour</button>
         </Link>
     </div>
     

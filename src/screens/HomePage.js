@@ -42,7 +42,7 @@ function HomePage() {
             </Carousel>
         </div>
         <Link to="/">
-          <button className='retour-button'>Retour</button>
+          <button className='retour-button button'>Retour</button>
         </Link>
     </div>
   );

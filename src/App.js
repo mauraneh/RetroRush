@@ -6,7 +6,7 @@ import HomePage from './screens/HomePage';
 import SnakeGame from './screens/SnakeGame';
 
 import { useNavigate } from 'react-router-dom';
-import BreakOut from "./screens/BreakOut";
+import BreakOut from "./screens/BreakOut/BreakOut";
 
 function App() {
   return (

@@ -260,12 +260,9 @@
       3px 3px 0 #000;
 }
 
-.retour-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background-color: #c47ef7;
-  color: #6705d6;
+
+/* --------------------- BUTTONS --------------------- */
+.button {
   border: none;
   border-radius: 50px;
   padding: 10px 20px;
@@ -277,17 +274,43 @@
   cursor: pointer;
   text-transform: uppercase;
 }
+.retour-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #c47ef7;
+  color: #6705d6;
+}
 
-.retour-button:hover {
+.button:hover {
   animation: flicker 1s infinite;
 }
 
-.retour-button:active {
+.button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
+.returnButtonAlertFail  {
+  background-color: #f10202;
+  color: #000000;
+}
+
+.returnButtonRestartFail {
+  background-color: #000000;
+  color: #f10202;
+}
+
+.returnButtonAlertSuccess  {
+  background-color: #4bc700;
+  color: #000000;
+}
+
+.returnButtonRestartSuccess {
+  background-color: #000000;
+  color: #4BC700FF;
+}
 /* --------  KEYFRAME ---------- */
 @keyframes clignotement {
   0%, 100% {
@@ -314,10 +337,56 @@
   100% { opacity: 1; }
 }
 
+
+
+
+/* --------------------- ALERT --------------------- */
 .alert {
   position: absolute;
-  background-color: #61dafb;
-  width: 150px;
-  height: 150px;
+  width: 25vw;
+  height: 50vh;
+}
+.templateAlert {
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  font-weight: 700;
+}
 
+.customSuccess {
+  background-color: #d4edda;
+  background-image: url('./assets/images/alert-success.webp');
+  background-position: center  5%;
+  width: 100%;
+  height: 100%;
+  text-shadow: #fcd60c 1px 1px 0, #fcd60c -1px -1px 0, #fcd60c -1px 1px 0, #fcd60c 1px -1px 0;
+}
+
+.customLoose {
+  background-color: #FC2F2E;
+  background-size: contain;
+  background-image: url('./assets/images/alert-loose.webp');
+  background-position: center;
+  text-shadow: #602929 1px 1px 0, #670808 -1px -1px 0, #6c041c -1px 1px 0, #ee3781 1px -1px 0;
+}
+
+.alertMessage {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+.buttonList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5%;
 }
