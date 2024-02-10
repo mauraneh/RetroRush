@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../assets/css/games.css';
 import { Link } from 'react-router-dom';
 import Alert from "../components/Alert";
 
@@ -113,17 +112,17 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className='games'>
+    <div className='games snake'>
       <h1 className="title">
         {text.split('').map((char, index) => (
           <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
         ))}
       </h1>
       <div id="gamesContainer">
-        <canvas ref={canvasRef} id="snakeCanvas" width="500" height="500"></canvas>
-        <div id="snakeScoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
-          <div id="snakeScore">Score : {score}</div>
-          <div id="snakeBestScore">Meilleur Score : {bestScore}</div>
+        <canvas ref={canvasRef} id="snakeCanvas canvas" width="500" height="500"></canvas>
+        <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
+          <div id="score">Score : {score}</div>
+          <div id="bestScore">Meilleur Score : {bestScore}</div>
         </div>
       </div>
       {!isGameActive && (

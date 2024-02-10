@@ -1,3 +1,9 @@
+/*  SITE ICONES TOUCHES : https://www.flaticon.com/fr/icones-gratuites/touche-du-clavier */
+
+@import './assets/css/games.css';
+@import './assets/css/buttons.css';
+@import './assets/css/expansionPanel.css';
+
 /* ------------------- APP --------------------- */
 .app {
   text-align: center;
@@ -61,30 +67,6 @@
 }
 .app-input:hover {
   border-color: #ffd826;
-}
-
-.app-button {
-  background-color: #fa519a;
-  color: #ffeef5;
-  padding: 40px 25px;
-  border: none;
-  border-radius: 100%;
-  cursor: pointer;
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  transition: background-color 0.3s, box-shadow 0.2s, transform 0.2s;
-  box-shadow: 0 10px #e91571;
-}
-
-.app-button:hover {
-  background-color: #f74d90;
-  transform: scale(1.1);
-}
-
-.app-button:active {
-  box-shadow: 0 1px #f74d90;
-  transform: translateY(3px);
 }
 
 /* --------------------- HOMEPAGE --------------------- */
@@ -226,27 +208,6 @@
     3px 3px 0 #09F;
   font-family: 'Press Start 2P', cursive;
 }
-.jouer-button {
-  position: relative;
-  z-index: 4;
-  background-color: #09F;
-  border: none;
-  color: white;
-  padding: 30px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 2rem;
-  box-shadow: 0 10px rgb(1, 85, 141);
-}
-
-.jouer-button:hover {
-  animation: clignotement-vif 0.5s infinite;
-}
-
-.bouton-jouer:active {
-  box-shadow: 0 1px #09F;
-  transform: translateY(3px);
-}
 
 .relief-text {
   z-index: 10;
@@ -259,85 +220,6 @@
       2px 2px 0 #000,
       3px 3px 0 #000;
 }
-
-
-/* --------------------- BUTTONS --------------------- */
-.button {
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-  text-transform: uppercase;
-}
-.retour-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background-color: #c47ef7;
-  color: #6705d6;
-}
-
-.button:hover {
-  animation: flicker 1s infinite;
-}
-
-.button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-.returnButtonAlertFail  {
-  background-color: #f10202;
-  color: #000000;
-}
-
-.returnButtonRestartFail {
-  background-color: #000000;
-  color: #f10202;
-}
-
-.returnButtonAlertSuccess  {
-  background-color: #4bc700;
-  color: #000000;
-}
-
-.returnButtonRestartSuccess {
-  background-color: #000000;
-  color: #4BC700FF;
-}
-/* --------  KEYFRAME ---------- */
-@keyframes clignotement {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes clignotement-vif {
-  0%, 100% {
-    background-color: #09F;
-  }
-  50% {
-    background-color: #F00;
-    box-shadow: 0 10px rgb(218, 12, 12);
-  }
-}
-
-@keyframes flicker {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-
 
 
 /* --------------------- ALERT --------------------- */
@@ -389,4 +271,7 @@
   align-items: center;
   justify-content: space-around;
   margin-bottom: 5%;
+  button {
+    background-color: #f692b8;
+  }
 }
