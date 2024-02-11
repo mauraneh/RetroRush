@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Alert from "../../components/Alert";
 import HowToPlay from "../../components/HowToPlay";
+import PlayButton from "../../components/BtnPlay";
+import Score from "../../components/Score";
+import GameTitle from "../../components/GameTitle";
 
 const TETROMINOS = {
     0: { shape: [[0]], color: '0, 0, 0' },
@@ -271,28 +274,19 @@ const Tetris = () => {
 */
 return (
     <div className="games tetris">
-        <h1 className="title">
-            {text.split('').map((char, index) => (
-                <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>
-                    {char}
-                </span>
-            ))}
-        </h1>
+        <GameTitle text="Tetris" />
+
         <div id="gamesContainer">
             <canvas ref={canvasRef} id="tetrisCanvas canvas" width="500" height="500"></canvas>
+            <Score isGameActive={isGameActive} score={score} bestScore={bestScore} initializeGame={initializeGame} />
 
-            <div id="scoreWrapper" style={{display: isGameActive ? 'flex' : 'flex'}}>
-                <div id="score">Score: {score}</div>
-                <div id="bestScore">Best Score: {bestScore}</div>
-            </div>
             {!isGameActive && (
-                <button id="start-button" onClick={initializeGame}>▶</button>
+                <PlayButton initializeGame={initializeGame} />
             )}
             <Link to="/homepage">
                 <button className="retour-button button">Retour</button>
             </Link>
             <HowToPlay gameToExplain={text}/>
-
             {alert.show &&
                 <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
             }

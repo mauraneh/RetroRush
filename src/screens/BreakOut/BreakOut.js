@@ -200,7 +200,6 @@ const BreakOut = () => {
             <div id="gamesContainer">
                 <canvas ref={canvasRef} id="breakOutCanvas canvas" width="500" height="500"></canvas>
                 <Score isGameActive={isGameActive} score={score} bestScore={bestScore} initializeGame={initializeGame} />
-
                 {!isGameActive && (
                     <PlayButton initializeGame={initializeGame} />
                 )}
@@ -208,7 +207,6 @@ const BreakOut = () => {
                     <button className="retour-button button">Retour</button>
                 </Link>
                 <HowToPlay gameToExplain={text}/>
-
             </div>
             {alert.show &&
                 <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
