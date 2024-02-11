@@ -1,12 +1,14 @@
 
-Impoter State :
+Importer :
     import Alert  from '../components/Alert';
-Merttre state :
-        const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+
 Défaite :
         setAlert({ show: true, type: 'error', message: 'Vous avez perdu ! ' });
+
 Victoire :
         setAlert({ show: true, type: 'win', message: 'Bravo, Vous avez gané ! ' });
+
 Appel dans le return :
         {alert.show &&
             <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />

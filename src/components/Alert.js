@@ -1,11 +1,32 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const Alert = ({ status, message, onRestart, show }) => {
     const renderContent = () => {
         if (status === 'win') {
-            return <p className="customSuccess">Bravo, {message} a gagné!</p>;
+            return (
+                <div className="customSuccess templateAlert">
+                    <p className="alertMessage">{message}</p>
+                    <div className="buttonList">
+                        <Link to="/homepage">
+                            <button className='returnButtonAlertSuccess button'>Accueil</button>
+                        </Link>
+                        <button className="returnButtonRestartSuccess button" onClick={onRestart}>Rejouer</button>
+                    </div>
+                </div>
+            );
         } else if (status === 'error') {
-            return <p className="customError">{message}</p>;
+            return (
+                <div className="customLoose templateAlert">
+                    <p className="alertMessage">{message}</p>
+                    <div className="buttonList">
+                        <Link to="/homepage">
+                            <button className='returnButtonAlertFail button'>Accueil</button>
+                        </Link>
+                        <button className="returnButtonRestartFail button" onClick={onRestart}>Réessayer</button>
+                    </div>
+                </div>
+            );
         }
         return null;
     };
@@ -17,7 +38,6 @@ const Alert = ({ status, message, onRestart, show }) => {
     return (
         <div className={`alert show`} id={status === 'win' ? 'success' : 'error'}>
             {renderContent()}
-            <button onClick={onRestart}>Redémarrer</button>
         </div>
     );
 };

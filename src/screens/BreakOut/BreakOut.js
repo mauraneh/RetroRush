@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Alert  from '../components/Alert';
+import Alert  from '../../components/Alert';
 const BreakOut = () => {
     const canvasRef = useRef(null);
     const [rightPressed, setRightPressed] = useState(false);
@@ -12,8 +12,8 @@ const BreakOut = () => {
     const [ballDirection, setBallDirection] = useState({ dx: 2, dy: -2 });
     const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
     const [bricks, setBricks] = useState([]);
-    const text = 'Breakout - Game';
     const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+    const text = 'Breakout - Game';
 
     const initBricks = () => {
         const brickRowCount = 5;
@@ -184,7 +184,7 @@ const BreakOut = () => {
             <h1 className="title">{text.split('').map((char, index) => (<span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>))}</h1>
             <div id="gamesContainer">
                 <canvas ref={canvasRef} id="breakOutCanvas" width="500" height="500"></canvas>
-                <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
+                <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'flex' }}>
                     <div id="score">Score: {score}</div>
                     <div id="bestScore">Best Score: {bestScore}</div>
                 </div>
@@ -192,7 +192,7 @@ const BreakOut = () => {
                     <button id="start-button" onClick={initializeGame}>▶</button>
                 )}
                 <Link to="/homepage">
-                    <button className="retour-button">Retour</button>
+                    <button className="retour-button button">Retour</button>
                 </Link>
             </div>
             {alert.show &&
