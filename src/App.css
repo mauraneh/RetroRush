@@ -238,6 +238,7 @@
   justify-content: space-between;
   flex-direction: column;
   font-weight: 700;
+  box-shadow: 0 0 10px #fd028c;
 }
 
 .customSuccess {
