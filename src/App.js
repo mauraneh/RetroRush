@@ -7,7 +7,6 @@ import SnakeGame from './screens/SnakeGame';
 import { useNavigate } from 'react-router-dom';
 import BreakOut from "./screens/BreakOut/BreakOut";
 import {SpeedProvider} from "./Context/Speedcontext";
-import Tetris from "./screens/Tetris/Tetris";
 function App() {
 
 
@@ -19,7 +18,6 @@ function App() {
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/snake" element={<SnakeGame />} />
             <Route path="/breakout" element={<BreakOut />} />
-            <Route path="/tetris" element={<Tetris />} />
           </Routes>
         </Router>
       </SpeedProvider>
