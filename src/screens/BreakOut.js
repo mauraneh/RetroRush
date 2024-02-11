@@ -5,218 +5,200 @@ const BreakOut = () => {
     const canvasRef = useRef(null);
     const [rightPressed, setRightPressed] = useState(false);
     const [leftPressed, setLeftPressed] = useState(false);
-    const [isGameActive, setIsGameActive] = useState(false); // Le jeu ne commence pas actif
+    const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
-    const [canvas, setCanvas] = useState(null);
+    const [ballPosition, setBallPosition] = useState({ x: 250, y: 470 });
+    const [ballDirection, setBallDirection] = useState({ dx: 2, dy: -2 });
+    const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
+    const [bricks, setBricks] = useState([]);
+    const text = 'Breakout - Game';
 
-    const text = 'BreakOut-Game';
+    const initBricks = () => {
+        const brickRowCount = 5;
+        const brickColumnCount = 6;
+        const initialBricks = [];
+        for (let c = 0; c < brickColumnCount; c++) {
+            initialBricks[c] = [];
+            for (let r = 0; r < brickRowCount; r++) {
+                initialBricks[c][r] = { x: 0, y: 0, status: 1 };
+            }
+        }
+        return initialBricks;
+    };
 
-
-    let x;
-    let y;
-    let paddleX;
-    let paddleWidth;
-    let initBricks;
-
+    useEffect(() => {
+        setBricks(initBricks());
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
+        if (!canvas) return;
         const ctx = canvas.getContext("2d");
         canvas.width = 500;
         canvas.height = 500;
 
-        let x = canvas.width / 2;
-        let y = canvas.height - 30;
-        let dx = 2;
-        let dy = -2;
-        const ballRadius = 10;
-        const paddleHeight = 10;
-        const paddleWidth = 75;
-        let paddleX = (canvas.width - paddleWidth) / 2;
-        const brickRowCount = 5;
-        const brickColumnCount = 3;
-        const brickWidth = 75;
+        const space = 10;
+        const brickWidth = 71;
         const brickHeight = 20;
-        const brickPadding = 10;
-        const brickOffsetTop = 30;
-        const brickOffsetLeft = 30;
-        let bricks = [];
 
-        function initBricks() {
-            bricks = [];
-            for (let c = 0; c < brickColumnCount; c++) {
-                bricks[c] = [];
-                for (let r = 0; r < brickRowCount; r++) {
-                    bricks[c][r] = { x: 0, y: 0, status: 1 };
-                }
-            }
-        }
-
-        initBricks();
-
-
-
-        function drawBall() {
+        const drawBall = () => {
             ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = "#0095DD";
+            ctx.arc(ballPosition.x, ballPosition.y, space, 0, Math.PI * 2);
+            ctx.fillStyle = "#FDFFE6";
             ctx.fill();
             ctx.closePath();
-        }
+        };
 
-        function drawPaddle() {
+        const drawPaddle = () => {
             ctx.beginPath();
-            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#0095DD";
+            ctx.rect(paddlePosition.paddleX, canvas.height - space, paddlePosition.paddleWidth, space);
+            ctx.fillStyle = "#3A7DBA";
             ctx.fill();
             ctx.closePath();
-        }
+        };
 
-        function drawBricks() {
-            for (let c = 0; c < brickColumnCount; c++) {
-                for (let r = 0; r < brickRowCount; r++) {
+        const drawBricks = () => {
+            for (let c = 0; c < bricks.length; c++) {
+                for (let r = 0; r < bricks[c].length; r++) {
                     if (bricks[c][r].status === 1) {
-                        let brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
-                        let brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+                        const brickX = c * (brickWidth + space) + space;
+                        const brickY = r * (brickHeight + space) + space;
                         bricks[c][r].x = brickX;
                         bricks[c][r].y = brickY;
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = "#0095DD";
+                        ctx.fillStyle = 'rgba(255,35,116,0.94)';
                         ctx.fill();
                         ctx.closePath();
                     }
                 }
             }
-        }
+        };
 
-        function collisionDetection() {
-            for (let c = 0; c < brickColumnCount; c++) {
-                for (let r = 0; r < brickRowCount; r++) {
-                    let b = bricks[c][r];
+        const collisionDetection = () => {
+            for (let c = 0; c < bricks.length; c++) {
+                for (let r = 0; r < bricks[c].length; r++) {
+                    const b = bricks[c][r];
                     if (b.status === 1) {
-                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                            dy = -dy;
+                        if (
+                            ballPosition.x > b.x && ballPosition.x < b.x + brickWidth &&
+                            ballPosition.y > b.y && ballPosition.y < b.y + brickHeight
+                        ) {
+                            setBallDirection(prev => ({ dx: prev.dx, dy: -prev.dy }));
                             b.status = 0;
-                            setScore(score + 1);
+                            setScore(prevScore => prevScore + 1);
                         }
                     }
                 }
             }
-        }
+        };
 
-        function draw() {
+        const updateGame = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBricks();
             drawBall();
             drawPaddle();
             collisionDetection();
 
-            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-                dx = -dx;
+            let newX = ballPosition.x + ballDirection.dx;
+            let newY = ballPosition.y + ballDirection.dy;
+            let newPaddleX = paddlePosition.paddleX;
+
+            // Check for wall collisions
+            if (newX > canvas.width - space || newX < space) {
+                setBallDirection(prev => ({ dx: -prev.dx, dy: prev.dy }));
             }
-            if (y + dy < ballRadius) {
-                dy = -dy;
-            } else if (y + dy > canvas.height - ballRadius) {
-                if (x > paddleX && x < paddleX + paddleWidth) {
-                    dy = -dy;
+            if (newY < space) {
+                setBallDirection(prev => ({ dx: prev.dx, dy: -prev.dy }));
+            } else if (newY > canvas.height - space) {
+                if (newX > newPaddleX && newX < newPaddleX + paddlePosition.paddleWidth) {
+                    let impactPoint = (newX - (newPaddleX + paddlePosition.paddleWidth / 2)) / (paddlePosition.paddleWidth / 2);
+                    let angle = impactPoint * Math.PI / 4;
+                    let speed = Math.sqrt(ballDirection.dx ** 2 + ballDirection.dy ** 2);
+                    setBallDirection({
+                        dx: speed * Math.sin(angle),
+                        dy: -speed * Math.cos(angle)
+                    });
                 } else {
-                    // Game over logic
-                    setIsGameActive(false);
+                    setIsGameActive(false); // Ball missed paddle
                     if (score > bestScore) {
                         setBestScore(score);
                     }
                 }
             }
 
-            if (rightPressed && paddleX < canvas.width - paddleWidth) {
-                paddleX += 7;
-            } else if (leftPressed && paddleX > 0) {
-                paddleX -= 7;
+            if (rightPressed && newPaddleX < canvas.width - paddlePosition.paddleWidth) {
+                newPaddleX += 7;
+            } else if (leftPressed && newPaddleX > 0) {
+                newPaddleX -= 7;
             }
 
-            x += dx;
-            y += dy;
+            setBallPosition({ x: newX, y: newY });
+            setPaddlePosition(prev => ({ ...prev, paddleX: newPaddleX }));
 
             if (isGameActive) {
-                requestAnimationFrame(draw);
+                requestAnimationFrame(updateGame);
             }
+        };
+
+        if (isGameActive) {
+            requestAnimationFrame(updateGame);
         }
 
-        draw();
-
-        const handleKeyPress = (event) => {
-            switch (event.key) {
-                case "ArrowRight":
-                case "d":
-                    setRightPressed(true);
-                    break;
-                case "ArrowLeft":
-                case "q":
-                    setLeftPressed(true);
-                    break;
-                default:
-                    break;
+        const handleKeyDown = (event) => {
+            if (event.key === "Right" || event.key === "ArrowRight" || event.key === "d") {
+                setRightPressed(true);
+            } else if (event.key === "Left" || event.key === "ArrowLeft" || event.key === "q") {
+                setLeftPressed(true);
             }
         };
 
         const handleKeyUp = (event) => {
-            switch (event.key) {
-                case "ArrowRight":
-                case "d":
-                    setRightPressed(false);
-                    break;
-                case "ArrowLeft":
-                case "q":
-                    setLeftPressed(false);
-                    break;
-                default:
-                    break;
+            if (event.key === "Right" || event.key === "ArrowRight" || event.key === "d") {
+                setRightPressed(false);
+            } else if (event.key === "Left" || event.key === "ArrowLeft" || event.key === "q") {
+                setLeftPressed(false);
             }
         };
 
-        window.addEventListener("keydown", handleKeyPress);
-        window.addEventListener("keyup", handleKeyUp);
-    }, []);
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
 
-    function initializeGame() {
-        if (!isGameActive) {
-            // Réinitialiser les positions de la balle et de la raquette
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            paddleX = (canvas.width - paddleWidth) / 2;
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("keyup", handleKeyUp);
+        };
+    }, [isGameActive, ballPosition, ballDirection, paddlePosition, bricks, score, rightPressed, leftPressed, bestScore]);
 
-            // Créer un nouveau tableau de briques
-            initBricks();
-
-            // Réinitialiser le score
-            setScore(0);
-
-            // Définir l'état isGameActive à true pour démarrer le jeu
-            setIsGameActive(true);
-        }
-    }
+    const initializeGame = () => {
+        setBallPosition({ x: 250, y: 470 });
+        setBallDirection({ dx: 2, dy: -2 });
+        setPaddlePosition({ paddleX: 212.5, paddleWidth: 75 });
+        setBricks(initBricks());
+        setScore(0);
+        setIsGameActive(true);
+    };
 
     return (
-        <div className='games'>
+        <div className="games">
             <h1 className="title">
                 {text.split('').map((char, index) => (
                     <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>
                 ))}
             </h1>
             <div id="gamesContainer">
-                <canvas ref={canvasRef} id="snakeCanvas" width="500" height="500"></canvas>
-                <div id="snakeScoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
-                    <div id="snakeScore">Score : {score}</div>
-                    <div id="snakeBestScore">Meilleur Score : {bestScore}</div>
+                <canvas ref={canvasRef} id="breakOutCanvas" width="500" height="500"></canvas>
+                <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
+                    <div id="score">Score: {score}</div>
+                    <div id="bestScore">Best Score: {bestScore}</div>
                 </div>
             </div>
             {!isGameActive && (
                 <button id="start-button" onClick={initializeGame}>▶</button>
             )}
             <Link to="/homepage">
-                <button className='retour-button'>Retour</button>
+                <button className="retour-button">Retour</button>
             </Link>
         </div>
     );

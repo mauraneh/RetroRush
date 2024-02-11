@@ -105,3 +105,9 @@
   color: #81e6d3;
   text-transform: uppercase;
 }
+
+/* breakout.css */
+
+.breakout {
+  background-image: url('/src/assets/images/breakoutBG.png');
+}
