@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Alert  from '../../components/Alert';
 import HowToPlay from "../../components/HowToPlay";
 import {useSpeed} from "../../Context/Speedcontext";
+import GameTitle from "../../components/GameTitle";
+import PlayButton from "../../components/BtnPlay";
+import Score from "../../components/Score";
 
 const BreakOut = () => {
     const { speedBall, setSpeedBall } = useSpeed(3);
@@ -193,21 +196,13 @@ const BreakOut = () => {
 
     return (
         <div className="games breakout">
-            <h1 className="title">
-                {text.split('').map((char, index) => (
-                    <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>
-                        {char}
-                    </span>
-                ))}
-            </h1>
+            <GameTitle text="Break Out" />
             <div id="gamesContainer">
                 <canvas ref={canvasRef} id="breakOutCanvas canvas" width="500" height="500"></canvas>
-                <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'flex' }}>
-                    <div id="score">Score: {score}</div>
-                    <div id="bestScore">Best Score: {bestScore}</div>
-                </div>
+                <Score isGameActive={isGameActive} score={score} bestScore={bestScore} initializeGame={initializeGame} />
+
                 {!isGameActive && (
-                    <button id="start-button" onClick={initializeGame}>▶</button>
+                    <PlayButton initializeGame={initializeGame} />
                 )}
                 <Link to="/homepage">
                     <button className="retour-button button">Retour</button>
