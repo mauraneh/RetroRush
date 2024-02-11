@@ -6,15 +6,13 @@ import GameTitle from '../components/GameTitle';
 import useGameLogic from '../hooks/useSnakeLogic';
 import { Link } from 'react-router-dom';
 import PlayButton from '../components/BtnPlay';
-import Alert from "../components/Alert";
 
 const SnakeGame = () => {
   const { snake, food, score, bestScore, isGameActive, initializeGame } = useGameLogic();
   const canvasRef = useRef(null);
-  const text = "Snake - Game";
 
   return (
-      <div className='games snake' style={{backgroundImage: `url(${require('../assets/images/snakesBG.png')})`}}>
+      <div className='games' style={{backgroundImage: `url(${require('../assets/images/snakesBG.png')})`}}>
         <GameTitle text="Snake" />
         <div id="gamesContainer">
           <SnakeCanvas id="snakeCanvas" canvasRef={canvasRef} snake={snake} food={food} isGameActive={isGameActive} />
