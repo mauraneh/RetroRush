@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Alert  from '../../components/Alert';
+import HowToPlay from "../../components/HowToPlay";
+import {useSpeed} from "../../Context/Speedcontext";
+
 const BreakOut = () => {
+    const { speedBall, setSpeedBall } = useSpeed(3);
     const canvasRef = useRef(null);
     const [rightPressed, setRightPressed] = useState(false);
     const [leftPressed, setLeftPressed] = useState(false);
@@ -9,10 +13,11 @@ const BreakOut = () => {
     const [score, setScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
     const [ballPosition, setBallPosition] = useState({ x: 250, y: 470 });
-    const [ballDirection, setBallDirection] = useState({ dx: 2, dy: -2 });
+    const [ballDirection, setBallDirection] = useState({ dx: speedBall, dy: -speedBall });
     const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
     const [bricks, setBricks] = useState([]);
     const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+    const [brickCounterBroken, setBrickCounterBroken] = useState(30);
     const text = 'Breakout - Game';
 
     const initBricks = () => {
@@ -89,11 +94,13 @@ const BreakOut = () => {
                             setBallDirection(prev => ({ dx: prev.dx, dy: -prev.dy }));
                             b.status = 0;
                             setScore(prevScore => prevScore + 1);
+                            setBrickCounterBroken(prevCount => prevCount - 1);
                         }
                     }
                 }
             }
         };
+
 
         const updateGame = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -106,7 +113,11 @@ const BreakOut = () => {
             let newY = ballPosition.y + ballDirection.dy;
             let newPaddleX = paddlePosition.paddleX;
 
-            // Check for wall collisions
+            if (brickCounterBroken === 0) {
+                setAlert({ show: true, type: 'win', message: 'Vous avez gagné! ' });
+                setIsGameActive(false);
+                }
+
             if (newX > canvas.width - space || newX < space) {
                 setBallDirection(prev => ({ dx: -prev.dx, dy: prev.dy }));
             }
@@ -170,9 +181,10 @@ const BreakOut = () => {
     }, [isGameActive, ballPosition, ballDirection, paddlePosition, bricks, score, rightPressed, leftPressed, bestScore]);
 
     const initializeGame = () => {
+        setBrickCounterBroken(30);
         setAlert({ show: false, type: '', message: '' });
         setBallPosition({ x: 250, y: 470 });
-        setBallDirection({ dx: 2, dy: -2 });
+        setBallDirection({ dx: speedBall, dy: -speedBall });
         setPaddlePosition({ paddleX: 212.5, paddleWidth: 75 });
         setBricks(initBricks());
         setScore(0);
@@ -181,9 +193,15 @@ const BreakOut = () => {
 
     return (
         <div className="games breakout">
-            <h1 className="title">{text.split('').map((char, index) => (<span key={index} style={{ animationDelay: `${index * 0.2}s` }}>{char}</span>))}</h1>
+            <h1 className="title">
+                {text.split('').map((char, index) => (
+                    <span key={index} style={{ animationDelay: `${index * 0.2}s` }}>
+                        {char}
+                    </span>
+                ))}
+            </h1>
             <div id="gamesContainer">
-                <canvas ref={canvasRef} id="breakOutCanvas" width="500" height="500"></canvas>
+                <canvas ref={canvasRef} id="breakOutCanvas canvas" width="500" height="500"></canvas>
                 <div id="scoreWrapper" style={{ display: isGameActive ? 'flex' : 'flex' }}>
                     <div id="score">Score: {score}</div>
                     <div id="bestScore">Best Score: {bestScore}</div>
@@ -194,6 +212,8 @@ const BreakOut = () => {
                 <Link to="/homepage">
                     <button className="retour-button button">Retour</button>
                 </Link>
+                <HowToPlay gameToExplain={text}/>
+
             </div>
             {alert.show &&
                 <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
