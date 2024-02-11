@@ -66,7 +66,7 @@ const ExpansionPanel = ({ gameToExplain }) => {
                     <div className="instructions">
                         <div className="instructionsHomePages">
                             <p className="pHomePage">Découvrez un univers de jeux rétro et plongez dans le plaisir
-                                nostalgique ! Cliquez, jouez et laissez-vous transporter par l'aventure !</p>
+                                nostalgique ! <br/>Cliquez, jouez et laissez-vous transporter par l'aventure !</p>
                             <div className="buttonList">
                                 <button className="button">Votre score</button>
                                 <button className="button" onClick={() => navigate(selectRandomGame())}>Jeux aléatoire

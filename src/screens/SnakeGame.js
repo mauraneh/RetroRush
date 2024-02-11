@@ -52,7 +52,7 @@ const SnakeGame = () => {
     setDirection("right");
     setScore(0);
     setIsGameActive(true);
-  }, 1000);
+  }, 100);
   };
 
   const updateGame = () => {
