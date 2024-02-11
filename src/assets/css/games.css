@@ -21,6 +21,10 @@
   background-image: url('/src/assets/images/breakoutBG.png');
 }
 
+.tetris {
+  background-image: url('/src/assets/images/tetrisBG.png');
+}
+
 .title span {
   display: inline-block;
   animation: fade 2s infinite, color 5s infinite;
@@ -131,4 +135,8 @@
 }
 
 
+#tetrisCanvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
 
+}
