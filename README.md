@@ -39,9 +39,6 @@ Pour exécuter cette collection de jeux sur votre machine locale, suivez ces ét
 
 Nous encourageons les contributions ! Si vous souhaitez ajouter de nouveaux jeux, améliorer l'interface utilisateur ou suggérer des modifications, n'hésitez pas à ouvrir une issue ou à soumettre une pull request.
 
-## Licence
-
-Ce projet est sous licence [INSÉREZ LE TYPE DE LICENCE ICI]. Voir le fichier LICENSE pour plus de détails.
 
 ## Auteurs
 

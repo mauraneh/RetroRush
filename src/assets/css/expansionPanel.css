@@ -1,0 +1,101 @@
+.expansionPanel {
+    position: fixed;
+    z-index: 30;
+    height: auto;
+    min-height: 50vh;
+    width: 25%;
+    right: 20px;
+    bottom: 10%;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(to left top, #6705d6, #822fde, #9a4be6, #b065ef, #c47ef7);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: -3px 5px 17px 10px rgba(0,0,0,0.66);
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #6705d6;
+        margin-left: 15px;
+        align-self: start;
+    }
+    .gameTagline {
+        font-size: 18px;
+        margin: 20px 0;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+    }
+    .instructions {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        .instructionsHomePages {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            .pHomePage {
+                width: 80%;
+                text-align: center;
+            }
+            .buttonList {
+                margin-top: 10%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex-direction: row;
+                button {
+                    font-size: 0.9rem;
+                    width: 43%;
+                }
+            }
+        }
+        p {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 5%;
+        }
+
+        .key {
+            margin: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+    .sliderContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        .speedRangeText {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 5%;
+        }
+        #sliderInput {
+            color: #6705d6;
+            margin-bottom: 3%;
+        }
+    }
+    .noGameFound {
+        font-size: 16px;
+        font-weight: 900;
+    }
+}

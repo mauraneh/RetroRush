@@ -1,3 +1,9 @@
+/*  SITE ICONES TOUCHES : https://www.flaticon.com/fr/icones-gratuites/touche-du-clavier */
+
+@import './assets/css/games.css';
+@import './assets/css/buttons.css';
+@import './assets/css/expansionPanel.css';
+
 /* ------------------- APP --------------------- */
 .app {
   text-align: center;
@@ -61,30 +67,6 @@
 }
 .app-input:hover {
   border-color: #ffd826;
-}
-
-.app-button {
-  background-color: #fa519a; 
-  color: #ffeef5;
-  padding: 40px 25px;
-  border: none;
-  border-radius: 100%; 
-  cursor: pointer;
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  transition: background-color 0.3s, box-shadow 0.2s, transform 0.2s;
-  box-shadow: 0 10px #e91571;
-}
-
-.app-button:hover {
-  background-color: #f74d90; 
-  transform: scale(1.1);
-}
-
-.app-button:active {
-  box-shadow: 0 1px #f74d90; 
-  transform: translateY(3px); 
 }
 
 /* --------------------- HOMEPAGE --------------------- */
@@ -166,7 +148,7 @@
   z-index: 4;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #ffe100; 
+  background-color: #ffe100;
   color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 0px 20px;
@@ -195,7 +177,7 @@
   background: white;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
 
@@ -213,103 +195,84 @@
   opacity: 1;
 }
 .card:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3); 
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .subtitle-hp {
   font-size: 48px;
-  color: #F0F; 
-  text-shadow: 
-    1px 1px 0 #EB0,   
-    2px 2px 0 #0D6,   
-    3px 3px 0 #09F; 
-  font-family: 'Press Start 2P', cursive; 
-}
-.jouer-button {
-  position: relative;
-  z-index: 4;
-  background-color: #09F;
-  border: none;
-  color: white;
-  padding: 30px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 2rem;
-  box-shadow: 0 10px rgb(1, 85, 141);
-}
-
-.jouer-button:hover {
-  animation: clignotement-vif 0.5s infinite; 
-}
-
-.bouton-jouer:active {
-  box-shadow: 0 1px #09F; 
-  transform: translateY(3px); 
+  color: #F0F;
+  text-shadow:
+    1px 1px 0 #EB0,
+    2px 2px 0 #0D6,
+    3px 3px 0 #09F;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .relief-text {
-  z-index: 10; 
+  z-index: 10;
   position: relative;
   bottom: 60px;
   font-size: 2rem;
   color: #e55800;
-  text-shadow: 
-      1px 1px 0 #000,   
-      2px 2px 0 #000,   
+  text-shadow:
+      1px 1px 0 #000,
+      2px 2px 0 #000,
       3px 3px 0 #000;
 }
 
-.retour-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background-color: #c47ef7;
-  color: #6705d6;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
+
+/* --------------------- ALERT --------------------- */
+.alert {
+  position: absolute;
+  width: 25vw;
+  height: 50vh;
+}
+.templateAlert {
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  font-weight: 700;
+  box-shadow: 0 0 10px #fd028c;
+}
+
+.customSuccess {
+  background-color: #d4edda;
+  background-image: url('./assets/images/alert-success.webp');
+  background-position: center  5%;
+  width: 100%;
+  height: 100%;
+  text-shadow: #fcd60c 1px 1px 0, #fcd60c -1px -1px 0, #fcd60c -1px 1px 0, #fcd60c 1px -1px 0;
+}
+
+.customLoose {
+  background-color: #FC2F2E;
+  background-size: contain;
+  background-image: url('./assets/images/alert-loose.webp');
+  background-position: center;
+  text-shadow: #602929 1px 1px 0, #670808 -1px -1px 0, #6c041c -1px 1px 0, #ee3781 1px -1px 0;
+}
+
+.alertMessage {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 100%;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-  text-transform: uppercase;
+  font-size: 2rem;
 }
-
-.retour-button:hover {
-  animation: flicker 1s infinite;
-}
-
-.retour-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-/* --------  KEYFRAME ---------- */
-@keyframes clignotement {
-  0%, 100% {
-    opacity: 1;
+.buttonList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5%;
+  button {
+    background-color: #f692b8;
   }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes clignotement-vif {
-  0%, 100% {
-    background-color: #09F; 
-  }
-  50% {
-    background-color: #F00;
-    box-shadow: 0 10px rgb(218, 12, 12);
-  }
-}
-
-@keyframes flicker {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
 }

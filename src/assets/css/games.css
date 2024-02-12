@@ -14,6 +14,30 @@
   height: 100vh;
   background-size: cover;
 }
+
+.snake {
+  background-image: url('/src/assets/images/snakesBG.png');
+}
+
+.breakout {
+  background-image: url('/src/assets/images/breakoutBG.png');
+}
+
+.tetris {
+  background-image: url('/src/assets/images/tetrisBG.png');
+}
+
+.title span {
+  display: inline-block;
+  animation: fade 2s infinite, color 5s infinite;
+}
+
+.title {
+  font-size: 6em;
+  text-align: center;
+  margin: 0 auto;
+}
+
 #gamesContainer {
   box-shadow: 0 0 10px #fd028c;
   padding: 10px 50px;
@@ -25,6 +49,16 @@
   position: relative;
   animation: blinkShadow 1.5s infinite;
   opacity: 0.8;
+}
+
+#canvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
+}
+
+#canvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
 }
 
 @keyframes color {
@@ -49,12 +83,6 @@
   100% {
     color: blue;
   }
-}
-
-.title {
-  font-size: 6em;
-  text-align: center;
-  margin: 0 auto;
 }
 
 @keyframes fade {
@@ -133,6 +161,7 @@
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
 /* Style du tictactoe */
 table {
   border-collapse: collapse;
@@ -178,4 +207,11 @@ td.span.bot-symbol {
   to {
     opacity: 1;
   }
+=======
+
+#tetrisCanvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
+
+>>>>>>> 6bd680b045cc7c4034ec56e52a1108921e03abaf
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SnakeScore = ({ isGameActive, score, bestScore }) => {
+const Score = ({ isGameActive, score, bestScore }) => {
     return (
         <div>
             <div className="gameScoreWrapper" style={{ display: isGameActive ? 'flex' : 'none' }}>
@@ -11,4 +11,4 @@ const SnakeScore = ({ isGameActive, score, bestScore }) => {
     );
 };
 
-export default SnakeScore;
+export default Score;
