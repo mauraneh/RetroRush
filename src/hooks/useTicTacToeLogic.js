@@ -8,6 +8,7 @@ const useTicTacToeLogic = () => {
     ["", "", ""],
   ]);
   const playerSymbol = "X";
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
   const botSymbol = "O";
   const [playerWins, setPlayerWins] = useState(0);
   const [draws, setDraws] = useState(0);
@@ -38,7 +39,6 @@ const useTicTacToeLogic = () => {
     if (!isGameActive) {
       return;
     }
-
     cellRefs.current.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
         cell.onClick = () => handleCellClick(rowIndex, colIndex);
@@ -133,9 +133,9 @@ const useTicTacToeLogic = () => {
     updatedBoard[row][col] = botSymbol;
     setBoard(updatedBoard);
     if (checkWinner(botSymbol)) {
-      handleGameEnd("Le bot a gagné !", setBotWins);
+      handleGameEnd("Le bot a gagné !", setBotWins, "error");
     } else if (checkDraw()) {
-      handleGameEnd("Match nul !", setDraws);
+      handleGameEnd("Match nul !", setDraws, "win");
     } else {
       setPlayerTurnFlag(true);
     }
@@ -196,12 +196,11 @@ const useTicTacToeLogic = () => {
   };
 
   // Fonction générique pour gérer la fin du jeu
-  const handleGameEnd = (message, setScore) => {
+  const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
       setIsGameActive(false);
-      alert(message);
+      setAlert({ show: true, type: type, message: message });
       setScore((prevScore) => prevScore + 1);
-      resetGame();
     }, 100);
   };
 
@@ -213,9 +212,9 @@ const useTicTacToeLogic = () => {
       setBoard(updatedBoard);
 
       if (checkWinner(playerSymbol)) {
-        handleGameEnd("Tu as gagné !", setPlayerWins);
+        handleGameEnd("Tu as gagné !", setPlayerWins, "win");
       } else if (checkDraw()) {
-        handleGameEnd("Match Nul !", setDraws);
+        handleGameEnd("Match Nul !", setDraws, "error");
       } else {
         setPlayerTurnFlag(false);
         setTimeout(botTurn, 500);
@@ -232,6 +231,7 @@ const useTicTacToeLogic = () => {
     ]);
     setIsGameActive(true);
     setPlayerTurnFlag(true);
+    setAlert({ show: false, type: "", message: "" });
   };
 
   return {
@@ -242,6 +242,7 @@ const useTicTacToeLogic = () => {
     isGameActive,
     botWins,
     cellRefs,
+    alert,
     displayBoard,
     setIsGameActive,
     addClickEventHandlers,

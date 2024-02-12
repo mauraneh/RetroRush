@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cell from "../components/TicTacToeCell";
-import Scoreboard from "../components/TicTacToeScoreBoard";
 import GameTitle from "../components/GameTitle";
 import useTicTacToeLogic from "../hooks/useTicTacToeLogic";
+import Score from "../components/Score";
+import Alert from "../components/Alert";
+import HowToPlay from "../components/HowToPlay";
 
 const TicTacToeScreen = () => {
   const {
@@ -15,16 +17,18 @@ const TicTacToeScreen = () => {
     cellRefs,
     playerSymbol,
     botSymbol,
+    alert,
     displayBoard,
     addClickEventHandlers,
     handleCellClick,
     setIsGameActive,
+    resetGame,
   } = useTicTacToeLogic();
 
   useEffect(() => {
     displayBoard();
     addClickEventHandlers();
-  }, [isGameActive]);
+  }, []);
 
   return (
     <>
@@ -61,7 +65,19 @@ const TicTacToeScreen = () => {
               ))}
             </tbody>
           </table>
-          <Scoreboard
+          <HowToPlay gameToExplain={"TicTacToe - Game"} />
+          {alert.show && (
+            <Alert
+              status={alert.type}
+              message={alert.message}
+              onRestart={resetGame}
+              show={alert.show}
+            />
+          )}
+          <Score
+            game={"morpion"}
+            score={0}
+            bestScore={0}
             playerWins={playerWins}
             draws={draws}
             botWins={botWins}
