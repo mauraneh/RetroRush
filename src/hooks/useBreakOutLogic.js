@@ -7,14 +7,13 @@ export const useBreakOutLogic = () => {
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
-    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
     const [bricks, setBricks] = useState([]);
     const [ballPosition, setBallPosition] = useState({ x: 250, y: 470 });
     const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
     const [ballDirection, setBallDirection] = useState({ dx: speedBall, dy: -speedBall });
     const [brickCounterBroken, setBrickCounterBroken] = useState(30);
-
-
+    const [isGameLost, setIsGameLost] = useState(false);
+    const [isGameWin, setIsGameWin] = useState(false);
     const [rightPressed, setRightPressed] = useState(false);
     const [leftPressed, setLeftPressed] = useState(false);
 
@@ -40,47 +39,9 @@ export const useBreakOutLogic = () => {
             document.removeEventListener("keyup", handleKeyUp);
         };
     }, []);
-/*
-useEffect(() => {
-    if (!isGameActive) return;
-
-    const interval = setInterval(() => {
-        updateGameState();
-    }, 1000 / 60); // Exemple d'exécution 60 fois par seconde.
-
-    return () => clearInterval(interval);
-}, [isGameActive, ballPosition, ballDirection, paddlePosition]); // Ajoutez d'autres dépendances au besoin.
-  useEffect(() => {
-        if (!isGameActive) return;
-
-        const handleKeyDown = (event) => {
-            if (event.key === "Right" || event.key === "ArrowRight") {
-                setPaddlePosition(prev => ({ ...prev, paddleX: Math.min(prev.paddleX + 7, 500 - prev.paddleWidth) }));
-            } else if (event.key === "Left" || event.key === "ArrowLeft") {
-                setPaddlePosition(prev => ({ ...prev, paddleX: Math.max(prev.paddleX - 7, 0) }));
-            }
-        };
-        document.addEventListener("keydown", handleKeyDown);
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [isGameActive, paddlePosition]);
-*/
-
-    const initializeGame = () => {
-        setIsGameActive(true);
-        setScore(0);
-        setAlert({ show: false, type: '', message: '' });
-        setBricks(initBricks(5, 6));
-        setBrickCounterBroken(30);
-        setBallPosition({ x: 250, y: 470 });
-        setPaddlePosition({ paddleX: 212.5, paddleWidth: 75 });
-        setBallDirection({ dx: speedBall, dy: -speedBall });
-    };
 
     const updateGameState = ( ctx, canvas) => {
         if (!isGameActive) return;
-
 
         let newX = ballPosition.x + ballDirection.dx;
         let newY = ballPosition.y + ballDirection.dy;
@@ -88,9 +49,8 @@ useEffect(() => {
 
         collisionDetection(ballPosition, bricks, 71, 20, setBallDirection, setScore, setBrickCounterBroken);
 
-
-        if (brickCounterBroken === 0) {
-            setAlert({ show: true, type: 'win', message: 'Vous avez gagné! ' });
+        if (brickCounterBroken === 28) {
+            setIsGameWin(true);
             setIsGameActive(false);
         }
 
@@ -109,7 +69,7 @@ useEffect(() => {
                     dy: -speed * Math.cos(angle)
                 });
             } else {
-                setAlert({ show: true, type: 'error', message: 'Vous avez perdu ! ' });
+                setIsGameLost(true);
                 setIsGameActive(false);
                 if (score > bestScore) {
                     setBestScore(score);
@@ -127,7 +87,19 @@ useEffect(() => {
         setPaddlePosition(prev => ({ ...prev, paddleX: newPaddleX }));
     };
 
-    return { score, bestScore, isGameActive, initializeGame, alert, bricks, ballPosition, paddlePosition, updateGameState };
+    const initializeGame = () => {
+        setIsGameWin(false);
+        setIsGameLost(false);
+        setIsGameActive(true);
+        setScore(0);
+        setBricks(initBricks(5, 6));
+        setBrickCounterBroken(30);
+        setBallPosition({ x: 250, y: 470 });
+        setPaddlePosition({ paddleX: 212.5, paddleWidth: 75 });
+        setBallDirection({ dx: speedBall, dy: -speedBall });
+    };
+
+    return { isGameLost,isGameWin, score, bestScore, isGameActive, initializeGame, bricks, ballPosition, paddlePosition, updateGameState };
 };
 
 export default useBreakOutLogic;

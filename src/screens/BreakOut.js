@@ -1,6 +1,5 @@
 import React, {useRef} from "react";
 import { Link } from "react-router-dom";
-import Alert from '../components/Alert';
 import HowToPlay from "../components/HowToPlay";
 import GameTitle from "../components/GameTitle";
 import PlayButton from "../components/BtnPlay";
@@ -8,7 +7,7 @@ import Score from "../components/Score";
 import useBreakOutLogic from "../hooks/useBreakOutLogic";
 import BreakOutCanvas from "../components/BreakOutCanvas";
 const BreakOut = () => {
-    const { score, bestScore, isGameActive, initializeGame, alert, bricks, ballPosition, paddlePosition, updateGameState } = useBreakOutLogic();
+    const { isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame, bricks, ballPosition, paddlePosition, updateGameState } = useBreakOutLogic();
     const canvasRef = useRef(null);
 
     return (
@@ -22,13 +21,13 @@ const BreakOut = () => {
                     paddlePosition={paddlePosition}
                     updateGameState={updateGameState}
                     canvasRef={canvasRef}
-
                 />
                 <Score
                     isGameActive={isGameActive}
+                    isGameWin={isGameWin}
                     score={score}
                     bestScore={bestScore}
-                    initializeGame={initializeGame}
+                    isGameLost={isGameLost}
                 />
                 {!isGameActive && (
                     <PlayButton initializeGame={initializeGame} />
@@ -38,9 +37,6 @@ const BreakOut = () => {
                 </Link>
                 <HowToPlay gameToExplain="Breakout"/>
             </div>
-            {alert.show &&
-                <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
-            }
         </div>
     );
 };
