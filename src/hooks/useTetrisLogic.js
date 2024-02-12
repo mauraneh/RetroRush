@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
 import { TETROMINOS, randomTetromino } from '../utils/tetrisHelper';
 
-const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0));
+
+
+export const BLOCK_SIZE = 40; // Taille d'un bloc en pixels
+export const CANVAS_WIDTH = 500;
+export const CANVAS_HEIGHT = 500;
+
+// Calcule le nombre de colonnes et de lignes en fonction de la taille du canvas et de la taille des blocs
+export const COLS = Math.floor(CANVAS_WIDTH / BLOCK_SIZE);
+export const ROWS = Math.floor(CANVAS_HEIGHT / BLOCK_SIZE);
+
+
+const createEmptyBoard = () => Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+
+// const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0));
 
 const useTetrisLogic = () => {
     const [isGameActive, setIsGameActive] = useState(false);
@@ -61,12 +74,13 @@ const useTetrisLogic = () => {
     }, [currentPiece]);
 
     const checkCollision = (x, y, candidate = currentPiece.shape) => {
+
         for (let row = 0; row < candidate.length; row++) {
             for (let col = 0; col < candidate[row].length; col++) {
                 if (candidate[row][col] !== 0) {
                     let newX = col + currentPiece.pos.x + x;
                     let newY = row + currentPiece.pos.y + y;
-
+                    if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
                     if (newX < 0 || newX >= 10 || newY >= 20) return true;
                     if (newY < 0) continue;
                     if (board[newY][newX] !== 0) return true;
@@ -127,22 +141,17 @@ const useTetrisLogic = () => {
     };
 
     const clearLines = () => {
-        let clearedLines = 0;
-        for (let y = 0; y < board.length; y++) {
-            if (board[y].every(value => value !== 0)) {
-                clearedLines += 1;
-                setBoard(prev => {
-                    const newBoard = [...prev];
-                    newBoard.splice(y, 1);
-                    newBoard.unshift(Array(10).fill(0));
-                    return newBoard;
-                });
-            }
+        const newBoard = board.filter(row => row.some(value => value === 0));
+        const clearedLines = ROWS - newBoard.length;
+        for (let i = 0; i < clearedLines; i++) {
+            newBoard.unshift(Array(COLS).fill(0));
         }
         if (clearedLines > 0) {
-            setScore(score + clearedLines * 100);
+            setBoard(newBoard);
+            setScore(score += 1);
         }
     };
+
 
     const checkGameOver = () => {
         if (checkCollision(0, 0)) {
