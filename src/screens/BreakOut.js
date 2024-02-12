@@ -9,7 +9,6 @@ import useBreakOutLogic from "../hooks/useBreakOutLogic";
 import BreakOutCanvas from "../components/BreakOutCanvas";
 const BreakOut = () => {
     const { score, bestScore, isGameActive, initializeGame, alert, bricks, ballPosition, paddlePosition, updateGameState } = useBreakOutLogic();
-    const text = 'Breakout - Game';
     const canvasRef = useRef(null);
 
     return (
@@ -37,7 +36,7 @@ const BreakOut = () => {
                 <Link to="/homepage">
                     <button className="retour-button button">Retour</button>
                 </Link>
-                <HowToPlay gameToExplain={text}/>
+                <HowToPlay gameToExplain="Breakout"/>
             </div>
             {alert.show &&
                 <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />

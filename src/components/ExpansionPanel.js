@@ -28,7 +28,7 @@ const ExpansionPanel = ({ gameToExplain }) => {
     };
 
     switch (gameToExplain) {
-        case 'Breakout - Game':
+        case 'Breakout':
             return (
                 <div className="expansionPanel">
                     <h1>{gameToExplain}</h1>
