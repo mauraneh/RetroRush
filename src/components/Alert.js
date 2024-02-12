@@ -20,9 +20,6 @@ const Alert = ({ status, message, onRestart, show }) => {
                 <div className="customLoose templateAlert">
                     <p className="alertMessage">{message}</p>
                     <div className="buttonList">
-                        <Link to="/homepage">
-                            <button className='returnButtonAlertFail button'>Accueil</button>
-                        </Link>
                         <button className="returnButtonRestartFail button" onClick={onRestart}>Réessayer</button>
                     </div>
                 </div>
