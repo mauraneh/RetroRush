@@ -1,10 +1,9 @@
 const cellSize = 20; 
 
 // Fonction pour initialiser les paramètres du jeu
-export const initializeGame = (setSnake, setFood, setDirection, setScore, setIsGameActive, setIsGameLost) => {
+export const initializeGame = (setSnake, setFood, setScore, setIsGameActive, setIsGameLost) => {
     setSnake([{ x: 10, y: 10 }]); 
     setFood(spawnFood(25, 25)); 
-    setDirection('right'); 
     setScore(0); 
     setIsGameActive(true);
     setIsGameLost(false);
@@ -27,7 +26,7 @@ switch (direction) {
     case 'left': newHead.x -= 1; break;
     case 'up': newHead.y -= 1; break;
     case 'down': newHead.y += 1; break;
-    default: break;
+    default: break;s
 }
 
 // Collision avec la nourriture
