@@ -97,6 +97,13 @@ const ExpansionPanel = ({ gameToExplain }) => {
                     </div>
                 </div>
             );
+        case 'Tetris':
+            return (
+                <div className="expansionPanel">
+                    <h1>{gameToExplain}</h1>
+                    <p>TODO</p>
+                </div>
+            )
         default:
             return (
                 <div className="expansionPanel">
