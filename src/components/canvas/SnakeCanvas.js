@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { drawGame } from '../utils/snakeHelpers';
+import { drawGame } from '../../utils/snakeHelpers';
 
 const SnakeCanvas = ({ canvasRef, snake, food, isGameActive }) => {
     useEffect(() => {
