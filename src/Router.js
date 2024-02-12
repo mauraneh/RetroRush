@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 import App from "./App";
-import SnakeGame from "./screens/SnakeGame"; 
+import BreakOut from "./screens/BreakOut/BreakOut";
+import HomePage from "./screens/HomePage";
 
 const Router = createBrowserRouter(
     [
@@ -11,7 +12,11 @@ const Router = createBrowserRouter(
         },
         {
             path: "/homepage",
-            element: <Homepage />,
+            element: <HomePage />,
+        },
+        {
+            path: "/breakout",
+            element: <BreakOut />,
         },
         {
             path: "/snake",

@@ -3,12 +3,11 @@ import { useLocation } from 'react-router-dom';
 import logo from '../assets/images/logoRR.png';
 import { Link } from 'react-router-dom';
 import Carousel from '../components/Carousel';
-
 import snakeImage from '../assets/images/snakes.png';
 import breakoutImage from '../assets/images/breakout.png';
 import motusImage from '../assets/images/motus.png';
 import tictactoeImage from '../assets/images/tictactoe.png';
-
+import HowToPlay from "../components/HowToPlay";
 
 function HomePage() {
   const location = useLocation();
@@ -22,28 +21,37 @@ function HomePage() {
       </div>
       <div className='container-carousel'>
             <h2 className='subtitle-hp'>Mini Jeux Rétro</h2>
-            <Carousel>
-              <div className='card'>
-                <img src={snakeImage} alt="Snake" className="card-image"/>
-                <Link to="/snake"><button className='jouer-button'>Jouez</button></Link>
-              </div>
-                <div className='card'>
-                <img src={breakoutImage} alt="Snake" className="card-image"/>
-                <Link to="/breakout"><button className='jouer-button'>Jouez</button></Link>
-              </div>
-              <div className='card'>
-              <img src={motusImage} alt="Snake" className="card-image"/>
-                <Link to="/motus"><button className='jouer-button'>Jouez</button></Link>
-              </div>
-              <div className='card'>
-                <img src={tictactoeImage} alt="Snake" className="card-image"/>
-                <Link to="/tictactoe"><button className='jouer-button'>Jouez</button></Link>
-              </div>
-            </Carousel>
-        </div>
-        <Link to="/">
-          <button className='retour-button'>Retour</button>
-        </Link>
+        <Carousel>
+          <div className='card'>
+            <img src={snakeImage} alt="Snake" className="card-image"/>
+            <Link to="/snake">
+              <button className='jouer-button'>Jouez</button>
+            </Link>
+          </div>
+          <div className='card'>
+            <img src={breakoutImage} alt="casse-brique" className="card-image"/>
+            <Link to="/breakout">
+              <button className='jouer-button'>Jouez</button>
+            </Link>
+          </div>
+          <div className='card'>
+            <img src={motusImage} alt="Snake" className="card-image"/>
+            <Link to="/motus">
+              <button className='jouer-button'>Jouez</button>
+            </Link>
+          </div>
+          <div className='card'>
+            <img src={tictactoeImage} alt="Snake" className="card-image"/>
+            <Link to="/tictactoe">
+              <button className='jouer-button'>Jouez</button>
+            </Link>
+          </div>
+        </Carousel>
+      </div>
+      <Link to="/">
+        <button className='retour-button button'>Retour</button>
+      </Link>
+      <HowToPlay gameToExplain='HomePage'/>
     </div>
   );
 }

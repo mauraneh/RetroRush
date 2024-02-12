@@ -1,21 +1,26 @@
 import logo from './assets/images/logoRR.png';
 import './App.css';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './screens/HomePage';
 import SnakeGame from './screens/SnakeGame';
-
 import { useNavigate } from 'react-router-dom';
-
+import BreakOut from "./screens/BreakOut/BreakOut";
+import {SpeedProvider} from "./Context/Speedcontext";
 function App() {
+
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<EnterNickname />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/snake" element={<SnakeGame />} />
-      </Routes>
-    </Router>
+      <SpeedProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<EnterNickname />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/snake" element={<SnakeGame />} />
+            <Route path="/breakout" element={<BreakOut />} />
+          </Routes>
+        </Router>
+      </SpeedProvider>
   );
 }
 
