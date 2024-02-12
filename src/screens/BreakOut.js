@@ -6,6 +6,7 @@ import PlayButton from "../components/BtnPlay";
 import Score from "../components/Score";
 import useBreakOutLogic from "../hooks/useBreakOutLogic";
 import BreakOutCanvas from "../components/BreakOutCanvas";
+
 const BreakOut = () => {
     const { isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame, bricks, ballPosition, paddlePosition, updateGameState } = useBreakOutLogic();
     const canvasRef = useRef(null);
