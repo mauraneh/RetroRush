@@ -31,7 +31,7 @@ const TetrisCanvas = ({canvasRef, isGameActive, initializeGame, board, currentPi
 
         drawBoard();
     }, [board, currentPiece, isGameActive]);
-    return <canvas ref={canvasRef} width="500" height="500" />;
+    return <canvas ref={canvasRef} width="500" height="500" className="test" />;
 
 };
 export default TetrisCanvas;
