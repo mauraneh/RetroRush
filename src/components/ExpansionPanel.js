@@ -3,6 +3,8 @@ import keyBoardQ from "../assets/images/icon/lettre-q.png"
 import keyBoardD from "../assets/images/icon/lettre-d.png"
 import {useSpeed} from "../Context/Speedcontext";
 import {useNavigate} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 /* POSSIBILITEE DE METTRE PARAMETRES POUR CHANGER LES REGLAGES D'UNE PARTIE
 EXEMPLE : VITESSE SERPENT
@@ -24,7 +26,6 @@ const ExpansionPanel = ({ gameToExplain }) => {
             setSpeedBall(3);
         }
     };
-
 
     switch (gameToExplain) {
         case 'Breakout - Game':
@@ -56,9 +57,29 @@ const ExpansionPanel = ({ gameToExplain }) => {
                         />
                     </div>
                 </div>
-            )
-                ;
-            break;
+            );
+            case 'Snake':
+            return (
+                <div className="expansionPanel">
+                    <h1>Snake</h1>
+                    <p className="gameTagline">Guidez le serpent, mangez les pommes, et évitez de vous mordre la queue ou les murs !</p>
+                    <p className="subgameTagline">Utilise les touches 'Haut', 'Bas', 'Droite', 'Gauche', pour déplacer le serpent.</p>
+                    <div className="keys-container">
+                        <div className="keySnake up">
+                            <FontAwesomeIcon icon={faArrowUp} className="touch"/>
+                        </div>
+                        <div className="keySnake left">
+                            <FontAwesomeIcon icon={faArrowLeft} className="touch"/>
+                        </div>
+                        <div className="keySnake down">
+                            <FontAwesomeIcon icon={faArrowDown} className="touch"/>
+                        </div>
+                        <div className="keySnake right">
+                            <FontAwesomeIcon icon={faArrowRight} className="touch"/>
+                        </div>
+                    </div>
+                </div>
+            );
         case 'HomePage':
             return (
                 <div className="expansionPanel">
@@ -73,11 +94,9 @@ const ExpansionPanel = ({ gameToExplain }) => {
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             );
-            break;
         default:
             return (
                 <div className="expansionPanel">
