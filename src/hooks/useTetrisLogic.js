@@ -1,167 +1,161 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { TETROMINOS, randomTetromino } from '../utils/tetrisHelper';
 
+const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0));
+
 const useTetrisLogic = () => {
-    //Generique aux autres mini-jeux
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
     const [isGameLost, setIsGameLost] = useState(false);
     const [isGameWin, setIsGameWin] = useState(false);
-    //Nouvelle fonctionnalitées
-    const [board, setBoard] = useState(createEmptyBoard());
-    const [currentPiece, setCurrentPiece] = useState({});
-
+    const [board, setBoard] = useState(createEmptyBoard);
+    const [currentPiece, setCurrentPiece] = useState(() => randomTetromino());
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.key === 'ArrowLeft') movePiece('left');
-            if (e.key === 'ArrowRight') movePiece('right');
-            if (e.key === 'ArrowDown') movePiece('down');
-            if (e.key === 'ArrowUp') movePiece('rotate');
+            if (!isGameActive) return;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    movePiece(-1);
+                    break;
+                case 'ArrowRight':
+                    movePiece(1);
+                    break;
+                case 'ArrowDown':
+                    dropPiece();
+                    break;
+                case 'ArrowUp':
+                    rotatePiece();
+                    break;
+                default:
+                    break;
+            }
         };
 
         window.addEventListener('keydown', handleKeyDown);
 
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [currentPiece, board]);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isGameActive, currentPiece, board]);
 
     useEffect(() => {
         if (isGameActive) {
             const interval = setInterval(() => {
                 dropPiece();
-            }, 1000);
-
+            }, 1000);   // TODO CHANGER VITESSE ICI //
             return () => clearInterval(interval);
         }
-    }, [isGameActive, currentPiece]); //DropPiece ici ???
+    }, [isGameActive, currentPiece]);
 
     useEffect(() => {
-        if (!isGameActive) return;
-        const handleCompleteLines = () => {
-            const linesCleared = clearLines(board);
-            if (linesCleared > 0) {
-                setScore(score + linesCleared * 100); // Update score based on cleared lines
-                setBoard([...board]); // Update board
-            }
-        };
+        if (isGameActive) {
+            checkGameOver();
+            clearLines();
+        }
+    }, [currentPiece]);
 
-        handleCompleteLines();
+    const checkCollision = (x, y, candidate = currentPiece.shape) => {
+        for (let row = 0; row < candidate.length; row++) {
+            for (let col = 0; col < candidate[row].length; col++) {
+                if (candidate[row][col] !== 0) {
+                    let newX = col + currentPiece.pos.x + x;
+                    let newY = row + currentPiece.pos.y + y;
 
-        const checkGameOver = () => {
-            if (checkCollision(currentPiece, board, { x: 0, y: 0 })) {
-                setIsGameActive(false);
-                setIsGameLost(true);
-            }
-        };
-
-        checkGameOver();
-
-    }, [board, currentPiece, isGameActive, score]);
-
-    function createEmptyBoard() {
-        return Array.from({ length: 20 }, () => Array(10).fill(0));
-    }
-    const checkCollision = (piece, board, { x: moveX, y: moveY }) => {
-        for (let y = 0; y < piece.shape.length; y += 1) {
-            for (let x = 0; x < piece.shape[y].length; x += 1) {
-                if (piece.shape[y][x] !== 0) {
-                    if (
-                        !board[y + piece.pos.y + moveY] ||
-                        !board[y + piece.pos.y + moveY][x + piece.pos.x + moveX] ||
-                        board[y + piece.pos.y + moveY][x + piece.pos.x + moveX] !== 0
-                    ) {
-                        return true;
-                    }
+                    if (newX < 0 || newX >= 10 || newY >= 20) return true;
+                    if (newY < 0) continue;
+                    if (board[newY][newX] !== 0) return true;
                 }
             }
         }
         return false;
     };
-    const initializeGame = () => {
-        setIsGameActive(true);
-        setIsGameLost(false);
-        setBoard(createEmptyBoard());
-        setCurrentPiece(randomTetromino());
-        setScore(0);
-    }
 
-    const merge = (board, piece) => {
-        piece.shape.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value !== 0) {
-                    board[y + piece.pos.y][x + piece.pos.x] = value;
-                }
-            });
-        });
-        return board;
-    };
-
-    const rotate = (matrix) => {
-        const N = matrix.length - 1;
-        const result = matrix.map((row, i) =>
-            row.map((val, j) => matrix[N - j][i])
-        );
-        return result;
+    const movePiece = (dir) => {
+        if (!checkCollision(dir, 0)) {
+            setCurrentPiece(prev => ({
+                ...prev,
+                pos: { x: prev.pos.x + dir, y: prev.pos.y }
+            }));
+        }
     };
 
     const dropPiece = () => {
-        if (!currentPiece) return;
-        if (!checkCollision(currentPiece, board, { x: 0, y: 1 })) {
-            setCurrentPiece({ ...currentPiece, pos: { x: currentPiece.pos.x, y: currentPiece.pos.y + 1 } });
+        if (!checkCollision(0, 1)) {
+            setCurrentPiece(prev => ({
+                ...prev,
+                pos: { x: prev.pos.x, y: prev.pos.y + 1 }
+            }));
         } else {
-            // Merge the piece into the board
-            let newBoard = merge(board, currentPiece);
-            setBoard(newBoard);
-            // Check for completed lines
-            // Reset currentPiece
-            setCurrentPiece(randomTetromino());
-        }
-    };
-
-    const movePiece = (direction) => {
-        if (!currentPiece) return;
-        if (direction === 'left' && !checkCollision(currentPiece, board, { x: -1, y: 0 })) {
-            setCurrentPiece({ ...currentPiece, pos: { x: currentPiece.pos.x - 1, y: currentPiece.pos.y } });
-        } else if (direction === 'right' && !checkCollision(currentPiece, board, { x: 1, y: 0 })) {
-            setCurrentPiece({ ...currentPiece, pos: { x: currentPiece.pos.x + 1, y: currentPiece.pos.y } });
-        } else if (direction === 'down') {
-            dropPiece();
-        } else if (direction === 'rotate') {
-            const rotatedPiece = { ...currentPiece, shape: rotate(currentPiece.shape) };
-            if (!checkCollision(rotatedPiece, board, { x: 0, y: 0 })) {
-                setCurrentPiece(rotatedPiece);
+            if (currentPiece.pos.y < 1) {
+                // Game Over
+                setIsGameActive(false);
+                setIsGameLost(true);
+                return;
             }
+            updateBoard();
         }
     };
 
-    const clearLines = (board) => {
-        let linesCleared = 0;
-        for (let y = board.length - 1; y >= 0; y--) {
-            if (board[y].every(value => value !== 0)) {
-                linesCleared += 1;
-                for (let yy = y; yy > 0; yy--) {
-                    board[yy] = board[yy - 1];
+    const rotatePiece = () => {
+        const rotatedShape = currentPiece.shape.map((_, index) =>
+            currentPiece.shape.map(col => col[index])
+        );
+        const rotatedPiece = { ...currentPiece, shape: rotatedShape };
+        if (!checkCollision(0, 0, rotatedPiece.shape)) {
+            setCurrentPiece(rotatedPiece);
+        }
+    };
+
+    const updateBoard = () => {
+        const newBoard = board.map(row => [...row]);
+        currentPiece.shape.forEach((row, y) => {
+            row.forEach((value, x) => {
+                if (value !== 0) {
+                    newBoard[y + currentPiece.pos.y][x + currentPiece.pos.x] = value;
                 }
-                board[0] = Array(10).fill(0);
-                y++; // Check the new line at the same position
-            }
-        }
-        return linesCleared;
+            });
+        });
+
+        setBoard(newBoard);
+        setCurrentPiece(randomTetromino());
     };
 
-    return {
-        board,
-        currentPiece,
-        movePiece,
-        isGameLost,
-        isGameWin,
-        score,
-        bestScore,
-        isGameActive,
-        initializeGame,
+    const clearLines = () => {
+        let clearedLines = 0;
+        for (let y = 0; y < board.length; y++) {
+            if (board[y].every(value => value !== 0)) {
+                clearedLines += 1;
+                setBoard(prev => {
+                    const newBoard = [...prev];
+                    newBoard.splice(y, 1);
+                    newBoard.unshift(Array(10).fill(0));
+                    return newBoard;
+                });
+            }
+        }
+        if (clearedLines > 0) {
+            setScore(score + clearedLines * 100);
+        }
     };
-}
+
+    const checkGameOver = () => {
+        if (checkCollision(0, 0)) {
+            setIsGameActive(false);
+            setIsGameLost(true);
+        }
+    };
+
+    const initializeGame = () => {
+        setIsGameActive(true);
+        setIsGameLost(false);
+        setIsGameWin(false);
+        setBoard(createEmptyBoard());
+        setCurrentPiece(randomTetromino());
+        setScore(0);
+    };
+
+    return { board, currentPiece, isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame };
+};
+
 export default useTetrisLogic;
