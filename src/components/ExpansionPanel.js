@@ -28,7 +28,7 @@ const ExpansionPanel = ({ gameToExplain }) => {
     };
 
     switch (gameToExplain) {
-        case 'Breakout - Game':
+        case 'Breakout':
             return (
                 <div className="expansionPanel">
                     <h1>{gameToExplain}</h1>
@@ -97,6 +97,13 @@ const ExpansionPanel = ({ gameToExplain }) => {
                     </div>
                 </div>
             );
+        case 'Tetris':
+            return (
+                <div className="expansionPanel">
+                    <h1>{gameToExplain}</h1>
+                    <p>TODO</p>
+                </div>
+            )
         default:
             return (
                 <div className="expansionPanel">
