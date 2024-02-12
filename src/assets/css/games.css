@@ -160,12 +160,12 @@ td {
   position: relative;
 }
 
-.player-symbol {
+td.span.player-symbol {
   color: #fdd33c; /* Couleur orange */
   opacity: 0;
   animation: fadeIn 0.3s forwards;
 }
-.bot-symbol {
+td.span.bot-symbol {
   color: #fd028c;
   opacity: 0;
   animation: fadeIn 0.3s forwards;
