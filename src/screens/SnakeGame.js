@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, text} from 'react';
 import '../assets/css/games.css';
 import SnakeCanvas from '../components/SnakeCanvas';
 import Score from '../components/Score';
@@ -7,6 +7,7 @@ import useGameLogic from '../hooks/useSnakeLogic';
 import { Link } from 'react-router-dom';
 import PlayButton from '../components/BtnPlay';
 import Alert from "../components/Alert";
+import HowToPlay from "../components/HowToPlay";
 
 const SnakeGame = () => {
   const { snake, food, score, bestScore, isGameActive, initializeGame } = useGameLogic();
@@ -28,7 +29,11 @@ const SnakeGame = () => {
         {alert.show &&
             <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
         }
-      </div>
+        <HowToPlay gameToExplain={text}/>
+        {alert.show &&
+            <Alert status={alert.type} message={alert.message} onRestart={initializeGame} show={alert.show} />
+        }
+  </div>
   );
 };
 
