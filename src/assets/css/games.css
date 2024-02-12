@@ -16,15 +16,15 @@
 }
 
 .snake {
-  background-image: url('/src/assets/images/snakesBG.png');
+  background-image: url("/src/assets/images/snakesBG.png");
 }
 
 .breakout {
-  background-image: url('/src/assets/images/breakoutBG.png');
+  background-image: url("/src/assets/images/breakoutBG.png");
 }
 
 .tetris {
-  background-image: url('/src/assets/images/tetrisBG.png');
+  background-image: url("/src/assets/images/tetrisBG.png");
 }
 
 .title span {
@@ -53,12 +53,12 @@
 
 #canvas {
   margin-top: 20px;
-  border: 1px solid #FFF;
+  border: 1px solid #fff;
 }
 
 #canvas {
   margin-top: 20px;
-  border: 1px solid #FFF;
+  border: 1px solid #fff;
 }
 
 @keyframes color {
@@ -161,7 +161,6 @@
   text-transform: uppercase;
 }
 
-<<<<<<< HEAD
 /* Style du tictactoe */
 table {
   border-collapse: collapse;
@@ -207,11 +206,9 @@ td.span.bot-symbol {
   to {
     opacity: 1;
   }
-=======
+}
 
 #tetrisCanvas {
   margin-top: 20px;
-  border: 1px solid #FFF;
-
->>>>>>> 6bd680b045cc7c4034ec56e52a1108921e03abaf
+  border: 1px solid #fff;
 }
