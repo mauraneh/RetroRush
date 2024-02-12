@@ -89,9 +89,11 @@ const TicTacToeScreen = () => {
             ▶
           </button>
         )}
-        <Link to="/homepage">
-          <button className="retour-button">Retour</button>
-        </Link>
+        <div>
+          <Link to="/homepage">
+            <button className="retour-button button">Retour</button>
+          </Link>
+        </div>
       </div>
     </>
   );
