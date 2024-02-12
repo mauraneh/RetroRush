@@ -26,7 +26,7 @@ switch (direction) {
     case 'left': newHead.x -= 1; break;
     case 'up': newHead.y -= 1; break;
     case 'down': newHead.y += 1; break;
-    default: break;s
+    default: break;
 }
 
 // Collision avec la nourriture
@@ -69,7 +69,7 @@ export const handleKeyPress = (e, setDirection, currentDirection, isGameActive) 
 };
 
 // Fonction pour dessiner le jeu sur le canvas
-export const drawGame = (canvasRef, snake, food, isGameActive) => {
+export const drawGame = (canvasRef, snake, food) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
@@ -81,7 +81,7 @@ export const drawGame = (canvasRef, snake, food, isGameActive) => {
     });
 
     // Dessiner la nourriture
-    ctx.fillStyle = '#fd028c'; 
+    ctx.fillStyle = '#e32426'; 
     ctx.beginPath();
     ctx.arc(food.x * cellSize + cellSize / 2, food.y * cellSize + cellSize / 2, cellSize / 2, 0, Math.PI * 2, true);
     ctx.fill();
