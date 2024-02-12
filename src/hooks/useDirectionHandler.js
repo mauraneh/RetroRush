@@ -11,7 +11,7 @@ export const useDirectionHandler = (config, isActive = true) => {
             if (!isActive) return;
 
             const keyAction = config.keyActions[e.key];
-            if (keyAction) {
+            if (keyAction && (!config.preventOpposite || direction !== keyAction.opposite)) {
                 setDirection(keyAction.direction);
             }
         };
