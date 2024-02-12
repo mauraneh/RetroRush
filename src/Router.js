@@ -3,6 +3,8 @@ import React from "react";
 import App from "./App";
 import BreakOut from "./screens/BreakOut/BreakOut";
 import HomePage from "./screens/HomePage";
+import Tetris from "./screens/Tetris/Tetris";
+import SnakeGame from "./screens/SnakeGame";
 
 const Router = createBrowserRouter(
     [
@@ -21,6 +23,10 @@ const Router = createBrowserRouter(
         {
             path: "/snake",
             element: <SnakeGame />,
+        },
+        {
+            path: "/tetris",
+            element: <Tetris />,
         },
     ]
 );

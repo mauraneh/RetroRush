@@ -7,6 +7,7 @@ import snakeImage from '../assets/images/snakes.png';
 import breakoutImage from '../assets/images/breakout.png';
 import motusImage from '../assets/images/motus.png';
 import tictactoeImage from '../assets/images/tictactoe.png';
+import tetrisImage from '../assets/images/tetris.png';
 import HowToPlay from "../components/HowToPlay";
 
 function HomePage() {
@@ -43,6 +44,12 @@ function HomePage() {
           <div className='card'>
             <img src={tictactoeImage} alt="Snake" className="card-image"/>
             <Link to="/tictactoe">
+              <button className='jouer-button'>Jouez</button>
+            </Link>
+          </div>
+          <div className='card'>
+            <img src={tetrisImage} alt="Tetris" className="card-image"/>
+            <Link to="/tetris">
               <button className='jouer-button'>Jouez</button>
             </Link>
           </div>
