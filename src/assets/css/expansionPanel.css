@@ -15,15 +15,15 @@
     flex-direction: column;
     box-shadow: -3px 5px 17px 10px rgba(0,0,0,0.66);
     h1 {
-        font-size: 1.8rem;
+        text-transform: uppercase;
+        font-size: 2rem;
         font-weight: 900;
         color: #6705d6;
         margin-left: 15px;
-        align-self: start;
     }
     .gameTagline {
         font-size: 18px;
-        margin: 20px 0;
+        margin: 20px;
         font-weight: bold;
         text-align: center;
         color: black;
@@ -75,7 +75,7 @@
                 width: 40px;
                 height: 40px;
             }
-        }
+        }                     
     }
     .sliderContainer {
         display: flex;
@@ -98,4 +98,46 @@
         font-size: 16px;
         font-weight: 900;
     }
+}
+.keys-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    gap: 5px; 
+    justify-content: center;
+    align-items: center;
+}
+
+.keySnake {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keySnake.up { grid-column: 2; grid-row: 1; }
+.keySnake.down { grid-column: 2; grid-row: 3; }
+.keySnake.left { grid-column: 1; grid-row: 2; }
+.keySnake.right { grid-column: 3; grid-row: 2; }
+
+.touch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px; 
+    background-color: #f0f0f0;
+    box-shadow: 
+        2px 2px 5px rgba(0, 0, 0, 0.2), 
+        -2px -2px 5px rgba(255, 255, 255, 0.7); 
+    transition: all 0.2s ease; 
+}
+.touch:active {
+    box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.2), 
+        inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+}
+.subgameTagline{
+    text-align: center;
+    font-style: italic;
 }

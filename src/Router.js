@@ -1,34 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 import App from "./App";
-<<<<<<< HEAD
-import SnakeGame from "./screens/SnakeGame";
+import BreakOut from "./screens/BreakOut";
 import HomePage from "./screens/HomePage";
+import Tetris from "./screens/Tetris";
+import SnakeGame from "./screens/SnakeGame";
 import TicTacToeGame from "./screens/TicTacToeGame";
-
-const Router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/homepage",
-    element: <HomePage />,
-  },
-  {
-    path: "/snake",
-    element: <SnakeGame />,
-  },
-  {
-    path: "/tictactoe",
-    element: <TicTacToeGame />,
-  },
-]);
-=======
-import BreakOut from "./screens/BreakOut/BreakOut";
-import HomePage from "./screens/HomePage";
-import Tetris from "./screens/Tetris/Tetris";
-import SnakeGame from "./screens/SnakeGame";
+import {SpeedProvider} from "./Context/Speedcontext";
 
 const Router = createBrowserRouter(
     [
@@ -42,7 +20,11 @@ const Router = createBrowserRouter(
         },
         {
             path: "/breakout",
-            element: <BreakOut />,
+            element: (
+                <SpeedProvider >
+                    <BreakOut />
+                </ SpeedProvider >
+            )
         },
         {
             path: "/snake",
@@ -51,8 +33,11 @@ const Router = createBrowserRouter(
         {
             path: "/tetris",
             element: <Tetris />,
-        },
+    },
+    {
+          
+        }
     ]
 );
->>>>>>> 6bd680b045cc7c4034ec56e52a1108921e03abaf
+
 export default Router;

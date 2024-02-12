@@ -1,20 +1,24 @@
-/* snake.css */
-
-.games {
+.games{
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10px;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   background-size: cover;
 }
 
+#gamesContainer {
+  box-shadow: 0 0 10px #fd028c;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: blinkShadow 1.5s infinite;
+}
 .snake {
   background-image: url("/src/assets/images/snakesBG.png");
 }
@@ -38,76 +42,9 @@
   margin: 0 auto;
 }
 
-#gamesContainer {
-  box-shadow: 0 0 10px #fd028c;
-  padding: 10px 50px;
-  border-radius: 10px;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  animation: blinkShadow 1.5s infinite;
-  opacity: 0.8;
-}
-
-#canvas {
-  margin-top: 20px;
-  border: 1px solid #fff;
-}
-
-#canvas {
-  margin-top: 20px;
-  border: 1px solid #fff;
-}
-
-@keyframes color {
-  0% {
-    color: red;
-  }
-  15% {
-    color: rgb(255, 0, 149);
-  }
-  25% {
-    color: orange;
-  }
-  35% {
-    color: rgb(255, 234, 0);
-  }
-  50% {
-    color: yellow;
-  }
-  75% {
-    color: green;
-  }
-  100% {
-    color: blue;
-  }
-}
-
-@keyframes fade {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
 .title span {
   display: inline-block;
   animation: fade 2s infinite, color 5s infinite;
-}
-@keyframes neon {
-  from {
-    box-shadow: 0 0 5px #00ff00, 0 0 25px #00ff00, 0 0 50px #00ff00,
-      0 0 200px #00ff00;
-  }
-  to {
-    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00,
-      0 0 80px #00ff00;
-  }
 }
 
 #start-button {
@@ -133,33 +70,47 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes blinkShadow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px #ff69b4;
-  }
-  50% {
-    box-shadow: 0 0 5px #ff69b4;
-  }
-}
-
-#snakeCanvas {
-  margin-top: 20px;
-  border: 1px solid #fff;
-}
-
-.gameScoreWrapper {
-  display: none;
-  margin-top: 20px;
-  border: #fcd60c 2px solid;
-}
-
-.gameScore,
-.gameBestScore {
-  margin: 10px;
-  color: #81e6d3;
+.gameScore, .gameBestScore {
+  margin: 15px;
+  color: inherit;
   text-transform: uppercase;
 }
+
+.tabScore {
+  position: absolute;
+  left: 100px; 
+  height: auto;
+  min-height: 30vh;
+  width: 20%;
+  font-family: 'Press Start 2P', cursive;
+  color: #FFFFFF;
+  background-color: black;  
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00de, 0 0 40px #ff00de;
+  margin-top: 20px;
+  transition: background-color 0.5s ease, color 0.5s ease; 
+}
+.gameOverMessage {
+  color: #FFFFFF; 
+  font-size: 1.2em; 
+  padding-top: 20px; 
+}
+
+#canvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
+}
+
+#canvas {
+  margin-top: 20px;
+  border: 1px solid #FFF;
+}
+
+
+
 
 /* Style du tictactoe */
 table {
@@ -175,13 +126,6 @@ td {
   font-size: 4.5rem;
   border: 1px solid #333;
   cursor: pointer;
-}
-
-#tictactoe-scoreboard {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 1rem;
 }
 
 .tictactoe-cell {
@@ -210,5 +154,60 @@ td.span.bot-symbol {
 
 #tetrisCanvas {
   margin-top: 20px;
-  border: 1px solid #fff;
+  border: 1px solid #FFF;
+}
+
+/* ------------------- KEYFRAME ------------------- */
+@keyframes neon {
+  from {
+    box-shadow: 0 0 5px #00ff00, 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 200px #00ff00;
+  }
+  to {
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00;
+  }
+}
+
+@keyframes blinkShadow {
+  0%, 100% { box-shadow: 0 0 20px #FF69B4; }
+  50% { box-shadow: 0 0 5px #FF69B4; }
+}
+
+@keyframes color {
+  0% { color: red; }
+  15% { color: rgb(255, 0, 149); }
+  25% { color: orange; }
+  35% { color: rgb(255, 234, 0); }
+  50% { color: yellow; }
+  75% { color: green; }
+  100% { color: blue; }
+}
+
+@keyframes fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes flashRed {
+  0%, 100% { background-color: rgba(255,0,0,0.6); }
+  50% { background-color: rgba(255,0,0,1); }
+}
+
+@keyframes purpleNeon {
+  from {
+    box-shadow: 0 0 5px #9400D3, 0 0 25px #9400D3, 0 0 50px #9400D3, 0 0 200px #9400D3; 
+  }
+  to {
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 40px #FF00FF, 0 0 80px #FF00FF;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+    box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff, 0 0 20px #ff00ff;
+  }
+  to {
+    text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+  }
 }
