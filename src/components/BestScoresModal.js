@@ -53,11 +53,6 @@ const BestScoresModal = ({ onClose }) => {
         ))}
               
       </div>
-      <div>
-        <button className="retour-button" onClick={onClose}>
-          Fermer
-        </button>
-      </div>
     </div>
   );
 };
