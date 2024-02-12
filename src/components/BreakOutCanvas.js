@@ -6,19 +6,21 @@ const BreakOutCanvas = ({ isGameActive, bricks, ballPosition, paddlePosition, up
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBricks(ctx, bricks, 10, 71, 20);
+        drawBall(ctx, ballPosition, 10);
+        drawPaddle(ctx, paddlePosition, canvas.height, 10);
+
         const gameLoop = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBricks(ctx, bricks, 10, 71, 20);
-            drawBall(ctx, ballPosition, 10);
-            drawPaddle(ctx, paddlePosition, canvas.height, 10);
+
 
             if (isGameActive) {
-                requestAnimationFrame(gameLoop);
+                requestAnimationFrame(() => updateGameState(ctx, canvas));
             }
         };
 
         gameLoop();
-    }, [isGameActive, ballPosition, paddlePosition, bricks]);
+    }, [isGameActive, ballPosition, paddlePosition, bricks, canvasRef, updateGameState]);
 
 
     return <canvas ref={canvasRef} width="500" height="500" />;
