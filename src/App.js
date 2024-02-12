@@ -6,8 +6,8 @@ import HomePage from './screens/HomePage';
 import SnakeGame from './screens/SnakeGame';
 import { useNavigate } from 'react-router-dom';
 import BreakOut from "./screens/BreakOut";
-import {SpeedProvider} from "./Context/Speedcontext";
 import Tetris from "./screens/Tetris";
+import {SpeedProvider} from "./Context/Speedcontext";
 function App() {
 
 
