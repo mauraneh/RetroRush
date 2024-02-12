@@ -75,11 +75,12 @@ const TicTacToeScreen = () => {
             />
           )}
           <Score
-            game={"morpion"}
-            score={0}
+            tictactoe={"yes"}
             bestScore={0}
             playerWins={playerWins}
             draws={draws}
+           isGameLost={alert.type === "error" ? alert.type : null}
+  isGameWin={alert.type !== "error" ? alert.type : null}
             botWins={botWins}
             isGameActive={isGameActive}
           />

@@ -1,6 +1,7 @@
 import React from "react";
 
-const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore }) => {
+const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore,
+    tictactoe, playerWins, draws, botWins }) => {
     let scoreBoardStyle, gameMessage;
 
     if (isGameWin) {
@@ -29,18 +30,17 @@ const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore }) => {
     return (
         <div className="tabScore" style={scoreBoardStyle}>
             <h2>Résultat</h2>
-            {morpion !== undefined ? (
-            <div className="gameScore">
-              Score: Joueur : {playerWins} | Matchs nuls : {draws} | Bot : {botWins}
-            </div>
-          ) : (
-            <div className="gameScore">Score: {score}</div>
-          )}
+            {tictactoe !== undefined ? (
+                <div className="gameScore">
+                    Joueur : {playerWins}  Matchs nuls : {draws}  Bot : {botWins}
+                </div>
+            ) : (
+                <div className="gameScore">Score: {score}</div>
+            )}
             <div className="gameBestScore">Meilleur Score: {bestScore}</div>
             <div className="gameOverMessage">{gameMessage}</div>
         </div>
     );
-  }
 };
 
 export default Score;
