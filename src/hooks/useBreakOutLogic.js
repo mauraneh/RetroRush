@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSpeed } from "../Context/Speedcontext";
-import { initBricks } from '../utils/breakOutHelper';
+import {collisionDetection, initBricks} from '../utils/breakOutHelper';
 
 export const useBreakOutLogic = () => {
     const { speedBall } = useSpeed();
@@ -50,8 +50,7 @@ useEffect(() => {
 
     return () => clearInterval(interval);
 }, [isGameActive, ballPosition, ballDirection, paddlePosition]); // Ajoutez d'autres dépendances au besoin.
- */
-    useEffect(() => {
+  useEffect(() => {
         if (!isGameActive) return;
 
         const handleKeyDown = (event) => {
@@ -66,6 +65,7 @@ useEffect(() => {
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, [isGameActive, paddlePosition]);
+*/
 
     const initializeGame = () => {
         setIsGameActive(true);
@@ -78,7 +78,7 @@ useEffect(() => {
         setBallDirection({ dx: speedBall, dy: -speedBall });
     };
 
-    const updateGameState = ( ctx, canvas, ballPosition, ballDirection, paddlePosition, bricks, setBallPosition, setBallDirection, setIsGameActive, setAlert, space, score, bestScore) => {
+    const updateGameState = ( ctx, canvas) => {
         if (!isGameActive) return;
 
 
@@ -86,17 +86,20 @@ useEffect(() => {
         let newY = ballPosition.y + ballDirection.dy;
         let newPaddleX = paddlePosition.paddleX;
 
+        collisionDetection(ballPosition, bricks, 71, 20, setBallDirection, setScore, setBrickCounterBroken);
+
+
         if (brickCounterBroken === 0) {
             setAlert({ show: true, type: 'win', message: 'Vous avez gagné! ' });
             setIsGameActive(false);
         }
 
-        if (newX > canvas.width - space || newX < space) {
+        if (newX > canvas.width - 10 || newX < 10) {
             setBallDirection(prev => ({ dx: -prev.dx, dy: prev.dy }));
         }
-        if (newY < space) {
+        if (newY < 10) {
             setBallDirection(prev => ({ dx: prev.dx, dy: -prev.dy }));
-        } else if (newY > canvas.height - space) {
+        } else if (newY > canvas.height - 10) {
             if (newX > newPaddleX && newX < newPaddleX + paddlePosition.paddleWidth) {
                 let impactPoint = (newX - (newPaddleX + paddlePosition.paddleWidth / 2)) / (paddlePosition.paddleWidth / 2);
                 let angle = impactPoint * Math.PI / 4;
