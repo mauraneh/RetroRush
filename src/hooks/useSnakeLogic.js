@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { gameLoop, spawnFood } from '../utils/snakeHelpers';
 import { useDirectionHandler } from './useDirectionHandler';
+import {snakeConfig} from "../utils/gameHandlerConfig";
 
 const useSnakeLogic = () => {
     const [snake, setSnake] = useState([]);
@@ -9,7 +10,10 @@ const useSnakeLogic = () => {
     const [bestScore, setBestScore] = useState(parseInt(localStorage.getItem('bestScore'), 10) || 0);
     const [isGameActive, setIsGameActive] = useState(false);
     const [isGameLost, setIsGameLost] = useState(false);
-    const [direction] = useDirectionHandler('right', isGameActive); 
+
+
+    const [direction] = useDirectionHandler(snakeConfig, isGameActive);
+
 
     useEffect(() => {
         if (isGameActive) {

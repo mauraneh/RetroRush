@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSpeed } from "../Context/Speedcontext";
 import {collisionDetection, initBricks} from '../utils/breakOutHelper';
+import {useDirectionHandler} from "./useDirectionHandler";
+import { breakoutConfig} from "../utils/gameHandlerConfig";
 
 export const useBreakOutLogic = () => {
     const { speedBall } = useSpeed();
@@ -14,30 +16,12 @@ export const useBreakOutLogic = () => {
     const [brickCounterBroken, setBrickCounterBroken] = useState(30);
     const [isGameLost, setIsGameLost] = useState(false);
     const [isGameWin, setIsGameWin] = useState(false);
-    const [rightPressed, setRightPressed] = useState(false);
-    const [leftPressed, setLeftPressed] = useState(false);
+
+    const [direction] = useDirectionHandler(breakoutConfig, isGameActive);
+
 
     useEffect(() => {
         setBricks(initBricks(5, 6));
-    }, []);
-
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === "ArrowRight") setRightPressed(true);
-            else if (event.key === "ArrowLeft") setLeftPressed(true);
-        };
-        const handleKeyUp = (event) => {
-            if (event.key === "ArrowRight") setRightPressed(false);
-            else if (event.key === "ArrowLeft") setLeftPressed(false);
-        };
-
-        document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("keyup", handleKeyUp);
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-            document.removeEventListener("keyup", handleKeyUp);
-        };
     }, []);
 
     const updateGameState = ( ctx, canvas) => {
@@ -49,7 +33,7 @@ export const useBreakOutLogic = () => {
 
         collisionDetection(ballPosition, bricks, 71, 20, setBallDirection, setScore, setBrickCounterBroken);
 
-        if (brickCounterBroken === 28) {
+        if (brickCounterBroken === 0) {
             setIsGameWin(true);
             setIsGameActive(false);
         }
@@ -77,9 +61,9 @@ export const useBreakOutLogic = () => {
             }
         }
 
-        if (rightPressed && newPaddleX < canvas.width - paddlePosition.paddleWidth) {
+        if (direction === 'right' && newPaddleX < canvas.width - paddlePosition.paddleWidth) {
             newPaddleX += 7;
-        } else if (leftPressed && newPaddleX > 0) {
+        } else if (direction === 'left' && newPaddleX > 0) {
             newPaddleX -= 7;
         }
 

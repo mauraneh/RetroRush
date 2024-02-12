@@ -1,24 +1,38 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from "react";
 
-export const useDirectionHandler = (initialDirection = 'right', isActive = true) => {
-    const [direction, setDirection] = useState(initialDirection);
+
+
+//************** CONFIGURATION DU JEUX DANS gameHandlerConfig.js dans utils ***************//
+export const useDirectionHandler = (config, isActive = true) => {
+    const [direction, setDirection] = useState(config.initialDirection || null);
 
     useEffect(() => {
         const handleKeyPress = (e) => {
             if (!isActive) return;
 
-            switch (e.key) {
-                case 'ArrowUp': if (direction !== 'down') setDirection('up'); break;
-                case 'ArrowDown': if (direction !== 'up') setDirection('down'); break;
-                case 'ArrowLeft': if (direction !== 'right') setDirection('left'); break;
-                case 'ArrowRight': if (direction !== 'left') setDirection('right'); break;
-                default: break;
+            const keyAction = config.keyActions[e.key];
+            if (keyAction) {
+                setDirection(keyAction.direction);
+            }
+        };
+
+        const handleKeyRelease = (e) => {
+            if (!isActive || !config.stopOnKeyUp) return;
+
+            const keyAction = config.keyActions[e.key];
+            if (keyAction && direction === keyAction.direction) {
+                setDirection(null);
             }
         };
 
         document.addEventListener('keydown', handleKeyPress);
-        return () => document.removeEventListener('keydown', handleKeyPress);
-    }, [direction, isActive]);
+        document.addEventListener('keyup', handleKeyRelease);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+            document.removeEventListener('keyup', handleKeyRelease);
+        };
+    }, [direction, isActive, config]);
 
     return [direction, setDirection];
 };
