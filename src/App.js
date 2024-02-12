@@ -1,6 +1,6 @@
 import logo from "./assets/images/logoRR.png";
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./screens/HomePage";
 import SnakeGame from "./screens/SnakeGame";

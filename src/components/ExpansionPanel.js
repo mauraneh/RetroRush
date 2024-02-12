@@ -2,8 +2,10 @@ import React from "react";
 import keyBoardQ from "../assets/images/icon/lettre-q.png";
 import keyBoardD from "../assets/images/icon/lettre-d.png";
 import cursor from "../assets/images/icon/icons8-curseur-unscreen.gif";
+import BestScoresModal from "./BestScoresModal";
 import { useSpeed } from "../Context/Speedcontext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,11 +16,24 @@ EXEMPLE : VITESSE SERPENT
 const ExpansionPanel = ({ gameToExplain }) => {
   const navigate = useNavigate();
   const { speedBall, setSpeedBall } = useSpeed();
-  const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe"];
+    const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe"];
+    
+    const [showBestScoresModal, setShowBestScoresModal] = useState(false);
+    
+
+  const openBestScoresModal = () => {
+    setShowBestScoresModal(true);
+  };
+
+  const closeBestScoresModal = () => {
+    setShowBestScoresModal(false);
+  };
+
   const selectRandomGame = () => {
     const randomIndex = Math.floor(Math.random() * gameRoutes.length);
     return gameRoutes[randomIndex];
-  };
+    };
+    
 
     const handleSpeedChange = (event) => {
         if (setSpeedBall) {
@@ -103,22 +118,31 @@ const ExpansionPanel = ({ gameToExplain }) => {
       );
 
         case 'HomePage':
-            return (
-                <div className="expansionPanel">
-                    <h1>{gameToExplain}</h1>
-                    <div className="instructions">
-                        <div className="instructionsHomePages">
-                            <p className="pHomePage">Découvrez un univers de jeux rétro et plongez dans le plaisir
-                                nostalgique ! <br/>Cliquez, jouez et laissez-vous transporter par l'aventure !</p>
-                            <div className="buttonList">
-                                <button className="button">Votre score</button>
-                                <button className="button" onClick={() => navigate(selectRandomGame())}>Jeux aléatoire
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+           return (
+    <div className="expansionPanel">
+      {!showBestScoresModal && (
+        // Affichez le contenu de la HomePage uniquement si le modal n'est pas ouvert
+        <>
+          <h1>{gameToExplain}</h1>
+          <div className="instructions">
+            <div className="instructionsHomePages">
+              <p className="pHomePage">
+                Découvrez un univers de jeux rétro et plongez dans le plaisir nostalgique ! <br />
+                Cliquez, jouez et laissez-vous transporter par l'aventure !
+              </p>
+              <div className="buttonList">
+                <button className='button' onClick={openBestScoresModal}>Mes scores</button>
+                <button className="button" onClick={() => navigate(selectRandomGame())}>
+                  Jeux aléatoire
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {showBestScoresModal && <BestScoresModal onClose={closeBestScoresModal} />}
+    </div>
+  );
         case 'Tetris':
             return (
                 <div className="expansionPanel">

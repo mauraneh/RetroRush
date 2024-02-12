@@ -13,11 +13,13 @@ const TicTacToeScreen = () => {
     playerWins,
     draws,
     isGameActive,
+    gameName,
     botWins,
     cellRefs,
     playerSymbol,
     botSymbol,
     alert,
+    bestScore,
     displayBoard,
     addClickEventHandlers,
     handleCellClick,
@@ -38,7 +40,7 @@ const TicTacToeScreen = () => {
           backgroundImage: `url(${require("../assets/images/tictactoeBG.png")})`,
         }}
       >
-        <GameTitle text="TicTacToe - Game"></GameTitle>
+        <GameTitle text={gameName}></GameTitle>
         <div id="gamesContainer">
           <table>
             <tbody>
@@ -65,7 +67,7 @@ const TicTacToeScreen = () => {
               ))}
             </tbody>
           </table>
-          <HowToPlay gameToExplain={"TicTacToe - Game"} />
+          <HowToPlay gameToExplain={gameName} />
           {alert.show && (
             <Alert
               status={alert.type}
@@ -76,7 +78,7 @@ const TicTacToeScreen = () => {
           )}
           <Score
             tictactoe={"yes"}
-            bestScore={0}
+            bestScore={bestScore}
             playerWins={playerWins}
             draws={draws}
            isGameLost={alert.type === "error" ? alert.type : null}

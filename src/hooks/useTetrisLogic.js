@@ -6,12 +6,17 @@ const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0
 const useTetrisLogic = () => {
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
-    const [bestScore, setBestScore] = useState(0);
+    const[bestScore, setBestScore] = useState(
+        parseInt(localStorage.getItem(`Tetris_bestScore`), 10) || 0);
     const [isGameLost, setIsGameLost] = useState(false);
     const [isGameWin, setIsGameWin] = useState(false);
     const [board, setBoard] = useState(createEmptyBoard);
     const [currentPiece, setCurrentPiece] = useState(() => randomTetromino());
 
+    useEffect(() => {
+    localStorage.setItem(`Tetris_bestScore`, bestScore.toString());
+    }, [bestScore]);
+    
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (!isGameActive) return;

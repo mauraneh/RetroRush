@@ -8,7 +8,8 @@ export const useBreakOutLogic = () => {
     const { speedBall } = useSpeed();
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
-    const [bestScore, setBestScore] = useState(0);
+    const [bestScore, setBestScore] = useState(
+    parseInt(localStorage.getItem(`BreakOut_bestScore`), 10) || 0 );
     const [bricks, setBricks] = useState([]);
     const [ballPosition, setBallPosition] = useState({ x: 250, y: 470 });
     const [paddlePosition, setPaddlePosition] = useState({ paddleX: 212.5, paddleWidth: 75 });
@@ -19,6 +20,9 @@ export const useBreakOutLogic = () => {
 
     const [direction] = useDirectionHandler(breakoutConfig, isGameActive);
 
+    useEffect(() => {
+    localStorage.setItem(`BreakOut_bestScore`, bestScore.toString());
+    }, [bestScore]);
 
     useEffect(() => {
         setBricks(initBricks(5, 6));
