@@ -19,6 +19,7 @@ const useTicTacToeLogic = () => {
      (localStorage.getItem("userNickname")) || "Anonymous");
    const[bestScore, setBestScore] = useState(
      parseInt(localStorage.getItem(`${userNickname}_TicTacToe_bestScore`)) || 0);
+  const gameName = "TicTacToe - Game";
  
   
   useEffect(() => {
@@ -253,6 +254,7 @@ const useTicTacToeLogic = () => {
     botWins,
     cellRefs,
     alert,
+    gameName,
     displayBoard,
     setIsGameActive,
     addClickEventHandlers,

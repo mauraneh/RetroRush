@@ -32,7 +32,7 @@ const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore,
             <h2>Résultat</h2>
             {tictactoe !== undefined ? (
                 <div className="gameScore">
-                    Joueur : {playerWins}  Matchs nuls : {draws}  Bot : {botWins}
+                    Joueur : {playerWins}  Matchs nuls : {draws} | Bot : {botWins}
                 </div>
             ) : (
                 <div className="gameScore">Score: {score}</div>
