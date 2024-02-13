@@ -36,6 +36,11 @@
         align-items: center;
         justify-content: center;
         flex-direction: row;
+
+        button {
+            margin: 5px;
+            width: 100px;
+        }
         .instructionsHomePages {
             height: 100%;
             width: 100%;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cell from "../components/TicTacToeCell";
 import GameTitle from "../components/GameTitle";
@@ -27,6 +27,11 @@ const TicTacToeScreen = () => {
     resetGame,
   } = useTicTacToeLogic();
 
+ const [botDifficulty, setBotDifficulty] = useState("easy"); // Ajoutez cet état
+
+  const setDifficulty = (difficulty) => {
+    setBotDifficulty(difficulty);
+  };
   
   useEffect(() => {
     displayBoard();
@@ -68,7 +73,11 @@ const TicTacToeScreen = () => {
               ))}
             </tbody>
           </table>
-          <HowToPlay gameToExplain={gameName} />
+           <HowToPlay
+          gameToExplain={gameName}
+          setDifficulty={setDifficulty} // Passez la fonction setDifficulty en tant que prop
+          botDifficulty={botDifficulty}
+        />
           {alert.show && (
             <Alert
               status={alert.type}

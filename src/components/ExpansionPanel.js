@@ -2,7 +2,7 @@ import React from "react";
 import keyBoardQ from "../assets/images/icon/lettre-q.png";
 import keyBoardD from "../assets/images/icon/lettre-d.png";
 import cursor from "../assets/images/icon/icons8-curseur-unscreen.gif";
-import BestScoresModal from "./BestScoresModal";
+import BestScoresModal from "./bestScoreModal/BestScoresModal";
 import { useSpeed } from "../Context/Speedcontext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -13,14 +13,16 @@ import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/
 EXEMPLE : VITESSE SERPENT
  */
 
-const ExpansionPanel = ({ gameToExplain }) => {
+const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
   const navigate = useNavigate();
   const { speedBall, setSpeedBall } = useSpeed();
     const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe"];
     
     const [showBestScoresModal, setShowBestScoresModal] = useState(false);
     
-
+const handleDifficultyClick = (difficulty) => {
+    setDifficulty(difficulty);
+  };
   const openBestScoresModal = () => {
     setShowBestScoresModal(true);
   };
@@ -98,24 +100,45 @@ const ExpansionPanel = ({ gameToExplain }) => {
             );
          case "TicTacToe - Game":
       return (
-        <div className="expansionPanel">
-          <h1>{gameToExplain}</h1>
-          <p className="gameTagline">
-            Affrontez le bot et alignez les symboles X horizontalement,
-            verticalement ou en diagonale !
-          </p>
-          <div className="instructions">
-            <div className="key">
-              <img
-                src={cursor}
-                alt="souris"
-                style={{ backgroundColor: "transparent" }}
-              />
-              <p>Utilise ta souris pour placer tes symboles</p>
-            </div>
-          </div>
+    <div className="expansionPanel">
+      <h1>{gameToExplain}</h1>
+      <p className="gameTagline">
+        Affrontez le bot et alignez les symboles X horizontalement,
+        verticalement ou en diagonale !
+      </p>
+      <div className="instructions">
+        <div className="key">
+          <img
+            src={cursor}
+            alt="souris"
+            style={{ backgroundColor: "transparent" }}
+          />
+          <p>Utilise ta souris pour placer tes symboles</p>
         </div>
-      );
+                  <div className="difficulty-buttons">
+                      <h3>Difficulté</h3>
+          <button
+            className={botDifficulty === 'easy' ? 'selected' : ''}
+            onClick={() => handleDifficultyClick('easy')}
+          >
+            Facile
+          </button>
+          <button
+            className={botDifficulty === 'medium' ? 'selected' : ''}
+            onClick={() => handleDifficultyClick('medium')}
+          >
+            Avancé
+          </button>
+          <button
+            className={botDifficulty === 'hard' ? 'selected' : ''}
+            onClick={() => handleDifficultyClick('hard')}
+          >
+            Difficile
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
         case 'HomePage':
            return (

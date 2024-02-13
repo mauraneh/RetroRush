@@ -1,31 +1,58 @@
 import { useState, useRef, useEffect } from "react";
 
+// Fonction personnalisée pour la logique du jeu Tic Tac Toe
 const useTicTacToeLogic = () => {
+  // État du tour actuel du joueur
   const [playerTurnFlag, setPlayerTurnFlag] = useState(true);
+
+  // État du plateau de jeu
   const [board, setBoard] = useState([
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ]);
+/// Par défaut, le niveau est "facile"
+  const [botDifficulty, setBotDifficulty] = useState("easy");
+
+  // Symbole du joueur humain
   const playerSymbol = "X";
+
+  // État de l'alerte pour afficher des messages de fin de jeu
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+
+  // Symbole du bot
   const botSymbol = "O";
+
+  // États des statistiques du jeu
   const [playerWins, setPlayerWins] = useState(0);
   const [draws, setDraws] = useState(0);
   const [isGameActive, setIsGameActive] = useState(false);
   const [botWins, setBotWins] = useState(0);
-  const cellRefs = useRef([]);
-  const[userNickname, setUserNickname] = useState(
-     (localStorage.getItem("userNickname")) || "Anonymous");
-   const[bestScore, setBestScore] = useState(
-     parseInt(localStorage.getItem(`${userNickname}_TicTacToe_bestScore`)) || 0);
-  const gameName = "TicTacToe - Game";
- 
-  
-  useEffect(() => {
-    localStorage.setItem(`${userNickname}_Tetris_bestScore`, bestScore.toString());
-    }, [bestScore, userNickname]);
 
+  // Référence aux cellules du plateau de jeu
+  const cellRefs = useRef([]);
+
+  // Nom du joueur (récupéré depuis le stockage local) ou "Anonymous" par défaut
+  const [userNickname, setUserNickname] = useState(
+    localStorage.getItem("userNickname") || "Anonymous"
+  );
+
+  // Meilleur score du joueur (récupéré depuis le stockage local) ou 0 par défaut
+  const [bestScore, setBestScore] = useState(
+    parseInt(localStorage.getItem(`${userNickname}_TicTacToe_bestScore`)) || 0
+  );
+
+  // Nom du jeu
+  const gameName = "TicTacToe - Game";
+
+  useEffect(() => {
+    localStorage.setItem(`${userNickname}_TicTacToe_bestScore`, bestScore.toString());
+  }, [bestScore, userNickname]);
+
+  // Mettre à jour difficultés
+const setDifficulty = (difficulty) => {
+  setBotDifficulty(difficulty);
+};
 
   // Affiche le contenu de la grille
   const displayBoard = () => {
@@ -46,13 +73,14 @@ const useTicTacToeLogic = () => {
   };
 
   // Ajoute des gestionnaires d'événements aux cellules
-  const addClickEventHandlers = () => {
+ const addClickEventHandlers = () => {
     if (!isGameActive) {
       return;
     }
+
     cellRefs.current.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
-        cell.onClick = () => handleCellClick(rowIndex, colIndex);
+        cell.onclick = () => handleCellClick(rowIndex, colIndex);
       });
     });
   };
@@ -109,40 +137,53 @@ const useTicTacToeLogic = () => {
     return true;
   };
 
-  // Gère le tour du bot
+   // Gère le tour du bot
   const botTurn = () => {
+    // Vérification des conditions de fin du jeu
     if (checkWinner(playerSymbol) || checkWinner(botSymbol) || checkDraw()) {
       return;
     }
 
+    // Initialisation des variables
     let bestScore = -Infinity;
     let bestMove;
 
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[i][j] === "") {
-          board[i][j] = botSymbol;
+// Exploration de tous les coups possibles
+for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    // Vérification si la cellule est vide
+    if (board[i][j] === "") {
+      // Simulation du coup du bot dans la cellule
+      board[i][j] = botSymbol;
 
-          if (Math.random() < 0.01) {
-            bestMove = { row: i, col: j };
-          } else {
-            let score = minimax(board, 0, false);
+      // Choix en fonction du niveau de difficulté
+      if (botDifficulty === "easy" && Math.random() < 0.5) {
+        bestMove = { row: i, col: j }; // 50% de chance de jouer aléatoirement
+      } else if (botDifficulty === "medium" && Math.random() < 0.8) {
+        bestMove = { row: i, col: j }; // 80% de chance de jouer aléatoirement
+      } else {
+        // Utilisation de l'algorithme minimax pour évaluer le score
+        let score = minimax(board, 0, false);
 
-            if (score > bestScore) {
-              bestScore = score;
-              bestMove = { row: i, col: j };
-            }
-          }
-
-          board[i][j] = "";
+        // Mise à jour du meilleur score et du meilleur coup
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = { row: i, col: j };
         }
       }
-    }
 
+      // Annulation du coup simulé
+      board[i][j] = "";
+    }
+  }
+}
+    // Application du meilleur coup du bot
     const { row, col } = bestMove;
     const updatedBoard = [...board];
     updatedBoard[row][col] = botSymbol;
     setBoard(updatedBoard);
+
+    // Vérification des conditions de fin après le coup du bot
     if (checkWinner(botSymbol)) {
       handleGameEnd("Le bot a gagné !", setBotWins, "error");
     } else if (checkDraw()) {
@@ -151,6 +192,7 @@ const useTicTacToeLogic = () => {
       setPlayerTurnFlag(true);
     }
   };
+
 
   // Fonction minimax pour le bot
   const minimax = (board, depth, isMaximizingPlayer) => {
@@ -207,7 +249,7 @@ const useTicTacToeLogic = () => {
   };
 
   // Fonction générique pour gérer la fin du jeu
-  const handleGameEnd = (message, setScore, type) => {
+ const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
       setIsGameActive(false);
       setAlert({ show: true, type: type, message: message });
@@ -255,6 +297,8 @@ const useTicTacToeLogic = () => {
     cellRefs,
     alert,
     gameName,
+    botDifficulty,
+    setDifficulty,
     displayBoard,
     setIsGameActive,
     addClickEventHandlers,

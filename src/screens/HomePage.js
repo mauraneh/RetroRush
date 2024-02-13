@@ -9,7 +9,7 @@ import motusImage from '../assets/images/motus.png';
 import tictactoeImage from '../assets/images/tictactoe.png';
 import tetrisImage from '../assets/images/tetris.png';
 import HowToPlay from "../components/HowToPlay";
-import SettingsModal from '../components/settings/SettingsComponent';
+import SettingsModal from '../components/settingsModal/SettingsComponent';
 import settingsIcon from '../assets/images/settings.png';
 
 function HomePage() {
