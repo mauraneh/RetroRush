@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {TETROMINOS} from "../../utils/tetrisHelper";
-import {BLOCK_SIZE, CANVAS_WIDTH} from "../../hooks/useTetrisLogic";
+import {BLOCK_SIZE} from "../../hooks/useTetrisLogic";
 
 const TetrisCanvas = ({canvasRef, isGameActive, board, currentPiece}) => {
     useEffect(() => {
@@ -32,7 +32,7 @@ const TetrisCanvas = ({canvasRef, isGameActive, board, currentPiece}) => {
 
         drawBoard();
     }, [board, currentPiece, isGameActive]);
-    return <canvas ref={canvasRef} width="500" height="500"/>;
+    return <canvas ref={canvasRef} width="480" height="480"/>;
 
 };
 export default TetrisCanvas;
