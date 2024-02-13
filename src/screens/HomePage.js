@@ -9,19 +9,43 @@ import motusImage from '../assets/images/motus.png';
 import tictactoeImage from '../assets/images/tictactoe.png';
 import tetrisImage from '../assets/images/tetris.png';
 import HowToPlay from "../components/HowToPlay";
+import SettingsModal from '../components/Settings';
+import settingsIcon from '../assets/images/settings.png';
 
 function HomePage() {
 const[userNickname, setUserNickname] = useState(
-     (localStorage.getItem("userNickname")) || "Anonymous");
+  (localStorage.getItem("userNickname")) || "Anonymous");
+   const [showSettings, setShowSettings] = useState(false);
 
-  return (
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
+
+  const handleEditUsername = (newUsername) => {
+    localStorage.setItem('userNickname', newUsername);
+    setUserNickname(newUsername);
+  };
+
+   return (
     <div className="container-hp">
       <div className="header-hp">
         <img src={logo} className="logo" alt="logo" />
         <h1 className="title-hp">Let's play, {userNickname} !</h1>
+        <button className="settings-button" onClick={toggleSettings}>
+          <img src={settingsIcon} alt="Settings" />
+        </button>
       </div>
-      <div className='container-carousel'>
-            <h2 className='subtitle-hp'>Mini Jeux Rétro</h2>
+
+      {showSettings && (
+       <SettingsModal
+          userNickname={userNickname}
+          onClose={() => setShowSettings(false)}
+          onEditUsername={handleEditUsername}
+        />
+      )}
+
+      <div className="container-carousel">
+        <h2 className="subtitle-hp">Mini Jeux Rétro</h2>
         <Carousel>
           <div className='card'>
             <img src={snakeImage} alt="Snake" className="card-image"/>
