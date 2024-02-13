@@ -27,8 +27,7 @@ const TicTacToeScreen = () => {
     resetGame,
   } = useTicTacToeLogic();
 
- const [botDifficulty, setBotDifficulty] = useState("easy"); // Ajoutez cet état
-
+ const [botDifficulty, setBotDifficulty] = useState("easy");
   const setDifficulty = (difficulty) => {
     setBotDifficulty(difficulty);
   };
@@ -75,7 +74,7 @@ const TicTacToeScreen = () => {
           </table>
            <HowToPlay
           gameToExplain={gameName}
-          setDifficulty={setDifficulty} // Passez la fonction setDifficulty en tant que prop
+          setDifficulty={setDifficulty} // fonction setDifficulty en tant que prop
           botDifficulty={botDifficulty}
         />
           {alert.show && (

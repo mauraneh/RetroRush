@@ -48,7 +48,8 @@ const useTicTacToeLogic = () => {
   useEffect(() => {
     localStorage.setItem(`${userNickname}_TicTacToe_bestScore`, bestScore.toString());
   }, [bestScore, userNickname]);
-
+  
+   
   // Mettre à jour difficultés
 const setDifficulty = (difficulty) => {
   setBotDifficulty(difficulty);
@@ -251,7 +252,8 @@ for (let i = 0; i < 3; i++) {
   // Fonction générique pour gérer la fin du jeu
  const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
-      setIsGameActive(false);
+      // Mettre à jour le meilleur score si le score actuel est supérieur
+
       setAlert({ show: true, type: type, message: message });
       setScore((prevScore) => prevScore + 1);
     }, 100);
@@ -265,6 +267,9 @@ for (let i = 0; i < 3; i++) {
       setBoard(updatedBoard);
 
       if (checkWinner(playerSymbol)) {
+            if ( playerWins + 1 > bestScore) {
+      setBestScore(playerWins + 1);
+    }
         handleGameEnd("Tu as gagné !", setPlayerWins, "win");
       } else if (checkDraw()) {
         handleGameEnd("Match Nul !", setDraws, "error");
@@ -296,6 +301,7 @@ for (let i = 0; i < 3; i++) {
     botWins,
     cellRefs,
     alert,
+    bestScore,
     gameName,
     botDifficulty,
     setDifficulty,

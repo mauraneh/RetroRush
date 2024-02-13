@@ -121,7 +121,7 @@ const getBestPlayerData = (gameName, viewUserScoresOnly) => {
             buttonType="user"
             selectedButton={selectedButton}
             handleButtonClick={handleButtonClick}
-            label="Mes Scores Personnels"
+            label="Mes Scores"
           />
           <ScoreButton
             buttonType="all"

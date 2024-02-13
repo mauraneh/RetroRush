@@ -7,9 +7,13 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  align-items: center;
   font-size: 15px;
   font-weight: 900;
+  width: auto;
   cursor: pointer;
+  margin: 2px;
+  margin-left: 20px;
   text-transform: uppercase;
   background-color: #fff;
   color: #6705d6;
