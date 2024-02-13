@@ -29,13 +29,19 @@ const useTetrisLogic = () => {
     const [currentPiece, setCurrentPiece] = useState(() => randomTetromino());
 
     useEffect(() => {
+        if (isGameActive) {
+            checkGameOver();
+            clearLines();
+        }
+    }, [currentPiece]);
+
+    useEffect(() => {
     localStorage.setItem(`${userNickname}_Tetris_bestScore`, bestScore.toString());
     }, [bestScore, userNickname]);
     
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (!isGameActive) return;
-
             switch (e.key) {
                 case 'ArrowLeft':
                     movePiece(-1);
@@ -68,29 +74,24 @@ const useTetrisLogic = () => {
         }
     }, [isGameActive, currentPiece]);
 
-    useEffect(() => {
-        if (isGameActive) {
-            checkGameOver();
-            clearLines();
-        }
-    }, [currentPiece]);
+
 
     const checkCollision = (x, y, candidate = currentPiece.shape) => {
-
         for (let row = 0; row < candidate.length; row++) {
             for (let col = 0; col < candidate[row].length; col++) {
                 if (candidate[row][col] !== 0) {
                     let newX = col + currentPiece.pos.x + x;
                     let newY = row + currentPiece.pos.y + y;
-                    if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
-                    if (newX < 0 || newX >= 10 || newY >= 20) return true;
-                    if (newY < 0) continue;
-                    if (board[newY][newX] !== 0) return true;
+                    if (newX < 0 || newX >= COLS || newY >= ROWS || board[newY][newX] !== 0) {
+                        console.log(`Collision at newX: ${newX}, newY: ${newY}`);
+                        return true;
+                    }
                 }
             }
         }
         return false;
     };
+
 
     const movePiece = (dir) => {
         if (!checkCollision(dir, 0)) {
@@ -119,14 +120,18 @@ const useTetrisLogic = () => {
     };
 
     const rotatePiece = () => {
-        const rotatedShape = currentPiece.shape.map((_, index) =>
-            currentPiece.shape.map(col => col[index])
+        const transposedShape = currentPiece.shape[0].map((_, colIndex) =>
+            currentPiece.shape.map(row => row[colIndex])
         );
-        const rotatedPiece = { ...currentPiece, shape: rotatedShape };
-        if (!checkCollision(0, 0, rotatedPiece.shape)) {
-            setCurrentPiece(rotatedPiece);
+        const rotatedShape = transposedShape.map(row => row.reverse());
+        if (!checkCollision(0, 0, rotatedShape)) {
+            setCurrentPiece(prev => ({
+                ...prev,
+                shape: rotatedShape
+            }));
         }
     };
+
 
     const updateBoard = () => {
         const newBoard = board.map(row => [...row]);
@@ -137,22 +142,56 @@ const useTetrisLogic = () => {
                 }
             });
         });
-
         setBoard(newBoard);
         setCurrentPiece(randomTetromino());
     };
 
     const clearLines = () => {
-        const newBoard = board.filter(row => row.some(value => value === 0));
-        const clearedLines = ROWS - newBoard.length;
-        for (let i = 0; i < clearedLines; i++) {
-            newBoard.unshift(Array(COLS).fill(0));
+        let newBoard = [...board];
+        for(let y = 0; y < ROWS; y++){
+            let rowFilled = true;
+            for(let x = 0; x < COLS; x++){
+                if(board[y][x] === 0){
+                    rowFilled = false;
+                    break;
+                }
+            }
+            if(rowFilled){
+                setScore(prev => prev + 1);
+                newBoard.splice(y, 1);
+                newBoard.unshift(Array(COLS).fill(0));
+            }
         }
-        if (clearedLines > 0) {
+        if(JSON.stringify(newBoard) !== JSON.stringify(board)){
+            console.log("Board updated");
             setBoard(newBoard);
-            setScore(score += 1);
         }
     };
+
+
+    /*
+    const clearLines = () => {
+            let newBoard = [...board];
+            for(let y = 0; y < ROWS; y++){
+                let rowFilled = true;
+                for(let x = 0; x < COLS; x++){
+                    if(board[y][x] === 0){
+                        rowFilled = false;
+                        break;
+                    }
+                }
+                if(rowFilled){
+                    setScore(prev => prev + 1);
+                    newBoard.splice(y, 1);
+                    newBoard.unshift(Array(COLS).fill(0));
+                }
+            }
+            if(JSON.stringify(newBoard) !== JSON.stringify(board)){
+                setBoard(newBoard);
+            }
+        };
+
+     */
 
 
     const checkGameOver = () => {
@@ -170,6 +209,7 @@ const useTetrisLogic = () => {
         setCurrentPiece(randomTetromino());
         setScore(0);
     };
+
 
     return { board, currentPiece, isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame };
 };

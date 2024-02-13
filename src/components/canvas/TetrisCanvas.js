@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import {TETROMINOS} from "../../utils/tetrisHelper";
 import {BLOCK_SIZE, CANVAS_WIDTH} from "../../hooks/useTetrisLogic";
 
-const TetrisCanvas = ({canvasRef, isGameActive, initializeGame, board, currentPiece}) => {
+const TetrisCanvas = ({canvasRef, isGameActive, board, currentPiece}) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         const drawBoard = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             board.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {

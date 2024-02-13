@@ -8,7 +8,7 @@ import HowToPlay from "../components/HowToPlay";
 import TetrisCanvas from "../components/canvas/TetrisCanvas"
 
 const Tetris = () => {
-    const {board, currentPiece, movePiece, isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame} = useTetrisLogic();
+    const {board, currentPiece, isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame} = useTetrisLogic();
     const canvasRef = useRef(null);
 
     return (
