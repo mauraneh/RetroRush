@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import Score from "../components/Score";
 
 const useTicTacToeLogic = () => {
   const [playerTurnFlag, setPlayerTurnFlag] = useState(true);
@@ -16,14 +15,15 @@ const useTicTacToeLogic = () => {
   const [isGameActive, setIsGameActive] = useState(false);
   const [botWins, setBotWins] = useState(0);
   const cellRefs = useRef([]);
-  const gameName = "TicTacToe - Game";
-const [bestScore, setBestScore] = useState(
-    parseInt(localStorage.getItem(`TicTacToe_bestScore`), 10) || 0
-  );
-
+  const[userNickname, setUserNickname] = useState(
+     (localStorage.getItem("userNickname")) || "Anonymous");
+   const[bestScore, setBestScore] = useState(
+     parseInt(localStorage.getItem(`${userNickname}_TicTacToe_bestScore`)) || 0);
+ 
+  
   useEffect(() => {
-    localStorage.setItem(`TicTacToe_bestScore`, bestScore.toString());
-  }, [bestScore]);
+    localStorage.setItem(`${userNickname}_Tetris_bestScore`, bestScore.toString());
+    }, [bestScore, userNickname]);
 
 
   // Affiche le contenu de la grille
@@ -205,25 +205,11 @@ const [bestScore, setBestScore] = useState(
     }
   };
 
-  //fin du jeu
- // Fonction générique pour gérer la fin du jeu
+  // Fonction générique pour gérer la fin du jeu
   const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
       setIsGameActive(false);
       setAlert({ show: true, type: type, message: message });
-
-      if (type === "win") {
-        // Si le joueur gagne, mise à jour du bestScore
-        setScore((prevScore) => {
-          const newScore = prevScore + 1;
-          setBestScore((prevBestScore) => Math.max(newScore, prevBestScore));
-          return newScore;
-        });
-      } else {
-        // Si le joueur ne gagne pas, réinitialiser le bestScore
-        setBestScore(0);
-      }
-
       setScore((prevScore) => prevScore + 1);
     }, 100);
   };
@@ -267,8 +253,6 @@ const [bestScore, setBestScore] = useState(
     botWins,
     cellRefs,
     alert,
-    bestScore,
-    gameName,
     displayBoard,
     setIsGameActive,
     addClickEventHandlers,

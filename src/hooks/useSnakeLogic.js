@@ -7,15 +7,17 @@ const useSnakeLogic = () => {
     const [snake, setSnake] = useState([]);
     const [food, setFood] = useState({});
     const [score, setScore] = useState(0);
+    const[userNickname, setUserNickname] = useState(
+     (localStorage.getItem("userNickname")) || "Anonymous");
     const [bestScore, setBestScore] = useState(
-    parseInt(localStorage.getItem(`Snake_bestScore`), 10) || 0 );
+    parseInt(localStorage.getItem(`${userNickname}_Snake_bestScore`)) || 0 );
     const [isGameActive, setIsGameActive] = useState(false);
     const [isGameLost, setIsGameLost] = useState(false);
     const [direction] = useDirectionHandler(snakeConfig, isGameActive);
  
     useEffect(() => {
-        localStorage.setItem(`Snake_bestScore`, bestScore.toString());
-    }, [bestScore]);
+        localStorage.setItem(`${userNickname}_Snake_bestScore`, bestScore.toString());
+    }, [bestScore, userNickname]);
 
     useEffect(() => {
         if (isGameActive) {

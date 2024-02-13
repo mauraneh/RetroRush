@@ -7,7 +7,7 @@ import { useSpeed } from "../Context/Speedcontext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faArrowsRotate} from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 /* POSSIBILITEE DE METTRE PARAMETRES POUR CHANGER LES REGLAGES D'UNE PARTIE
 EXEMPLE : VITESSE SERPENT
@@ -47,18 +47,17 @@ const ExpansionPanel = ({ gameToExplain }) => {
         case 'Breakout':
             return (
                 <div className="expansionPanel">
-                    <h1>Breakout</h1>
-                    <p className="gameTagline">Faites rebondir la balle pour détruire les briques tout en contrôlant la
-                        plateforme pour ne pas laisser la balle tomber.</p>
-                    <p className="subgameTagline">Utilisez les touches 'Q' et 'D' pour déplacer la plateforme vers la
-                        gauche ou la droite.</p>
-                    <div className="keys-container">
-                        <div className="keySnake left">
-                            <FontAwesomeIcon icon={faArrowLeft} className="touch"/>
+                    <h1>{gameToExplain}</h1>
+                    <p className="gameTagline">Faites rebondir la balle, détruisez les briques, et ne laissez pas la
+                        balle tomber !</p>
+                    <div className="instructions">
+                        <div className="key">
+                            <p>LEFT</p>
+                            <img src={keyBoardQ} alt="touche Q"/>
                         </div>
-
-                        <div className="keySnake right">
-                            <FontAwesomeIcon icon={faArrowRight} className="touch"/>
+                        <div className="key">
+                            <img src={keyBoardD} alt="touche D"/>
+                            <p>RIGHT</p>
                         </div>
                     </div>
                     <div className="sliderContainer">
@@ -74,17 +73,13 @@ const ExpansionPanel = ({ gameToExplain }) => {
                         />
                     </div>
                 </div>
-
-            )
-                ;
-        case 'Snake':
+            );
+            case 'Snake':
             return (
                 <div className="expansionPanel">
                     <h1>Snake</h1>
-                    <p className="gameTagline">Guidez le serpent, mangez les pommes, et évitez de vous mordre la queue
-                        ou les murs !</p>
-                    <p className="subgameTagline">Utilise les touches 'Haut', 'Bas', 'Droite', 'Gauche', pour déplacer
-                        le serpent.</p>
+                    <p className="gameTagline">Guidez le serpent, mangez les pommes, et évitez de vous mordre la queue ou les murs !</p>
+                    <p className="subgameTagline">Utilise les touches 'Haut', 'Bas', 'Droite', 'Gauche', pour déplacer le serpent.</p>
                     <div className="keys-container">
                         <div className="keySnake up">
                             <FontAwesomeIcon icon={faArrowUp} className="touch"/>
@@ -121,6 +116,7 @@ const ExpansionPanel = ({ gameToExplain }) => {
           </div>
         </div>
       );
+
         case 'HomePage':
            return (
     <div className="expansionPanel">
@@ -150,33 +146,15 @@ const ExpansionPanel = ({ gameToExplain }) => {
         case 'Tetris':
             return (
                 <div className="expansionPanel">
-                    <h1>TETRIS</h1>
-                    <p className="gameTagline">Empilez les blocs pour compléter des lignes et marquer des points. Évitez
-                        de laisser les blocs atteindre le haut de l'écran !</p>
-
-                    <p className="subgameTagline">Utilisez les touches fléchées pour déplacer et tourner les pièces.</p>
-
-                    <div className="keys-container">
-                        <div className="keySnake up">
-                            <FontAwesomeIcon icon={faArrowsRotate} className="touch"/>
-                        </div>
-                        <div className="keySnake left">
-                            <FontAwesomeIcon icon={faArrowLeft} className="touch"/>
-                        </div>
-                        <div className="keySnake down">
-                            <FontAwesomeIcon icon={faArrowDown} className="touch"/>
-                        </div>
-                        <div className="keySnake right">
-                            <FontAwesomeIcon icon={faArrowRight} className="touch"/>
-                        </div>
-                    </div>
+                    <h1>{gameToExplain}</h1>
+                    <p>TODO</p>
                 </div>
             )
         default:
             return (
                 <div className="expansionPanel">
-                <div className="instructions">
-                    <p className="noGameFound">Aucuns jeux trouvés.</p>
+                    <div className="instructions">
+                        <p className="noGameFound">Aucuns jeux trouvés.</p>
                     </div>
                 </div>
             );

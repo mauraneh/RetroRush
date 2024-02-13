@@ -19,16 +19,18 @@ const createEmptyBoard = () => Array.from({ length: ROWS }, () => Array(COLS).fi
 const useTetrisLogic = () => {
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
+      const[userNickname, setUserNickname] = useState(
+          (localStorage.getItem("userNickname")) || "Anonymous");
     const[bestScore, setBestScore] = useState(
-        parseInt(localStorage.getItem(`Tetris_bestScore`), 10) || 0);
+        parseInt(localStorage.getItem(`${userNickname}_Tetris_bestScore`)) || 0);
     const [isGameLost, setIsGameLost] = useState(false);
     const [isGameWin, setIsGameWin] = useState(false);
     const [board, setBoard] = useState(createEmptyBoard);
     const [currentPiece, setCurrentPiece] = useState(() => randomTetromino());
 
     useEffect(() => {
-    localStorage.setItem(`Tetris_bestScore`, bestScore.toString());
-    }, [bestScore]);
+    localStorage.setItem(`${userNickname}_Tetris_bestScore`, bestScore.toString());
+    }, [bestScore, userNickname]);
     
     useEffect(() => {
         const handleKeyDown = (e) => {

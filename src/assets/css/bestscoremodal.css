@@ -1,3 +1,27 @@
+/* Ajoutez ces styles à votre fichier CSS */
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #fff;
+  color: #6705d6;
+  transition: background-color 0.3s ease; /* Ajout de la transition de couleur de fond */
+}
+
+button.selected {
+  /* Couleur de fond pour l'état sélectionné */
+  color: #fff;
+  background-color: #6705d6;
+}
+
 .best-scores-modal .floating-text {
   max-width: 100%;
   height: auto;
@@ -25,16 +49,18 @@
 .best-scores-modal .game-container:hover .game-info {
   opacity: 1;
 }
+
 .best-scores-modal h2 {
-    width: 125px;
-    padding: 2px;
-    text-align: center;
-    position: relative;
-    color: #c47ef7;
-    background-color: #fff;
-    opacity: 0.5;
-    display: inline-block;
+  width: 125px;
+  padding: 2px;
+  text-align: center;
+  position: relative;
+  color: #c47ef7;
+  background-color: #fff;
+  opacity: 0.5;
+  display: inline-block;
 }
+
 .best-scores-modal .score-text {
   font-size: 1rem;
   margin: 0;
@@ -43,15 +69,14 @@
   transform: translateX(100px); /* Ajustez la valeur en fonction de votre préférence */
 }
 
-
 .best-scores-modal .game-container:hover .score-text {
   transform: scale(1.5) translateX(50px);
 }
+
 .best-scores-modal .score-label {
-  font-size: 1.2rem; /* Ajustez la taille du texte selon vos besoins */
-  margin: 20px 0 0 100px; /* Ajustez les marges pour le décalage vers le bas et vers la gauche */
+  font-size: 1.2rem;
+  margin: 20px 0 0 100px;
   transform-origin: center;
-  text-align: center; /* Pour centrer le texte horizontalement */
+  text-align: center;
   color: #fff;
 }
-

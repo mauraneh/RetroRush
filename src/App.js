@@ -32,8 +32,11 @@ function EnterNickname() {
 
   const handleEnter = () => {
     if (nickname) {
-      navigate("/homepage", { state: { nickname } });
+      localStorage.setItem("userNickname", nickname);
+    } else {
+      localStorage.setItem("userNickname", "Anonymous");
     }
+    navigate("/homepage");
   };
 
   return (
