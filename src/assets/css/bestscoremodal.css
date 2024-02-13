@@ -59,7 +59,7 @@ button.selected {
   padding: 2px;
   text-align: center;
   position: relative;
-  color: #c47ef7;
+  color: #6705d6;
   background-color: #fff;
   opacity: 0.5;
   display: inline-block;
@@ -76,6 +76,13 @@ button.selected {
 .best-scores-modal .game-container:hover .score-text {
   transform: scale(1.5) translateX(50px);
 }
+.best-scores-modal .game-container:hover.score-text.fixed {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.best-scores-modal .game-container:hover button {
+  transform: scale(1.5) translateX(20px);
+}
 
 .best-scores-modal .score-label {
   font-size: 1.2rem;
@@ -84,3 +91,15 @@ button.selected {
   text-align: center;
   color: #fff;
 }
+.best-scores-modal .game-info button {
+font-size: 0.8rem;
+  margin: 0;
+  transform-origin: center;
+    margin: 40px 10px 10px 100px;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(60px);
+  width: 100px;
+}
+/* Ajoutez ce style à votre feuille de style CSS */
+
+

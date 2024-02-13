@@ -16,7 +16,7 @@ EXEMPLE : VITESSE SERPENT
 const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
   const navigate = useNavigate();
   const { speedBall, setSpeedBall } = useSpeed();
-    const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe"];
+    const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
     
     const [showBestScoresModal, setShowBestScoresModal] = useState(false);
     
@@ -45,6 +45,7 @@ const handleDifficultyClick = (difficulty) => {
         }
     };
 
+    // eslint-disable-next-line default-case
     switch (gameToExplain) {
         case 'Breakout':
             return (
