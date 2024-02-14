@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from 'react';
 import SettingsModal from '../components/settingsModal/SettingsComponent';
+import settingsIcon from '../assets/images/settings.png';
 
 function HomePage() {
   const[userNickname, setUserNickname] = useState(
@@ -45,14 +46,17 @@ function HomePage() {
   return (
     <div className='container-hp'>
       <div className='header-hp'>
-        <img src={logo} className="logo" alt="logo" />
+        <img src={logo} className="logo" alt="logo"/>
         <h1 className='title-hp'>Let's play, {userNickname}!</h1>
+        <button className="settings-button" onClick={toggleSettings}>
+          <img src={settingsIcon} alt="Settings"/>
+        </button>
       </div>
 
       {showSettings && (
-       <SettingsModal
-          userNickname={userNickname}
-          onClose={() => setShowSettings(false)}
+          <SettingsModal
+              userNickname={userNickname}
+              onClose={() => setShowSettings(false)}
           onEditUsername={handleEditUsername}
         />
       )}

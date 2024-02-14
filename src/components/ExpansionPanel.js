@@ -17,9 +17,9 @@ const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
   const navigate = useNavigate();
   const { speedBall, setSpeedBall } = useSpeed();
     const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
-    
+
     const [showBestScoresModal, setShowBestScoresModal] = useState(false);
-    
+
 const handleDifficultyClick = (difficulty) => {
     setDifficulty(difficulty);
   };
@@ -35,7 +35,7 @@ const handleDifficultyClick = (difficulty) => {
     const randomIndex = Math.floor(Math.random() * gameRoutes.length);
     return gameRoutes[randomIndex];
     };
-    
+
 
     const handleSpeedChange = (event) => {
         if (setSpeedBall) {
@@ -143,7 +143,6 @@ const handleDifficultyClick = (difficulty) => {
       </div>
     </div>
   );
-
         case 'HomePage':
            return (
     <div className="expansionPanel">
