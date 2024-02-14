@@ -8,7 +8,7 @@ export const useBreakOutLogic = () => {
     const { speedBall } = useSpeed();
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
-         const[userNickname, setUserNickname] = useState(
+    const[userNickname, setUserNickname] = useState(
      (localStorage.getItem("userNickname")) || "Anonymous");
     const [bestScore, setBestScore] = useState(
     parseInt(localStorage.getItem(`${userNickname}_BreakOut_bestScore`)|| 0 ));
