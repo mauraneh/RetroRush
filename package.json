@@ -1,7 +1,9 @@
 {
   "name": "retrorush_app",
   "version": "0.1.0",
+  "description": "Retrorush est une application web innovante développée par un groupe d'étudiants passionnés de l'école Ynov. Cette galerie de mini-jeux rétro offre une expérience ludique et nostalgique, invitant les utilisateurs à redécouvrir le charme des jeux classiques à travers une interface moderne et intuitive. Conçue avec React et d'autres technologies de pointe, Retrorush promet des heures de divertissement tout en démontrant les compétences avancées en développement front-end de nos étudiants. Rejoignez l'aventure et plongez dans le passé ludique avec Retrorush !",
   "private": true,
+  "homepage": "https://https://retrorush.cloud/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",

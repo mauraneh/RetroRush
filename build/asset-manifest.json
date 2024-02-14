@@ -1,21 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.827756bf.css",
-    "main.js": "/static/js/main.a8ec2d1f.js",
-    "static/js/787.a4a0aefc.chunk.js": "/static/js/787.a4a0aefc.chunk.js",
-    "static/media/background.png": "/static/media/background.95828dc9b3f573233bfa.png",
-    "static/media/motus.png": "/static/media/motus.f0ce48341ebbbc9f49e2.png",
-    "static/media/breakout.png": "/static/media/breakout.a1d867d87ccc688769f2.png",
-    "static/media/tictactoe.png": "/static/media/tictactoe.cccf1ab0192e9ac9e594.png",
-    "static/media/snakes.png": "/static/media/snakes.ceb554276c9b12702ff8.png",
-    "static/media/logoRR.png": "/static/media/logoRR.4ca220bd45aee210af4b.png",
-    "index.html": "/index.html",
-    "main.827756bf.css.map": "/static/css/main.827756bf.css.map",
-    "main.a8ec2d1f.js.map": "/static/js/main.a8ec2d1f.js.map",
-    "787.a4a0aefc.chunk.js.map": "/static/js/787.a4a0aefc.chunk.js.map"
+    "main.css": "https://retrorush.cloud/static/css/main.ac284e6f.css",
+    "main.js": "https://retrorush.cloud/static/js/main.643a0858.js",
+    "static/js/787.a4a0aefc.chunk.js": "https://retrorush.cloud/static/js/787.a4a0aefc.chunk.js",
+    "static/media/background.png": "https://retrorush.cloud/static/media/background.95828dc9b3f573233bfa.png",
+    "static/media/tictactoeBG.png": "https://retrorush.cloud/static/media/tictactoeBG.6db2ba490c25812a5747.png",
+    "static/media/breakoutBG.png": "https://retrorush.cloud/static/media/breakoutBG.1bab9c9ce1a448e71ed4.png",
+    "static/media/motus.png": "https://retrorush.cloud/static/media/motus.f0ce48341ebbbc9f49e2.png",
+    "static/media/breakout.png": "https://retrorush.cloud/static/media/breakout.a1d867d87ccc688769f2.png",
+    "static/media/snakesBG.png": "https://retrorush.cloud/static/media/snakesBG.ff8599190f16e7398752.png",
+    "static/media/tictactoe.png": "https://retrorush.cloud/static/media/tictactoe.cccf1ab0192e9ac9e594.png",
+    "static/media/snakes.png": "https://retrorush.cloud/static/media/snakes.ceb554276c9b12702ff8.png",
+    "static/media/tetrisBG.png": "https://retrorush.cloud/static/media/tetrisBG.c770490c6dd4a8157535.png",
+    "static/media/alert-success.webp": "https://retrorush.cloud/static/media/alert-success.0d93aae57094cefd4a4c.webp",
+    "static/media/tetris.png": "https://retrorush.cloud/static/media/tetris.02d7e58e7aa8aaca8da2.png",
+    "static/media/alert-loose.webp": "https://retrorush.cloud/static/media/alert-loose.111df06697a7d681ae75.webp",
+    "static/media/logoRR.png": "https://retrorush.cloud/static/media/logoRR.4ca220bd45aee210af4b.png",
+    "static/media/icons8-curseur-unscreen.gif": "https://retrorush.cloud/static/media/icons8-curseur-unscreen.048378e12ffcce07f29b.gif",
+    "index.html": "https://retrorush.cloud/index.html",
+    "main.ac284e6f.css.map": "https://retrorush.cloud/static/css/main.ac284e6f.css.map",
+    "main.643a0858.js.map": "https://retrorush.cloud/static/js/main.643a0858.js.map",
+    "787.a4a0aefc.chunk.js.map": "https://retrorush.cloud/static/js/787.a4a0aefc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.827756bf.css",
-    "static/js/main.a8ec2d1f.js"
+    "static/css/main.ac284e6f.css",
+    "static/js/main.643a0858.js"
   ]
 }
