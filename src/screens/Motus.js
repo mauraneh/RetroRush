@@ -52,7 +52,7 @@ const Motus = () => {
                 <Link to="/homepage">
                     <button className="retour-button button">Retour</button>
                 </Link>
-                <HowToPlay gameToExplain="Breakout"/>
+                <HowToPlay gameToExplain="Motus"/>
             </div>
             {isGameActive && !isGameWin && !isGameLost && (
                 <form onSubmit={handleSubmit}>

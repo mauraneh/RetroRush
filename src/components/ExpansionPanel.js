@@ -85,6 +85,16 @@ const handleDifficultyClick = (difficulty) => {
                     </div>
                 </div>
             );
+        case 'Motus':
+            return (
+                <div className="expansionPanel">
+                    <h1>Motus</h1>
+                    <p className="gameTagline">Trouvez le mot caché en devinant les lettres une par une !</p>
+                    <p className="subgameTagline">Chaque bonne lettre à sa place vous rapproche du mot mystère, mais
+                        attention au nombre d'essais limités.</p>
+                </div>
+
+            );
         case 'Snake':
             return (
                 <div className="expansionPanel">
