@@ -4,6 +4,7 @@ import keyBoardD from "../assets/images/icon/lettre-d.png";
 import cursor from "../assets/images/icon/icons8-curseur-unscreen.gif";
 import BestScoresModal from "./bestScoreModal/BestScoresModal";
 import { useSpeed } from "../Context/Speedcontext";
+import { useTetris } from "../Context/TetrisContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,11 +15,11 @@ EXEMPLE : VITESSE SERPENT
  */
 
 const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
-  const navigate = useNavigate();
-  const { speedBall, setSpeedBall } = useSpeed();
-    const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
-
-    const [showBestScoresModal, setShowBestScoresModal] = useState(false);
+     const navigate = useNavigate();
+     const { speedBall, setSpeedBall } = useSpeed();
+     const { speedTetris, setSpeedTetris } = useTetris();
+     const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
+     const [showBestScoresModal, setShowBestScoresModal] = useState(false);
 
 const handleDifficultyClick = (difficulty) => {
     setDifficulty(difficulty);
@@ -42,6 +43,12 @@ const handleDifficultyClick = (difficulty) => {
             setSpeedBall(Number(event.target.value));
         } else {
             setSpeedBall(3);
+        }
+    };
+    const handleTetrisChange = (event) => {
+        if (setSpeedTetris) {
+           setSpeedTetris(Number(event.target.value));
+        } else {
         }
     };
 
@@ -191,6 +198,17 @@ const handleDifficultyClick = (difficulty) => {
                         <div className="keySnake right">
                             <FontAwesomeIcon icon={faArrowRight} className="touch"/>
                         </div>
+                    </div>
+                    <div className="sliderContainer">
+                        <label className="speedRangeText">Indiquez la vitesse de descente du bloc, et
+                            lancez !</label>
+                        <input
+                            type="range"
+                            min="100"
+                            max="4000"
+                            value={speedTetris}
+                            onChange={handleTetrisChange}
+                        />
                     </div>
                 </div>
             );
