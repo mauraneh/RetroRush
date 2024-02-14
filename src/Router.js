@@ -7,6 +7,7 @@ import Tetris from "./screens/Tetris";
 import SnakeGame from "./screens/SnakeGame";
 import TicTacToeGame from "./screens/TicTacToeGame";
 import {SpeedProvider} from "./Context/Speedcontext";
+import Motus from "./screens/Motus";
 
 const Router = createBrowserRouter(
     [
@@ -33,10 +34,11 @@ const Router = createBrowserRouter(
         {
             path: "/tetris",
             element: <Tetris />,
-    },
-    {
-          
-        }
+        },
+        {
+            path: "/motus",
+            element: <Motus />,
+        },
     ]
 );
 

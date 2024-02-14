@@ -4,12 +4,15 @@ import React, {  useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./screens/HomePage";
 import SnakeGame from "./screens/SnakeGame";
+import Motus from "./screens/Motus";
 import { useNavigate } from "react-router-dom";
 import TicTacToeGame from "./screens/TicTacToeGame";
 import BreakOut from "./screens/BreakOut";
 import Tetris from "./screens/Tetris";
 import { SpeedProvider } from "./Context/Speedcontext";
 import {TetrisProvider} from "./Context/TetrisContext";
+
+
 function App() {
   return (
     <SpeedProvider>
@@ -22,6 +25,7 @@ function App() {
             <Route path="/tictactoe" element={<TicTacToeGame />} />
             <Route path="/breakout" element={<BreakOut />} />
             <Route path="/tetris" element={<Tetris />} />
+            <Route path="/motus" element={<Motus />} />
           </Routes>
         </Router>
       </TetrisProvider>
