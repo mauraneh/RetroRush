@@ -31,6 +31,10 @@
   background-image: url("/src/assets/images/tetrisBG.png");
 }
 
+.motus {
+  background-image: url("/src/assets/images/motusBG.png");
+}
+
 .title span {
   display: inline-block;
   animation: fade 2s infinite, color 5s infinite;
