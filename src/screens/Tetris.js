@@ -1,14 +1,14 @@
 import useTetrisLogic from "../hooks/useTetrisLogic";
 import React, {useRef} from "react";
 import GameTitle from "../components/GameTitle";
-import BreakOutCanvas from "../components/BreakOutCanvas";
 import Score from "../components/Score";
 import PlayButton from "../components/BtnPlay";
 import {Link} from "react-router-dom";
 import HowToPlay from "../components/HowToPlay";
-import TetrisCanvas from "../components/TetrisCanvas"
+import TetrisCanvas from "../components/canvas/TetrisCanvas"
+
 const Tetris = () => {
-    const {isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame} = useTetrisLogic();
+    const {board, currentPiece, isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame} = useTetrisLogic();
     const canvasRef = useRef(null);
 
     return (
@@ -17,6 +17,10 @@ const Tetris = () => {
             <div id="gamesContainer">
                 <TetrisCanvas
                     canvasRef={canvasRef}
+                    isGameActive={isGameActive}
+                    initializeGame={initializeGame}
+                    board={board}
+                    currentPiece={currentPiece}
                 />
                 <Score
                     isGameActive={isGameActive}

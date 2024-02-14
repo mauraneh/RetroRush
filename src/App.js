@@ -1,39 +1,42 @@
-import logo from './assets/images/logoRR.png';
-import './App.css';
-import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './screens/HomePage';
-import SnakeGame from './screens/SnakeGame';
-import { useNavigate } from 'react-router-dom';
+import logo from "./assets/images/logoRR.png";
+import "./App.css";
+import React, {  useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./screens/HomePage";
+import SnakeGame from "./screens/SnakeGame";
+import { useNavigate } from "react-router-dom";
+import TicTacToeGame from "./screens/TicTacToeGame";
 import BreakOut from "./screens/BreakOut";
-import {SpeedProvider} from "./Context/Speedcontext";
 import Tetris from "./screens/Tetris";
+import { SpeedProvider } from "./Context/Speedcontext";
 function App() {
-
-
   return (
-      <SpeedProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<EnterNickname />} />
-            <Route path="/homepage" element={<HomePage />} />
-            <Route path="/snake" element={<SnakeGame />} />
-            <Route path="/breakout" element={<BreakOut />} />
-            <Route path="/tetris" element={<Tetris />} />
-          </Routes>
-        </Router>
-      </SpeedProvider>
+    <SpeedProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<EnterNickname />} />
+          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/snake" element={<SnakeGame />} />
+          <Route path="/tictactoe" element={<TicTacToeGame />} />
+          <Route path="/breakout" element={<BreakOut />} />
+          <Route path="/tetris" element={<Tetris />} />
+        </Routes>
+      </Router>
+    </SpeedProvider>
   );
 }
 
 function EnterNickname() {
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
   const handleEnter = () => {
     if (nickname) {
-      navigate('/homepage', { state: { nickname } });
+      localStorage.setItem("userNickname", nickname);
+    } else {
+      localStorage.setItem("userNickname", "Anonymous");
     }
+    navigate("/homepage");
   };
 
   return (
@@ -48,7 +51,9 @@ function EnterNickname() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <button className="app-button" onClick={handleEnter}>Enter</button>
+          <button className="app-button" onClick={handleEnter}>
+            Enter
+          </button>
         </div>
       </header>
     </div>

@@ -20,15 +20,15 @@
   animation: blinkShadow 1.5s infinite;
 }
 .snake {
-  background-image: url('/src/assets/images/snakesBG.png');
+  background-image: url("/src/assets/images/snakesBG.png");
 }
 
 .breakout {
-  background-image: url('/src/assets/images/breakoutBG.png');
+  background-image: url("/src/assets/images/breakoutBG.png");
 }
 
 .tetris {
-  background-image: url('/src/assets/images/tetrisBG.png');
+  background-image: url("/src/assets/images/tetrisBG.png");
 }
 
 .title span {
@@ -48,15 +48,14 @@
 }
 
 #start-button {
-  margin: 10px;
-  background: linear-gradient(45deg, #fd028c, #fcd60c);
+  background-color: #fd028c;
   border-radius: 50%;
   padding: 20px 30px;
   font-size: 2rem;
   color: white;
   cursor: pointer;
   text-shadow: 0 0 5px #fcd60c;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   animation: neon 1s ease-in-out infinite alternate;
   transition: box-shadow 0.3s ease;
 }
@@ -68,7 +67,7 @@
 
 #start-button:active {
   transform: scale(0.9);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .gameScore, .gameBestScore {
@@ -105,9 +104,52 @@
   border: 1px solid #FFF;
 }
 
-#snakeCanvas {
+#canvas {
   margin-top: 20px;
   border: 1px solid #FFF;
+}
+
+
+
+
+/* Style du tictactoe */
+table {
+  border-collapse: collapse;
+  margin: 1.25rem auto;
+  background-color: #101010;
+}
+
+td {
+  width: 9.375rem;
+  height: 9.375rem;
+  text-align: center;
+  font-size: 4.5rem;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+.tictactoe-cell {
+  position: relative;
+}
+
+td.span.player-symbol {
+  color: #fdd33c; /* Couleur orange */
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+td.span.bot-symbol {
+  color: #fd028c;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #tetrisCanvas {

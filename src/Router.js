@@ -5,6 +5,8 @@ import BreakOut from "./screens/BreakOut";
 import HomePage from "./screens/HomePage";
 import Tetris from "./screens/Tetris";
 import SnakeGame from "./screens/SnakeGame";
+import TicTacToeGame from "./screens/TicTacToeGame";
+import {SpeedProvider} from "./Context/Speedcontext";
 
 const Router = createBrowserRouter(
     [
@@ -18,7 +20,11 @@ const Router = createBrowserRouter(
         },
         {
             path: "/breakout",
-            element: <BreakOut />,
+            element: (
+                <SpeedProvider >
+                    <BreakOut />
+                </ SpeedProvider >
+            )
         },
         {
             path: "/snake",
@@ -27,7 +33,11 @@ const Router = createBrowserRouter(
         {
             path: "/tetris",
             element: <Tetris />,
-        },
+    },
+    {
+          
+        }
     ]
 );
+
 export default Router;

@@ -1,0 +1,105 @@
+/* Ajoutez ces styles à votre fichier CSS */
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 900;
+  width: auto;
+  cursor: pointer;
+  margin: 2px;
+  margin-left: 20px;
+  text-transform: uppercase;
+  background-color: #fff;
+  color: #6705d6;
+  transition: background-color 0.3s ease; /* Ajout de la transition de couleur de fond */
+}
+
+button.selected {
+  /* Couleur de fond pour l'état sélectionné */
+  color: #fff;
+  background-color: #6705d6;
+}
+
+.best-scores-modal .floating-text {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.best-scores-modal .game-container:hover .floating-text {
+  transform: scale(1.1);
+}
+
+.best-scores-modal .game-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.best-scores-modal .game-container:hover .game-info {
+  opacity: 1;
+}
+
+.best-scores-modal h2 {
+  width: 125px;
+  padding: 2px;
+  text-align: center;
+  position: relative;
+  color: #6705d6;
+  background-color: #fff;
+  opacity: 0.5;
+  display: inline-block;
+}
+
+.best-scores-modal .score-text {
+  font-size: 1rem;
+  margin: 0;
+  transform-origin: center;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(100px); /* Ajustez la valeur en fonction de votre préférence */
+}
+
+.best-scores-modal .game-container:hover .score-text {
+  transform: scale(1.5) translateX(50px);
+}
+.best-scores-modal .game-container:hover.score-text.fixed {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.best-scores-modal .game-container:hover button {
+  transform: scale(1.5) translateX(20px);
+}
+
+.best-scores-modal .score-label {
+  font-size: 1.2rem;
+  margin: 20px 0 0 100px;
+  transform-origin: center;
+  text-align: center;
+  color: #fff;
+}
+.best-scores-modal .game-info button {
+font-size: 0.8rem;
+  margin: 0;
+  transform-origin: center;
+    margin: 40px 10px 10px 100px;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(60px);
+  width: 100px;
+}
+/* Ajoutez ce style à votre feuille de style CSS */
+
+

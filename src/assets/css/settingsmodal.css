@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.settings-modal {
+  top: 25%;
+  left: 40%;
+  padding: 20px;
+  background-color:rgb(45,39,69, 0.8); 
+  border-radius: 10px;
+  text-align: center;
+  width: 400px;
+  z-index: 99999999;
+  position: fixed;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.User,
+.brightness {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon-and-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.settings-icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  filter: grayscale(40%) brightness(1.2); /* Effet de rétrogradation */
+  transition: filter 0.3s ease;
+}
+
+.settings-icon:hover {
+  filter: grayscale(0%) brightness(1.5);
+}
+
+/* Style pour le formulaire de modification du nom d'utilisateur */
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 80%;
+  font-family: "Press Start 2P", cursive;
+  font-size: 1rem;
+  border: 2px solid rgb(249,237,148); /* Couleur de bordure jaune */
+  background-color: rgb(245,198,220, 0.8); /* Couleur de fond noire */
+  color: rgb(45,39,69); /* Couleur du texte jaune */
+  outline: none;
+}
+.hidden {
+  display: none;
+}
+.brightlessbuton{
+  background-color: rgb(245,198,220);
+  color: rgb(45,39,69);
+  padding: 10px 20px;
+  border: black 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.brightlessbuton:hover {
+  background-color: rgb(45,39,69);
+  color: rgb(245,198,220);
+   text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
+}
+
+.settings-modal h1 {
+  font-family: "Press Start 2P", cursive;
+  font-size: 2rem;
+  color: rgb(245,198,220);
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+ text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
+}
+
+.settings-modal h1::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: rgb(245,198,220, 0.8);
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.settings-modal h1:hover::after {
+  transform: scaleX(1);
+}
+
+.settings-modal span {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+  color: rgb(245,198,220);
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+ text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
+}

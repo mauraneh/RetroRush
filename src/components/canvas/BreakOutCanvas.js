@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {drawBall, drawBricks, drawPaddle } from "../utils/breakOutHelper";
+import {drawBall, drawBricks, drawPaddle } from "../../utils/breakOutHelper";
 const BreakOutCanvas = ({ isGameActive, bricks, ballPosition, paddlePosition, updateGameState, canvasRef }) => {
 
     useEffect(() => {

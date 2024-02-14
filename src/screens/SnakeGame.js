@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import '../assets/css/games.css';
-import SnakeCanvas from '../components/SnakeCanvas';
+import SnakeCanvas from '../components/canvas/SnakeCanvas';
 import Score from '../components/Score';
 import GameTitle from '../components/GameTitle';
 import useSnakeLogic from '../hooks/useSnakeLogic';
