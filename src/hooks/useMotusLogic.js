@@ -7,7 +7,7 @@ const useMotusLogic = () => {
     const[userNickname, setUserNickname] = useState(
         (localStorage.getItem("userNickname")) || "Anonymous");
     const [bestScore, setBestScore] = useState(
-        parseInt(localStorage.getItem(`${userNickname}_BreakOut_bestScore`)|| 0 ));
+        parseInt(localStorage.getItem(`${userNickname}_Motus_bestScore`)|| 0 ));
     const [isGameLost, setIsGameLost] = useState(false);
     const [isGameWin, setIsGameWin] = useState(false);
     const [word, setWord] = useState('');

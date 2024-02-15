@@ -55,16 +55,20 @@ const Motus = () => {
                 <HowToPlay gameToExplain="Motus"/>
             </div>
             {isGameActive && !isGameWin && !isGameLost && (
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={userInputs[userInputs.length - 1]}
-                        onChange={(e) => handleInputChange(e, userInputs.length - 1)}
-                        placeholder="Entrez votre mot"
-                        maxLength={displayWord.length} // Limiter la longueur à celle du mot à deviner
-                    />
-                    <button type="submit">Vérifier</button>
-                </form>
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <span style={{marginRight: "10px"}}>Tentatives restantes : {attemptsLeft}</span>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={userInputs[userInputs.length - 1] }
+                            onSubmit={(e) => handleInputChange(e, userInputs.length - 1)}
+                            placeholder="Entrez votre mot"
+                            maxLength={displayWord.length}
+                            minLength={displayWord.length}
+                        />
+                        <button type="submit">Vérifier</button>
+                    </form>
+                </div>
             )}
         </div>
     )
