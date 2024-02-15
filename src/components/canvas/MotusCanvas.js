@@ -14,6 +14,7 @@ const MotusCanvas = ({canvasRef, checkAttempt, displayWord, attemptsLeft, userAt
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
         const userInputY = startY + 90; // Ajuster la position en Y pour les entrées utilisateur
+
         userInputs.forEach((userInput, index) => {
             const y = userInputY + index * 60;
             userInputs.forEach((userInput, index) => {
