@@ -31,7 +31,7 @@ button.selected {
   height: auto;
   border-radius: 10px;
   margin-bottom: 10px;
-  transition: transform 0.5s ease-in-out;
+  /* transition: transform 0.5s ease-in-out; */
   cursor: pointer;
 }
 
@@ -70,7 +70,6 @@ button.selected {
   margin: 0;
   transform-origin: center;
   transition: transform 0.5s ease-in-out;
-  transform: translateX(100px); /* Ajustez la valeur en fonction de votre préférence */
 }
 
 .best-scores-modal .game-container:hover .score-text {

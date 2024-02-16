@@ -10,27 +10,12 @@ const BestScoresModal = ({ onClose }) => {
   const [mountedItems, setMountedItems] = useState([]);
   const userNickname = localStorage.getItem("userNickname");
   const [selectedButton, setSelectedButton] = useState(null);
-  const [bestScores, setBestScores] = useState(() => {
-    const storedBestScores = {};
-    gameNames.forEach((gameName) => {
-      const storedScore = parseInt(localStorage.getItem(`${userNickname}_${gameName}_bestScore`), 10) || 0;
-      storedBestScores[gameName] = { score: storedScore };
-    });
-    return storedBestScores;
-  });
-
-  useEffect(() => {
-    const storedBestScores = JSON.parse(localStorage.getItem("bestScores")) || {};
-    if (storedBestScores) {
-      setBestScores(storedBestScores);
-    }
-
-    setMountedItems(Object.keys(storedBestScores || {}));
-  }, []);
+  const [viewOnlyUser, setViewOnlyUser] = useState(true);
 
   const handleButtonClick = (buttonType) => {
     setMountedItems([buttonType]);
     setSelectedButton(buttonType);
+    setViewOnlyUser(buttonType === "user"); // Update viewOnlyUser based on buttonType
   };
 
   const navigateToGame = (gameName) => {
@@ -38,77 +23,40 @@ const BestScoresModal = ({ onClose }) => {
     navigate(gameRoute);
   };
 
-  // Fonction pour obtenir les scores personnels du joueur pour un jeu spécifique
-const getBestPlayerData = (gameName, viewUserScoresOnly) => {
-  const allScores = Object.entries(localStorage)
-    .filter(([key]) => key.endsWith(`_${gameName}_bestScore`))
-    .map(([key, value]) => {
-      const [, playerNickname] = key.match(/^(.+)_(.*)_bestScore$/);
-      const score = parseInt(value) || 0;
-      return { playerNickname, score };
-    });
+  const getBestPlayerData = (gameName) => {
+    const keyPattern = viewOnlyUser ? `${userNickname}_${gameName}_bestScore` : `_${gameName}_bestScore`;
 
-  if (viewUserScoresOnly) {
-    const userScores = allScores.filter((userData) => userData.playerNickname === userNickname);
-    const userBestScore = userScores.reduce((best, current) => (current.score > best.score ? current : best), { playerNickname: userNickname, score: 0 });
-    return userBestScore;
-  }
+    const scores = Object.entries(localStorage)
+      .filter(([key]) => key.endsWith(keyPattern))
+      .map(([key, value]) => {
+        const [, playerNickname] = key.match(/^(.+)_(.*)_bestScore$/);
+        const score = parseInt(value) || 0;
+        return { playerNickname, score };
+      });
 
-  // Trouver le meilleur score pour chaque joueur
-  const bestScoresByPlayer = allScores.reduce((acc, scoreData) => {
-    if (!acc[scoreData.playerNickname] || acc[scoreData.playerNickname].score < scoreData.score) {
-      acc[scoreData.playerNickname] = { playerNickname: scoreData.playerNickname, score: scoreData.score };
-    }
-    return acc;
-  }, {});
+    return viewOnlyUser ? scores[0] : scores.reduce((best, current) => (current.score > best.score ? current : best), { playerNickname: "", score: 0 });
+  };
 
-  // Convertir l'objet en liste
-  const bestScoresList = Object.values(bestScoresByPlayer);
-
-  // Trouver le meilleur score global parmi tous les joueurs
-  const overallBestScore = bestScoresList.reduce((best, current) => (current.score > best.score ? current : best), { playerNickname: "", score: 0 });
-
-  return overallBestScore;
-};
-
-  const renderGameScore = (gameName, key, isUserScore) => {
+  const renderGameScore = (gameName, index, isUserScore) => {
+    const bestPlayerData = getBestPlayerData(gameName);
     return (
       <GameScore
-        key={key}
+        key={index}
         gameName={gameName}
         isUserScore={isUserScore}
         userNickname={userNickname}
         navigateToGame={navigateToGame}
         getBestPlayerData={getBestPlayerData}
+        viewOnlyUser={viewOnlyUser}
       />
     );
   };
 
-  const renderUserScores = () => {
-  const userScores = gameNames.map((gameName, index) => {
-    const bestPlayerData = getBestPlayerData(gameName, selectedButton === "user");
-    return renderGameScore(gameName, index, true, bestPlayerData);
-  });
-
-  return (
+  const renderScores = () => (
     <div className="games-container">
-      {userScores}
+      {gameNames.map((gameName, index) => renderGameScore(gameName, index, viewOnlyUser))}
     </div>
   );
-};
-
-
-  const renderAllScores = () => {
-    const allScores = gameNames.map((gameName, index) => {
-      return renderGameScore(gameName, index, false);
-    });
-
-    return (
-      <div className="games-container">
-        {allScores}
-      </div>
-    );
-  };
 
   return (
     <div className="best-scores-modal">
@@ -120,17 +68,17 @@ const getBestPlayerData = (gameName, viewUserScoresOnly) => {
           <ScoreButton
             buttonType="user"
             selectedButton={selectedButton}
-            handleButtonClick={handleButtonClick}
+            handleButtonClick={() => handleButtonClick("user")}
             label="Mes Scores"
           />
           <ScoreButton
             buttonType="all"
             selectedButton={selectedButton}
-            handleButtonClick={handleButtonClick}
+            handleButtonClick={() => handleButtonClick("all")}
             label="Meilleurs Scores"
           />
-          {mountedItems.includes("user") && renderUserScores()}
-          {mountedItems.includes("all") && renderAllScores()}
+          {mountedItems.includes("user") && renderScores()}
+          {mountedItems.includes("all") && renderScores()}
         </>
       )}
     </div>

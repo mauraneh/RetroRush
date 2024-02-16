@@ -1,8 +1,6 @@
-// ...
-
-const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBestPlayerData }) => {
+const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBestPlayerData, viewOnlyUser }) => {
   // Obtenir les données du meilleur joueur pour le jeu en cours
-  const bestPlayerData = getBestPlayerData(gameName);
+  const bestPlayerData = getBestPlayerData(gameName, isUserScore);
 
   // Initialiser les variables pour le score et le nom du meilleur joueur
   let score = 0;
@@ -14,8 +12,6 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
     bestPlayerNickname = bestPlayerData.playerNickname;
   }
 
-  // Déterminer le nom à afficher en fonction de l'utilisateur ou du meilleur joueur
-  const displayName = isUserScore ? userNickname : bestPlayerNickname;
 
   // Initialiser le message en fonction du résultat
   let message;
@@ -24,35 +20,44 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
     if (score > 0) {
       message = (
         <>
-          Bravo {displayName} ! <br />
+          Bravo {userNickname} ! <br />
           Ton meilleur score est {score}
         </>
       );
     } else {
-      message = `Let's go ${displayName} ! Jouons au ${gameName}`;
+      message = (
+        <>
+          Let's go {userNickname} ! <br />
+          Jouons au {gameName}
+        </>
+      );
     }
-  } else if (userNickname === bestPlayerNickname) {
-    message = (
-      <>
-        Bravo à toi ! <br />
-        Tu as obtenu le meilleur score : {score}
-      </>
-    );
-  } else if (bestPlayerNickname !== "") {
-    message = (
-      <>
-        Bravo à {bestPlayerNickname} ! <br />
-        Il a obtenu {score}
-      </>
-    );
   } else {
-       message = (
-      <>
-        Aucun meilleur joueur <br />
-        pour le moment !
-      </>
-    );
-        }
+    if (score > 0) {
+      if (userNickname === bestPlayerNickname) {
+        message = (
+          <>
+            Bravo à toi ! <br />
+            Tu as obtenu le meilleur score : {score}
+          </>
+        );
+      } else {
+        message = (
+          <>
+            Bravo à {bestPlayerNickname} ! <br />
+            Il a obtenu {score}
+          </>
+        );
+      }
+    } else {
+      message = (
+        <>
+          Aucun meilleur joueur <br />
+          pour le moment !
+        </>
+      );
+    }
+  }
 
   // Rendu du composant
   return (
@@ -60,10 +65,6 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
       <div className="game-info">
         {/* Utilisation de balises HTML normales pour afficher le texte */}
         <h3 className={`score-text ${isUserScore ? "fixed" : ""}`}>{message}</h3>
-        {/* Afficher le bouton de jeu si l'utilisateur n'a pas de score */}
-        {isUserScore && score === 0 && (
-          <button onClick={() => navigateToGame(gameName)}>Jouer à {gameName}</button>
-        )}
       </div>
       {/* Afficher le nom du jeu */}
       <h2 className="floating-text">{gameName}</h2>
