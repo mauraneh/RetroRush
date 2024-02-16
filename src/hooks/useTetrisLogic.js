@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { TETROMINOS, randomTetromino } from '../utils/tetrisHelper';
+import { randomTetromino } from '../utils/tetrisHelper';
+import { useTetris } from "../Context/TetrisContext";
+
 
 
 
@@ -17,6 +19,7 @@ const createEmptyBoard = () => Array.from({ length: ROWS }, () => Array(COLS).fi
 // const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0));
 
 const useTetrisLogic = () => {
+    const { speedTetris } = useTetris(1000);
     const [isGameActive, setIsGameActive] = useState(false);
     const [score, setScore] = useState(0);
       const[userNickname, setUserNickname] = useState(
@@ -69,7 +72,8 @@ const useTetrisLogic = () => {
         if (isGameActive) {
             const interval = setInterval(() => {
                 dropPiece();
-            }, 1000);   // TODO CHANGER VITESSE ICI //
+                console.log(speedTetris)
+            },  speedTetris);
             return () => clearInterval(interval);
         }
     }, [isGameActive, currentPiece]);
@@ -166,38 +170,16 @@ const useTetrisLogic = () => {
             console.log("Board updated");
             setBoard(newBoard);
         }
+        setScore(prev => prev + 1);
     };
-
-
-    /*
-    const clearLines = () => {
-            let newBoard = [...board];
-            for(let y = 0; y < ROWS; y++){
-                let rowFilled = true;
-                for(let x = 0; x < COLS; x++){
-                    if(board[y][x] === 0){
-                        rowFilled = false;
-                        break;
-                    }
-                }
-                if(rowFilled){
-                    setScore(prev => prev + 1);
-                    newBoard.splice(y, 1);
-                    newBoard.unshift(Array(COLS).fill(0));
-                }
-            }
-            if(JSON.stringify(newBoard) !== JSON.stringify(board)){
-                setBoard(newBoard);
-            }
-        };
-
-     */
-
 
     const checkGameOver = () => {
         if (checkCollision(0, 0)) {
             setIsGameActive(false);
             setIsGameLost(true);
+            if (score > bestScore) {
+                setBestScore(score);
+            }
         }
     };
 

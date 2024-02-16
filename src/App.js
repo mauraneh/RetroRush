@@ -9,19 +9,22 @@ import TicTacToeGame from "./screens/TicTacToeGame";
 import BreakOut from "./screens/BreakOut";
 import Tetris from "./screens/Tetris";
 import { SpeedProvider } from "./Context/Speedcontext";
+import {TetrisProvider} from "./Context/TetrisContext";
 function App() {
   return (
     <SpeedProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<EnterNickname />} />
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/snake" element={<SnakeGame />} />
-          <Route path="/tictactoe" element={<TicTacToeGame />} />
-          <Route path="/breakout" element={<BreakOut />} />
-          <Route path="/tetris" element={<Tetris />} />
-        </Routes>
-      </Router>
+      <TetrisProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<EnterNickname />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/snake" element={<SnakeGame />} />
+            <Route path="/tictactoe" element={<TicTacToeGame />} />
+            <Route path="/breakout" element={<BreakOut />} />
+            <Route path="/tetris" element={<Tetris />} />
+          </Routes>
+        </Router>
+      </TetrisProvider>
     </SpeedProvider>
   );
 }
