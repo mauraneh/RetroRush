@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../assets/css/bestscoremodal.css";
 import { useNavigate } from 'react-router-dom';
 import ScoreButton from "./ScoreButton";
@@ -11,11 +11,12 @@ const BestScoresModal = ({ onClose }) => {
   const userNickname = localStorage.getItem("userNickname");
   const [selectedButton, setSelectedButton] = useState(null);
   const [viewOnlyUser, setViewOnlyUser] = useState(true);
+  const [isHoveredState, setIsHoveredState] = useState({});
+
 
   const handleButtonClick = (buttonType) => {
     setMountedItems([buttonType]);
     setSelectedButton(buttonType);
-    setViewOnlyUser(buttonType === "user"); // Update viewOnlyUser based on buttonType
   };
 
   const navigateToGame = (gameName) => {
@@ -37,24 +38,52 @@ const BestScoresModal = ({ onClose }) => {
     return viewOnlyUser ? scores[0] : scores.reduce((best, current) => (current.score > best.score ? current : best), { playerNickname: "", score: 0 });
   };
 
-  const renderGameScore = (gameName, index, isUserScore) => {
-    const bestPlayerData = getBestPlayerData(gameName);
-    return (
-      <GameScore
-        key={index}
-        gameName={gameName}
-        isUserScore={isUserScore}
-        userNickname={userNickname}
-        navigateToGame={navigateToGame}
-        getBestPlayerData={getBestPlayerData}
-        viewOnlyUser={viewOnlyUser}
-      />
-    );
+  const handleMouseEnter = (gameName) => {
+    setIsHoveredState((prev) => ({ ...prev, [gameName]: true }));
   };
 
-  const renderScores = () => (
+  const handleMouseLeave = (gameName) => {
+    setIsHoveredState((prev) => ({ ...prev, [gameName]: false }));
+  };
+
+  const renderGameScore = (gameName, index, isUserScore) => {
+    const bestPlayerData = getBestPlayerData(gameName);
+
+
+    return (
+      <div
+        key={index}
+        className={`game-container visible`}
+        onMouseEnter={() => handleMouseEnter(gameName)}
+        onMouseLeave={() => handleMouseLeave(gameName)}
+        onClick={() => navigateToGame(gameName)}
+      >
+        <div className="game-info">
+          <GameScore
+            gameName={gameName}
+            isUserScore={isUserScore}
+            userNickname={userNickname}
+            getBestPlayerData={getBestPlayerData}
+            viewOnlyUser={viewOnlyUser}
+          />
+        </div>
+        {/* Afficher le nom du jeu */}
+        {isHoveredState[gameName] ? (
+          <h2 className={`floating-text ${isUserScore ? "" : "show"}`} onClick={() => navigateToGame(gameName)}>
+            JOUER
+          </h2>
+        ) : (
+          <h2 className="floating-text" onMouseEnter={() => handleMouseEnter(gameName)} onMouseLeave={() => handleMouseLeave(gameName)}>
+            {gameName}
+          </h2>
+        )}
+      </div>
+    );
+  };
+  
+  const renderScores = (userScores) => (
     <div className="games-container">
-      {gameNames.map((gameName, index) => renderGameScore(gameName, index, viewOnlyUser))}
+      {userScores.map((gameName, index) => renderGameScore(gameName, index, viewOnlyUser))}
     </div>
   );
 
@@ -77,8 +106,8 @@ const BestScoresModal = ({ onClose }) => {
             handleButtonClick={() => handleButtonClick("all")}
             label="Meilleurs Scores"
           />
-          {mountedItems.includes("user") && renderScores()}
-          {mountedItems.includes("all") && renderScores()}
+          {mountedItems.includes("user") && renderScores(gameNames)}
+          {mountedItems.includes("all") && renderScores(gameNames)}
         </>
       )}
     </div>

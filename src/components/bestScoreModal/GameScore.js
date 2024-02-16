@@ -1,4 +1,4 @@
-const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBestPlayerData, viewOnlyUser }) => {
+const GameScore = ({ gameName, isUserScore, userNickname,getBestPlayerData}) => {
   // Obtenir les données du meilleur joueur pour le jeu en cours
   const bestPlayerData = getBestPlayerData(gameName, isUserScore);
 
@@ -20,14 +20,14 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
     if (score > 0) {
       message = (
         <>
-          Bravo {userNickname} ! <br />
+          Bravo {userNickname} !
           Ton meilleur score est {score}
         </>
       );
     } else {
       message = (
         <>
-          Let's go {userNickname} ! <br />
+          Let's go {userNickname} !
           Jouons au {gameName}
         </>
       );
@@ -37,14 +37,14 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
       if (userNickname === bestPlayerNickname) {
         message = (
           <>
-            Bravo à toi ! <br />
+            Bravo à toi !
             Tu as obtenu le meilleur score : {score}
           </>
         );
       } else {
         message = (
           <>
-            Bravo à {bestPlayerNickname} ! <br />
+            Bravo à {bestPlayerNickname} !
             Il a obtenu {score}
           </>
         );
@@ -52,7 +52,7 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
     } else {
       message = (
         <>
-          Aucun meilleur joueur <br />
+          Aucun meilleur joueur
           pour le moment !
         </>
       );
@@ -66,10 +66,9 @@ const GameScore = ({ gameName, isUserScore, userNickname, navigateToGame, getBes
         {/* Utilisation de balises HTML normales pour afficher le texte */}
         <h3 className={`score-text ${isUserScore ? "fixed" : ""}`}>{message}</h3>
       </div>
-      {/* Afficher le nom du jeu */}
-      <h2 className="floating-text">{gameName}</h2>
+      {/* Afficher le nom du jeu
+      <h2 className="floating-text">{gameName}</h2> */}
     </div>
   );
 };
-
 export default GameScore;
