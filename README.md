@@ -17,7 +17,7 @@ Bienvenue sur notre application web de mini jeux rétro, une collection passionn
 
 ## Comment Jouer
 
-Visitez https://RetroRush.fr depuis n'importe quel navigateur moderne pour commencer à jouer immédiatement. Rentrez votre pseudo appuyez sur Entrer. Sélectionnez le jeu auquel vous souhaitez jouer dans le menu principal et laissez-vous guider par les instructions à l'écran pour chaque jeu.
+Visitez https://retrorush.cloud/ depuis n'importe quel navigateur moderne pour commencer à jouer immédiatement. Rentrez votre pseudo appuyez sur Entrer. Sélectionnez le jeu auquel vous souhaitez jouer dans le menu principal et laissez-vous guider par les instructions à l'écran pour chaque jeu.
 
 ## Technologies Utilisées
 
