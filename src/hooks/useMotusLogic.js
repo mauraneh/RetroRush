@@ -20,7 +20,6 @@ const useMotusLogic = () => {
             fetchRandomWord().then(word => {
                 setWord(word);
                 setDisplayWord(word[0] + '_'.repeat(word.length - 1));
-
             });
         }
     }, [isGameActive]);
@@ -30,36 +29,42 @@ const useMotusLogic = () => {
         setIsGameLost(false);
         setIsGameActive(true);
         setScore(0);
+        setUserAttempts([]);
         setAttemptsLeft(6);
     };
 
     const checkAttempt = (attempt) => {
         let newDisplayWord = displayWord.split('');
+        let correctGuess = true;
+
         let attemptDetails = attempt.split('').map((char, index) => {
+            const isCorrect = word.toLowerCase()[index] === char.toLowerCase();
+            if (isCorrect) {
+                newDisplayWord[index] = char;
+            } else {
+                correctGuess = false;
+            }
             return {
                 char,
-                correct: word.toLowerCase()[index] === char.toLowerCase()
+                correct: isCorrect
             };
         });
 
         setUserAttempts([...userAttempts, attemptDetails]);
+        setDisplayWord(newDisplayWord.join(''));
 
-        if (attempt.toLowerCase() === word.toLowerCase()) {
-            setIsGameWin(true);
-            setIsGameActive(false);
-            const newScore = attemptsLeft * 10; // Exemple de calcul de score
-            setScore(newScore);
-            if (newScore > bestScore) {
-                setBestScore(newScore);
-                localStorage.setItem(`${userNickname}_Motus_bestScore`, newScore.toString());
-            }
-        } else {
-            attempt.split('').forEach((char, index) => {
-                if (word.toLowerCase()[index] === char.toLowerCase()) {
-                    newDisplayWord[index] = char; // Révéler la lettre correcte à la bonne position
+        if (correctGuess || attempt.toLowerCase() === word.toLowerCase()) {
+            setTimeout(() => {
+                setIsGameWin(true);
+                setIsGameActive(false);
+                const newScore = attemptsLeft * 10;
+                setScore(newScore);
+                if (newScore > bestScore) {
+                    setBestScore(newScore);
+                    localStorage.setItem(`${userNickname}_Motus_bestScore`, newScore.toString());
                 }
-            });
-            setDisplayWord(newDisplayWord.join(''));
+            }, 500);
+        } else {
             setAttemptsLeft(attemptsLeft - 1);
             if (attemptsLeft <= 1) {
                 setIsGameLost(true);
@@ -67,6 +72,7 @@ const useMotusLogic = () => {
             }
         }
     };
+
 
     return { isGameLost, isGameWin, score, bestScore, isGameActive, initializeGame, checkAttempt, displayWord, attemptsLeft };
 };

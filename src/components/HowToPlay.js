@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import arrowRightIcon from "../assets/images/icon/arrow-right.png";
 import ExpansionPanel from "./ExpansionPanel";
 
-//////////////////// gameToExplain === titre du jeux h1 du composant parent. ////////////////////
 const HowToPlay = ({gameToExplain, setDifficulty, botDifficulty}) =>  {
     const [isClick, setIsClick] = useState(false);
 

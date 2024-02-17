@@ -1,6 +1,4 @@
 import React from "react";
-import keyBoardQ from "../assets/images/icon/lettre-q.png";
-import keyBoardD from "../assets/images/icon/lettre-d.png";
 import cursor from "../assets/images/icon/icons8-curseur-unscreen.gif";
 import BestScoresModal from "./bestScoreModal/BestScoresModal";
 import { useSpeed } from "../Context/Speedcontext";
@@ -10,9 +8,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faArrowsRotate} from '@fortawesome/free-solid-svg-icons';
 
-/* POSSIBILITEE DE METTRE PARAMETRES POUR CHANGER LES REGLAGES D'UNE PARTIE
-EXEMPLE : VITESSE SERPENT
- */
 
 const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
      const navigate = useNavigate();

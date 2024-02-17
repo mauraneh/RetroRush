@@ -5,18 +5,16 @@ import { useTetris } from "../Context/TetrisContext";
 
 
 
-export const BLOCK_SIZE = 40; // Taille d'un bloc en pixels
+export const BLOCK_SIZE = 40; // px
 export const CANVAS_WIDTH = 500;
 export const CANVAS_HEIGHT = 500;
 
-// Calcule le nombre de colonnes et de lignes en fonction de la taille du canvas et de la taille des blocs
 export const COLS = Math.floor(CANVAS_WIDTH / BLOCK_SIZE);
 export const ROWS = Math.floor(CANVAS_HEIGHT / BLOCK_SIZE);
 
 
 const createEmptyBoard = () => Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 
-// const createEmptyBoard = () => Array.from({ length: 40 }, () => Array(30).fill(0));
 
 const useTetrisLogic = () => {
     const { speedTetris } = useTetris(1000);
