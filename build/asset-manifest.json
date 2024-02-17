@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "https://retrorush.cloud/static/css/main.faa4f1b7.css",
-    "main.js": "https://retrorush.cloud/static/js/main.7a9f699d.js",
+    "main.css": "https://retrorush.cloud/static/css/main.1dc65731.css",
+    "main.js": "https://retrorush.cloud/static/js/main.163d081c.js",
     "static/js/787.a4a0aefc.chunk.js": "https://retrorush.cloud/static/js/787.a4a0aefc.chunk.js",
     "static/media/background.png": "https://retrorush.cloud/static/media/background.95828dc9b3f573233bfa.png",
     "static/media/tictactoeBG.png": "https://retrorush.cloud/static/media/tictactoeBG.6db2ba490c25812a5747.png",
     "static/media/breakoutBG.png": "https://retrorush.cloud/static/media/breakoutBG.1bab9c9ce1a448e71ed4.png",
+    "static/media/motusBG.png": "https://retrorush.cloud/static/media/motusBG.d025d80461438645f5a1.png",
     "static/media/motus.png": "https://retrorush.cloud/static/media/motus.f0ce48341ebbbc9f49e2.png",
     "static/media/breakout.png": "https://retrorush.cloud/static/media/breakout.a1d867d87ccc688769f2.png",
     "static/media/snakesBG.png": "https://retrorush.cloud/static/media/snakesBG.ff8599190f16e7398752.png",
@@ -22,12 +23,12 @@
     "static/media/slick.ttf": "https://retrorush.cloud/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "https://retrorush.cloud/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "https://retrorush.cloud/index.html",
-    "main.faa4f1b7.css.map": "https://retrorush.cloud/static/css/main.faa4f1b7.css.map",
-    "main.7a9f699d.js.map": "https://retrorush.cloud/static/js/main.7a9f699d.js.map",
+    "main.1dc65731.css.map": "https://retrorush.cloud/static/css/main.1dc65731.css.map",
+    "main.163d081c.js.map": "https://retrorush.cloud/static/js/main.163d081c.js.map",
     "787.a4a0aefc.chunk.js.map": "https://retrorush.cloud/static/js/787.a4a0aefc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.faa4f1b7.css",
-    "static/js/main.7a9f699d.js"
+    "static/css/main.1dc65731.css",
+    "static/js/main.163d081c.js"
   ]
 }
