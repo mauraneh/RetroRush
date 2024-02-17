@@ -31,6 +31,10 @@
   background-image: url("/src/assets/images/tetrisBG.png");
 }
 
+.motus {
+  background-image: url("/src/assets/images/motusBG.png");
+}
+
 .title span {
   display: inline-block;
   animation: fade 2s infinite, color 5s infinite;
@@ -209,5 +213,21 @@ td.span.bot-symbol {
   to {
     text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
     box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+  }
+}
+
+.formMotus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+  input {
+    width: 90%;
+  }
+  button {
+    margin: auto;
+    margin-left: 35%;
   }
 }
