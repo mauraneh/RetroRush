@@ -1,6 +1,4 @@
 import React from "react";
-import keyBoardQ from "../assets/images/icon/lettre-q.png";
-import keyBoardD from "../assets/images/icon/lettre-d.png";
 import cursor from "../assets/images/icon/icons8-curseur-unscreen.gif";
 import BestScoresModal from "./bestScoreModal/BestScoresModal";
 import { useSpeed } from "../Context/Speedcontext";
@@ -10,9 +8,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faArrowsRotate} from '@fortawesome/free-solid-svg-icons';
 
-/* POSSIBILITEE DE METTRE PARAMETRES POUR CHANGER LES REGLAGES D'UNE PARTIE
-EXEMPLE : VITESSE SERPENT
- */
 
 const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
      const navigate = useNavigate();
@@ -84,6 +79,16 @@ const handleDifficultyClick = (difficulty) => {
                         />
                     </div>
                 </div>
+            );
+        case 'Motus':
+            return (
+                <div className="expansionPanel">
+                    <h1>Motus</h1>
+                    <p className="gameTagline">Trouvez le mot caché en devinant les lettres une par une !</p>
+                    <p className="subgameTagline">Chaque bonne lettre à sa place vous rapproche du mot mystère, mais
+                        attention au nombre d'essais limités.</p>
+                </div>
+
             );
         case 'Snake':
             return (
