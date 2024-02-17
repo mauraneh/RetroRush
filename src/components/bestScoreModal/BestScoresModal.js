@@ -91,8 +91,9 @@ const BestScoresModal = ({ onClose }) => {
   return (
     <div className="best-scores-modal">
       <div className="Title">
-        <h1>Mes meilleurs scores</h1>
+        <h1>Les scores</h1>
       </div>
+      <div className="best-scores-container">
       {userNickname && (
         <>
           <ScoreButton
@@ -105,13 +106,14 @@ const BestScoresModal = ({ onClose }) => {
             buttonType="all"
             selectedButton={selectedButton}
             handleButtonClick={() => handleButtonClick("all")}
-            label="Meilleurs Scores"
+            label="Tous les scores"
           />
           {mountedItems.includes("user") && renderScores(gameNames)}
           {mountedItems.includes("all") && renderScores(gameNames)}
         </>
       )}
-    </div>
+      </div>
+      </div>
   );
 };
 

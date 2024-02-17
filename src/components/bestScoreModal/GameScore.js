@@ -20,14 +20,14 @@ const GameScore = ({ gameName, userNickname,getBestPlayerData, viewOnlyUser}) =>
     if (score > 0) {
       message = (
         <>
-          Bravo {userNickname} !
+          Bravo {userNickname} ! <br />
           Ton meilleur score est {score}
         </>
       );
     } else {
       message = (
         <>
-          Let's go {userNickname} !
+          Let's go {userNickname} !  <br />
           Jouons au {gameName}
         </>
       );
@@ -37,14 +37,14 @@ const GameScore = ({ gameName, userNickname,getBestPlayerData, viewOnlyUser}) =>
       if (userNickname === bestPlayerNickname) {
         message = (
           <>
-            Bravo !
+            Bravo !  <br />
             Tu as obtenu le meilleur score : {score}
           </>
         );
       } else {
         message = (
           <>
-            Bravo à {bestPlayerNickname} !
+            Bravo à {bestPlayerNickname} !  <br />
             Il a obtenu {score}
           </>
         );
@@ -52,7 +52,7 @@ const GameScore = ({ gameName, userNickname,getBestPlayerData, viewOnlyUser}) =>
     } else {
       message = (
         <>
-          Aucun meilleur joueur
+          Aucun meilleur joueur  <br />
           pour le moment !
         </>
       );

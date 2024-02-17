@@ -1,38 +1,49 @@
 /* Ajoutez ces styles à votre fichier CSS */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+.best-scores-modal{
+background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c4, #9458cd, #b065ef, #c47ef7, #711e99, #590d82, #360046);
+        width: 100%;
+         border-radius: 20px;
 
-button {
+}
+.best-scores-container button {
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  /* display: inline-block; */
+    font-family: "Righteous", sans-serif;
+  display: inline;
   align-items: center;
   font-size: 15px;
+  height:auto;
   font-weight: 900;
-  width: auto;
+  width: 45%;
   cursor: pointer;
-  margin: 2px;
-  margin-left: 20px;
+  margin: 2%;
+  /* margin-left: 20px; */
   text-transform: uppercase;
-  background-color: #fff;
+  /* background-image: linear-gradient(to left top, #fff, #ffcc00, #b065ef, #ff00ff, #ffcc00, #c47ef7, #ff00ff); */
+   background-color: #fff; 
   color: #6705d6;
   transition: background-color 0.3s ease; /* Ajout de la transition de couleur de fond */
 }
-button:hover{
-    background-color: #6705d6;
+.best-scores-container button:hover{
+  background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
   color: #fff;
 
 }
 
-button.selected {
+.best-scores-container button.selected {
   /* Couleur de fond pour l'état sélectionné */
   color: #fff;
-  background-color: #6705d6;
+  background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
+
   
 }
-button:active{
-      box-shadow: 0 1px #09F;
+.best-scores-container button:active{
+      box-shadow: 0 2px linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
     transform: translateY(3px);
 }
 
@@ -59,8 +70,6 @@ button:active{
   color: #fff;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-    font-family: 'Press Start 2P', cursive;
-
 }
 
 .best-scores-modal .game-container:hover .game-info {
@@ -72,27 +81,26 @@ button:active{
   padding: 2.5%;
   text-align: center;
   position: relative;
-  color: #6705d6;
-  background-color: #fff;
-  opacity: 0.8;
+  color: #fff;
+  background-color: #590d82;
+  opacity: 0.9;
   display: inline-block;
   margin-left: 5.2%;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Righteous", sans-serif;
   margin-top: 3%;
-    font-size: 1rem;
+    font-size: 1.5rem;
 
 
 }
 
 .best-scores-modal .score-text {
-  font-size: 0.8rem;
-  text-align: center;
+  font-size: 1rem;
   transition: transform 0.5s ease-in-out;
-    background-color: #6705d6;
+  background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
     opacity: 0.7;
     padding:10%;
     border-radius: 20%;
-    line-height: 1.5;
+    line-height: 1.2;
 
 }
 
@@ -128,19 +136,49 @@ font-size: 0.8rem;
 .best-scores-modal .floating-text.show{
     width: 34%;
   z-index: 4;
-  background-color: #6705d6;
-  border: none;
+background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
   color: #fff;
   padding: 3% 0%;
-  animation: clignotement-vif 0.5s infinite;
+  animation: clignotement-vif-modal 0.5s infinite;
   border-radius: 50%;
   cursor: pointer;
   margin-left: 7%;
   font-size: 1rem;
-  box-shadow: 0 10px rgb(45, 29, 95);
-  
+  box-shadow: 0 10px rgb(45, 29, 95);  
   margin-bottom: 6%;
   font-family: 'Press Start 2P', cursive;
+}
+.best-scores-modal .Title h1 {
+  text-align: center;
+    color: #fff;
+}
+.best-scores-modal .Title {
+  font-family: "Righteous", sans-serif;
+  padding: 2%;
+  font-size: 0.8rem;
+  text-align: center;
+  position: relative;
+  color: #fff; /* Couleur du texte */
+}
+
+.best-scores-modal .Title::before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 60%;
+  top: 18%;
+  left: 17%;
+  border-radius: 8px; /* Ajustez selon vos préférences */
+  box-shadow: 0 0 10px 5px #9321a2; /* Couleur de lueur néon */
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  animation: neon-glow 1s infinite alternate; /* Animation de clignotement */
+}
+
+@keyframes neon-glow {
+  to {
+    opacity: 1;
+  }
 }
 
 /* Ajoutez ce style à votre feuille de style CSS */
@@ -156,12 +194,13 @@ font-size: 0.8rem;
     }
 }
 
-@keyframes clignotement-vif {
+@keyframes clignotement-vif-modal {
     0%, 100% {
-        background-color: #09F;
+        background-color: #6705d6;
     }
     50% {
-        background-color: #F00;
-        box-shadow: 0 10px rgb(218, 12, 12);
+      background-image: linear-gradient(to left top, #fff, #b065ef, #ff00ff);
+        box-shadow: 0 10px linear-gradient(to left top, #fff, #ff00ff);
+        
     }
 }

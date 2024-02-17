@@ -51,6 +51,20 @@
 
 .settings-icon:hover {
   filter: grayscale(0%) brightness(1.5);
+  
+}
+.settings-button:hover {
+     background-color: #80e7d4;
+}
+.settings-button{
+   cursor: pointer;
+   border-radius: 15%;
+   margin-right: 0.5%;
+   width: 4%;
+}
+.settings-button:active{
+      box-shadow: 0 1px #09F;
+    transform: translateY(3px);
 }
 
 /* Style pour le formulaire de modification du nom d'utilisateur */
