@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/css/bestscoremodal.css";
 import { useNavigate } from 'react-router-dom';
 import ScoreButton from "./ScoreButton";
@@ -13,10 +13,14 @@ const BestScoresModal = ({ onClose }) => {
   const [viewOnlyUser, setViewOnlyUser] = useState(true);
   const [isHoveredState, setIsHoveredState] = useState({});
 
+  useEffect(() => {
+    handleButtonClick("user");
+  }, []);
 
   const handleButtonClick = (buttonType) => {
     setMountedItems([buttonType]);
     setSelectedButton(buttonType);
+        setViewOnlyUser(buttonType === "user");
   };
 
   const navigateToGame = (gameName) => {
@@ -47,8 +51,6 @@ const BestScoresModal = ({ onClose }) => {
   };
 
   const renderGameScore = (gameName, index, isUserScore) => {
-    const bestPlayerData = getBestPlayerData(gameName);
-
 
     return (
       <div
@@ -61,7 +63,6 @@ const BestScoresModal = ({ onClose }) => {
         <div className="game-info">
           <GameScore
             gameName={gameName}
-            isUserScore={isUserScore}
             userNickname={userNickname}
             getBestPlayerData={getBestPlayerData}
             viewOnlyUser={viewOnlyUser}
@@ -69,7 +70,7 @@ const BestScoresModal = ({ onClose }) => {
         </div>
         {/* Afficher le nom du jeu */}
         {isHoveredState[gameName] ? (
-          <h2 className={`floating-text ${isUserScore ? "" : "show"}`} onClick={() => navigateToGame(gameName)}>
+          <h2 className={`floating-text ${viewOnlyUser ? "play-text" : "show"}`} onClick={() => navigateToGame(gameName)}>
             JOUER
           </h2>
         ) : (

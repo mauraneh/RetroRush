@@ -1,6 +1,6 @@
-const GameScore = ({ gameName, isUserScore, userNickname,getBestPlayerData}) => {
+const GameScore = ({ gameName, userNickname,getBestPlayerData, viewOnlyUser}) => {
   // Obtenir les données du meilleur joueur pour le jeu en cours
-  const bestPlayerData = getBestPlayerData(gameName, isUserScore);
+  const bestPlayerData = getBestPlayerData(gameName, viewOnlyUser);
 
   // Initialiser les variables pour le score et le nom du meilleur joueur
   let score = 0;
@@ -16,7 +16,7 @@ const GameScore = ({ gameName, isUserScore, userNickname,getBestPlayerData}) => 
   // Initialiser le message en fonction du résultat
   let message;
 
-  if (isUserScore) {
+  if (viewOnlyUser) {
     if (score > 0) {
       message = (
         <>
@@ -37,7 +37,7 @@ const GameScore = ({ gameName, isUserScore, userNickname,getBestPlayerData}) => 
       if (userNickname === bestPlayerNickname) {
         message = (
           <>
-            Bravo à toi !
+            Bravo !
             Tu as obtenu le meilleur score : {score}
           </>
         );
@@ -64,7 +64,7 @@ const GameScore = ({ gameName, isUserScore, userNickname,getBestPlayerData}) => 
     <div className={`game-container visible`}>
       <div className="game-info">
         {/* Utilisation de balises HTML normales pour afficher le texte */}
-        <h3 className={`score-text ${isUserScore ? "fixed" : ""}`}>{message}</h3>
+        <h3 className={`score-text ${viewOnlyUser ? "fixed" : ""}`}>{message}</h3>
       </div>
       {/* Afficher le nom du jeu
       <h2 className="floating-text">{gameName}</h2> */}

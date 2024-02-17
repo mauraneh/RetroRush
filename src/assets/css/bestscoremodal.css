@@ -3,7 +3,7 @@
 button {
   border: none;
   border-radius: 10px;
-  padding: 10px 10px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -19,11 +19,21 @@ button {
   color: #6705d6;
   transition: background-color 0.3s ease; /* Ajout de la transition de couleur de fond */
 }
+button:hover{
+    background-color: #6705d6;
+  color: #fff;
+
+}
 
 button.selected {
   /* Couleur de fond pour l'état sélectionné */
   color: #fff;
   background-color: #6705d6;
+  
+}
+button:active{
+      box-shadow: 0 1px #09F;
+    transform: translateY(3px);
 }
 
 .best-scores-modal .floating-text {
@@ -43,12 +53,14 @@ button.selected {
   position: absolute;
   width: 53%;
   top: 60%;
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+    font-family: 'Press Start 2P', cursive;
+
 }
 
 .best-scores-modal .game-container:hover .game-info {
@@ -56,36 +68,32 @@ button.selected {
 }
 
 .best-scores-modal h2 {
-  width: 120px;
-  padding: 2px;
+  width: 34%;
+  padding: 2.5%;
   text-align: center;
   position: relative;
   color: #6705d6;
   background-color: #fff;
-  opacity: 0.5;
+  opacity: 0.8;
   display: inline-block;
-  margin-left: 5%;
-}
+  margin-left: 5.2%;
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 3%;
+    font-size: 1rem;
 
-.best-scores-modal .game-container:hover h2 {
-    z-index: 4;
-    background-color: #6705d6;
-    border: none;
-    color: white;
-    padding: 2px 2px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.8rem;
-    box-shadow: 0 10px rgb(1, 85, 141);
-      margin-bottom: 6%;
 
 }
-
 
 .best-scores-modal .score-text {
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   transition: transform 0.5s ease-in-out;
+    background-color: #6705d6;
+    opacity: 0.7;
+    padding:10%;
+    border-radius: 20%;
+    line-height: 1.5;
+
 }
 
 .best-scores-modal .game-container:hover .score-text {
@@ -96,12 +104,12 @@ button.selected {
   opacity: 1 !important;
 }
 .best-scores-modal .game-container:hover button {
-  transform: scale(1.5) translateX(20px);
+  transform: scale(1.5) translateX(50px);
 }
 
 .best-scores-modal .score-label {
   font-size: 1rem;
-  margin: 15% 0 0 15%;
+  margin: 17% 0 0 18%;
   transform-origin: center;
   text-align: center;
   color: #fff;
@@ -111,11 +119,49 @@ button.selected {
 font-size: 0.8rem;
   margin: 0;
   transform-origin: center;
-    margin: 40px 10px 10px 100px;
+    margin: 0px 10px 10px 100px;
   transition: transform 0.5s ease-in-out;
   transform: translateX(60px);
   width: 100px;
 }
+.best-scores-modal .floating-text.play-text,
+.best-scores-modal .floating-text.show{
+    width: 34%;
+  z-index: 4;
+  background-color: #6705d6;
+  border: none;
+  color: #fff;
+  padding: 3% 0%;
+  animation: clignotement-vif 0.5s infinite;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 7%;
+  font-size: 1rem;
+  box-shadow: 0 10px rgb(45, 29, 95);
+  
+  margin-bottom: 6%;
+  font-family: 'Press Start 2P', cursive;
+}
+
 /* Ajoutez ce style à votre feuille de style CSS */
 
 
+/* --------  KEYFRAME ---------- */
+@keyframes clignotement {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes clignotement-vif {
+    0%, 100% {
+        background-color: #09F;
+    }
+    50% {
+        background-color: #F00;
+        box-shadow: 0 10px rgb(218, 12, 12);
+    }
+}
