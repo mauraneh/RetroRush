@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Slider from "react-slick";
 import logo from '../assets/images/logoRR.png';
 import snakeImage from '../assets/images/snakes.png';

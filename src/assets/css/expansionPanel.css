@@ -28,6 +28,23 @@
         text-align: center;
         color: black;
     }
+    button{
+        border-radius: 45%;
+        font-size: 20px;
+        bottom: 20px;
+    right: 20px;
+    width: 250px;
+    height: 50px;
+    background-color: #c47ef7;
+    color: #6705d6;
+        cursor: pointer;
+
+    }
+    button.selected {
+        background-color: #6705d6;
+        color: #fff;
+
+    }
     .instructions {
         height: 100%;
         width: 100%;

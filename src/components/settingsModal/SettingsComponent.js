@@ -3,12 +3,17 @@ import "../../assets/css/settingsmodal.css";
 import UserButton from './UserButton';
 import CloseButton from './CloseButton';
 import BrightnessButton from './BrightnessButton';
+import SoundEffectsButton from './SoundEffectsButton';
 
 const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
   // State pour gérer le bouton actif et d'autres états
   const [activeButton, setActiveButton] = useState(null);
   const [newUsername, setNewUsername] = useState(userNickname);
   const [brightnessValue, setBrightnessValue] = useState(100);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(
+  JSON.parse(localStorage.getItem('soundPreference')) ?? true
+);
+
 
   // Effet pour mettre à jour la luminosité lorsque la valeur change
   useEffect(() => {
@@ -36,6 +41,13 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
     setActiveButton(null);
   };
 
+  const handleSoundToggle = () => {
+  const newSoundPreference = !isSoundEnabled;
+  localStorage.setItem('soundPreference', JSON.stringify(newSoundPreference));
+  setIsSoundEnabled(newSoundPreference);
+};
+
+
   return (
     <div className="settings-modal">
       <h1>SETTINGS</h1>
@@ -55,6 +67,15 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
         onClick={() => handleButtonClick('brightness')}
         brightnessValue={brightnessValue}
         onChange={handleBrightnessChange}
+        onReturn={handleReturn}
+      />
+      {/* Composant SoundEffectsToggle */}
+      <SoundEffectsButton
+        key={Date.now()}
+        active={activeButton}
+        onClick={() => handleButtonClick('soundEffects')}
+        isSoundEnabled={isSoundEnabled}
+        onToggle={handleSoundToggle}
         onReturn={handleReturn}
       />
       {/* Composant CloseButton */}

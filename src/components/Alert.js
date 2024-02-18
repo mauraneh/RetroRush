@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-
 const Alert = ({ status, message, onRestart, show }) => {
     const renderContent = () => {
         if (status === 'win') {

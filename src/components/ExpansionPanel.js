@@ -146,7 +146,7 @@ const handleDifficultyClick = (difficulty) => {
             Avancé
           </button>
           <button
-            className={botDifficulty === 'hard' ? 'selected' : ''}
+            className={ botDifficulty === 'hard' ? 'selected' : ''}
             onClick={() => handleDifficultyClick('hard')}
           >
             Difficile

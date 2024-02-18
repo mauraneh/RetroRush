@@ -4,8 +4,9 @@ import Cell from "../components/TicTacToeCell";
 import GameTitle from "../components/GameTitle";
 import useTicTacToeLogic from "../hooks/useTicTacToeLogic";
 import Score from "../components/Score";
-import Alert from "../components/Alert";
 import HowToPlay from "../components/HowToPlay";
+import PlayButton from "../components/BtnPlay";
+
 
 const TicTacToeScreen = () => {
   const {
@@ -20,16 +21,16 @@ const TicTacToeScreen = () => {
     botSymbol,
     alert,
     bestScore,
+    botDifficulty,
+    setDifficulty,
     displayBoard,
     addClickEventHandlers,
     handleCellClick,
-    setIsGameActive,
     resetGame,
   } = useTicTacToeLogic();
 
- const [botDifficulty, setBotDifficulty] = useState("easy");
-  const setDifficulty = (difficulty) => {
-    setBotDifficulty(difficulty);
+  const setBotDifficulty = (difficulty) => {
+    setDifficulty(difficulty);
   };
   
   useEffect(() => {
@@ -74,17 +75,9 @@ const TicTacToeScreen = () => {
           </table>
            <HowToPlay
           gameToExplain={gameName}
-          setDifficulty={setDifficulty} // fonction setDifficulty en tant que prop
+          setDifficulty={setBotDifficulty} // fonction setDifficulty en tant que prop
           botDifficulty={botDifficulty}
         />
-          {alert.show && (
-            <Alert
-              status={alert.type}
-              message={alert.message}
-              onRestart={resetGame}
-              show={alert.show}
-            />
-          )}
           <Score
             tictactoe={"yes"}
             bestScore={bestScore}
@@ -96,11 +89,9 @@ const TicTacToeScreen = () => {
             isGameActive={isGameActive}
           />
         </div>
-        {!isGameActive && (
-          <button id="start-button" onClick={() => setIsGameActive(true)}>
-            ▶
-          </button>
-        )}
+       {!isGameActive && (
+        <PlayButton initializeGame={resetGame} />
+      )}
         <div>
           <Link to="/homepage">
             <button className="retour-button button">Retour</button>

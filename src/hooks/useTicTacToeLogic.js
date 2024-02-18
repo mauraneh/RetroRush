@@ -53,6 +53,7 @@ const useTicTacToeLogic = () => {
   // Mettre à jour difficultés
 const setDifficulty = (difficulty) => {
   setBotDifficulty(difficulty);
+  setIsGameActive(false);
 };
 
   // Affiche le contenu de la grille
@@ -253,7 +254,7 @@ for (let i = 0; i < 3; i++) {
  const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
       // Mettre à jour le meilleur score si le score actuel est supérieur
-
+      setIsGameActive(false);
       setAlert({ show: true, type: type, message: message });
       setScore((prevScore) => prevScore + 1);
     }, 100);

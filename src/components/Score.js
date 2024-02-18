@@ -1,8 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
+import useSoundManager from "../hooks/useSoundManager";
 
 const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore,
     tictactoe, playerWins, draws, botWins }) => {
     let scoreBoardStyle, gameMessage;
+    const isSoundEnabled = JSON.parse(localStorage.getItem('soundPreference'));
+  const { playSound } = useSoundManager({ isSoundEnabled });
+
+    
+    // changer d'audio dès que les valeurs de isGameLost et isGameWin se mette à jour
+  useEffect(() => {
+    handleChange();
+  }, [isGameLost, isGameWin]);
+
+  const handleChange = async () => {
+      if (isSoundEnabled) {
+          if (isGameWin) {
+              const audioSrc = '/assets/sounds/winGame.mp3';
+                    playSound(audioSrc);
+
+            }
+          if(isGameLost){
+              const audioSrc = '/assets/sounds/gameOver.mp3';
+              playSound(audioSrc);
+          }
+      }
+  };
+
 
     if (isGameWin) {
         scoreBoardStyle = {
