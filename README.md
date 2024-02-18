@@ -8,6 +8,7 @@ Bienvenue sur notre application web de mini jeux rétro, une collection passionn
 - **Breakout** : Utilisez la raquette pour frapper la balle et détruire les briques au-dessus de vous. Ne laissez pas la balle tomber !
 - **Motus** : Trouvez le mot caché en devinant les lettres qui le composent, un jeu parfait pour les amateurs de mots.
 - **TicTacToe** : Le classique jeu du morpion, où le but est d'aligner trois de vos symboles avant votre adversaire.
+- **Tetris** : L'incontournable Tétris, où le but est d'assembler des blocs pour créer des lignes complètes. Le jeu continue jusqu'à ce que le joueur ne puisse plus placer de blocs.
 
 ## Fonctionnalités
 
