@@ -10,41 +10,41 @@ import {faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faArrowsRotate} from 
 
 
 const ExpansionPanel = ({ gameToExplain,setDifficulty, botDifficulty }) => {
-     const navigate = useNavigate();
-     const { speedBall, setSpeedBall } = useSpeed();
-     const { speedTetris, setSpeedTetris } = useTetris();
-     const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
-     const [showBestScoresModal, setShowBestScoresModal] = useState(false);
+    const navigate = useNavigate();
+    const { speedBall, setSpeedBall } = useSpeed();
+    const { speedTetris, setSpeedTetris } = useTetris();
+    const gameRoutes = ["/snake", "/breakout", "/motus", "/tictactoe", "/tetris"];
+    const [showBestScoresModal, setShowBestScoresModal] = useState(false);
 
-const handleDifficultyClick = (difficulty) => {
-    setDifficulty(difficulty);
-  };
-  const openBestScoresModal = () => {
-    setShowBestScoresModal(true);
-  };
-
-  const closeBestScoresModal = () => {
-    setShowBestScoresModal(false);
-  };
-
-  const selectRandomGame = () => {
-    const randomIndex = Math.floor(Math.random() * gameRoutes.length);
-    return gameRoutes[randomIndex];
+    const handleDifficultyClick = (difficulty) => {
+      setDifficulty(difficulty);
+    };
+  
+    const openBestScoresModal = () => {
+      setShowBestScoresModal(true);
     };
 
+    const closeBestScoresModal = () => {
+      setShowBestScoresModal(false);
+    };
+
+    const selectRandomGame = () => {
+      const randomIndex = Math.floor(Math.random() * gameRoutes.length);
+      return gameRoutes[randomIndex];
+    };
 
     const handleSpeedChange = (event) => {
         if (setSpeedBall) {
             setSpeedBall(Number(event.target.value));
         } else {
             setSpeedBall(3);
-        }
+      }
     };
+  
     const handleTetrisChange = (event) => {
         if (setSpeedTetris) {
-           setSpeedTetris(Number(event.target.value));
-        } else {
-        }
+          setSpeedTetris(Number(event.target.value));
+        } 
     };
 
     // eslint-disable-next-line default-case
@@ -146,7 +146,7 @@ const handleDifficultyClick = (difficulty) => {
             Avancé
           </button>
           <button
-            className={ botDifficulty === 'hard' ? 'selected' : ''}
+            className={botDifficulty === 'hard' ? 'selected' : ''}
             onClick={() => handleDifficultyClick('hard')}
           >
             Difficile

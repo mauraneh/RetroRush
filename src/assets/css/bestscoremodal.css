@@ -1,19 +1,18 @@
 /* Ajoutez ces styles à votre fichier CSS */
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 .best-scores-modal{
-background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c4, #9458cd, #b065ef, #c47ef7, #711e99, #590d82, #360046);
-        width: 100%;
-         border-radius: 20px;
-
+  background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c4, #9458cd, #b065ef, #c47ef7, #711e99, #590d82, #360046);
+  width: 100%;
+  border-radius: 20px;
 }
+
 .best-scores-container button {
   border: none;
   border-radius: 10px;
   padding: 10px 10px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
-    font-family: "Righteous", sans-serif;
+  font-family: "Righteous", sans-serif;
   display: inline;
   align-items: center;
   font-size: 15px;
@@ -22,29 +21,25 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c
   width: 45%;
   cursor: pointer;
   margin: 2%;
-  /* margin-left: 20px; */
   text-transform: uppercase;
-  /* background-image: linear-gradient(to left top, #fff, #ffcc00, #b065ef, #ff00ff, #ffcc00, #c47ef7, #ff00ff); */
-   background-color: #fff; 
+  background-color: #fff; 
   color: #6705d6;
-  transition: background-color 0.3s ease; /* Ajout de la transition de couleur de fond */
+  transition: background-color 0.3s ease;
 }
-.best-scores-container button:hover{
+
+.best-scores-container button:hover {
   background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
   color: #fff;
-
 }
 
 .best-scores-container button.selected {
-  /* Couleur de fond pour l'état sélectionné */
   color: #fff;
   background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
-
-  
 }
-.best-scores-container button:active{
-      box-shadow: 0 2px linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
-    transform: translateY(3px);
+
+.best-scores-container button:active {
+  box-shadow: 0 2px linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
+  transform: translateY(3px);
 }
 
 .best-scores-modal .floating-text {
@@ -52,7 +47,6 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c
   height: auto;
   border-radius: 10px;
   margin-bottom: 10px;
-  /* transition: transform 0.5s ease-in-out; */
   cursor: pointer;
 }
 
@@ -88,29 +82,28 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c
   margin-left: 5.2%;
   font-family: "Righteous", sans-serif;
   margin-top: 3%;
-    font-size: 1.5rem;
-
-
+  font-size: 1.5rem;
 }
 
 .best-scores-modal .score-text {
   font-size: 1rem;
   transition: transform 0.5s ease-in-out;
   background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
-    opacity: 0.7;
-    padding:10%;
-    border-radius: 20%;
-    line-height: 1.2;
-
+  opacity: 0.7;
+  padding:10%;
+  border-radius: 20%;
+  line-height: 1.2;
 }
 
 .best-scores-modal .game-container:hover .score-text {
   transform: scale(1.5) translateX(50px);
 }
+
 .best-scores-modal .game-container:hover.score-text.fixed {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 .best-scores-modal .game-container:hover button {
   transform: scale(1.5) translateX(50px);
 }
@@ -124,19 +117,20 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #a756c
 }
 
 .best-scores-modal .game-info button {
-font-size: 0.8rem;
+  font-size: 0.8rem;
   margin: 0;
   transform-origin: center;
-    margin: 0px 10px 10px 100px;
+  margin: 0px 10px 10px 100px;
   transition: transform 0.5s ease-in-out;
   transform: translateX(60px);
   width: 100px;
 }
+
 .best-scores-modal .floating-text.play-text,
-.best-scores-modal .floating-text.show{
-    width: 34%;
+.best-scores-modal .floating-text.show {
+  width: 34%;
   z-index: 4;
-background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
+  background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a2);
   color: #fff;
   padding: 3% 0%;
   animation: clignotement-vif-modal 0.5s infinite;
@@ -148,17 +142,19 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a
   margin-bottom: 6%;
   font-family: 'Press Start 2P', cursive;
 }
+
 .best-scores-modal .Title h1 {
   text-align: center;
-    color: #fff;
+  color: #fff;
 }
+
 .best-scores-modal .Title {
   font-family: "Righteous", sans-serif;
   padding: 2%;
   font-size: 0.8rem;
   text-align: center;
   position: relative;
-  color: #fff; /* Couleur du texte */
+  color: #fff;
 }
 
 .best-scores-modal .Title::before {
@@ -168,11 +164,11 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a
   height: 60%;
   top: 18%;
   left: 17%;
-  border-radius: 8px; /* Ajustez selon vos préférences */
-  box-shadow: 0 0 10px 5px #9321a2; /* Couleur de lueur néon */
+  border-radius: 8px;
+  box-shadow: 0 0 10px 5px #9321a2; 
   opacity: 0;
   background-color: rgba(255, 255, 255, 0.4);
-  animation: neon-glow 1s infinite alternate; /* Animation de clignotement */
+  animation: neon-glow 1s infinite alternate; 
 }
 
 @keyframes neon-glow {
@@ -186,21 +182,20 @@ background-image: linear-gradient(to left top, #360046, #590d82, #711e99, #9321a
 
 /* --------  KEYFRAME ---------- */
 @keyframes clignotement {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+  0%, 100% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.5;
+  }
 }
 
 @keyframes clignotement-vif-modal {
-    0%, 100% {
-        background-color: #6705d6;
-    }
-    50% {
-      background-image: linear-gradient(to left top, #fff, #b065ef, #ff00ff);
-        box-shadow: 0 10px linear-gradient(to left top, #fff, #ff00ff);
-        
-    }
+  0%, 100% {
+    background-color: #6705d6;
+  }
+  50% {
+    background-image: linear-gradient(to left top, #fff, #b065ef, #ff00ff);
+    box-shadow: 0 10px linear-gradient(to left top, #fff, #ff00ff); 
+  }
 }

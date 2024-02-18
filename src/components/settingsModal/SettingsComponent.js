@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "../../assets/css/settingsmodal.css";
-import UserButton from './UserButton';
-import CloseButton from './CloseButton';
-import BrightnessButton from './BrightnessButton';
-import SoundEffectsButton from './SoundEffectsButton';
+import UserButton from "./UserButton";
+import CloseButton from "./CloseButton";
+import BrightnessButton from "./BrightnessButton";
+import SoundEffectsButton from "./SoundEffectsButton";
 
 const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
   // State pour gérer le bouton actif et d'autres états
@@ -11,9 +11,8 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
   const [newUsername, setNewUsername] = useState(userNickname);
   const [brightnessValue, setBrightnessValue] = useState(100);
   const [isSoundEnabled, setIsSoundEnabled] = useState(
-  JSON.parse(localStorage.getItem('soundPreference')) ?? true
-);
-
+    JSON.parse(localStorage.getItem("soundPreference")) ?? true
+  );
 
   // Effet pour mettre à jour la luminosité lorsque la valeur change
   useEffect(() => {
@@ -42,11 +41,10 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
   };
 
   const handleSoundToggle = () => {
-  const newSoundPreference = !isSoundEnabled;
-  localStorage.setItem('soundPreference', JSON.stringify(newSoundPreference));
-  setIsSoundEnabled(newSoundPreference);
-};
-
+    const newSoundPreference = !isSoundEnabled;
+    localStorage.setItem("soundPreference", JSON.stringify(newSoundPreference));
+    setIsSoundEnabled(newSoundPreference);
+  };
 
   return (
     <div className="settings-modal">
@@ -55,16 +53,16 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
       <UserButton
         active={activeButton}
         userNickname={userNickname}
-        onClick={() => handleButtonClick('user')}
+        onClick={() => handleButtonClick("user")}
         onEditUsername={handleEditUsername}
         newUsername={newUsername}
-              onReturn={handleReturn}
-              setNewUsername={setNewUsername}
+        onReturn={handleReturn}
+        setNewUsername={setNewUsername}
       />
       {/* Composant BrightnessButton */}
       <BrightnessButton
         active={activeButton}
-        onClick={() => handleButtonClick('brightness')}
+        onClick={() => handleButtonClick("brightness")}
         brightnessValue={brightnessValue}
         onChange={handleBrightnessChange}
         onReturn={handleReturn}
@@ -73,7 +71,7 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
       <SoundEffectsButton
         key={Date.now()}
         active={activeButton}
-        onClick={() => handleButtonClick('soundEffects')}
+        onClick={() => handleButtonClick("soundEffects")}
         isSoundEnabled={isSoundEnabled}
         onToggle={handleSoundToggle}
         onReturn={handleReturn}

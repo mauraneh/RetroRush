@@ -3,7 +3,7 @@ import useSoundManager from '../hooks/useSoundManager';
 
 const BtnPlay = ({ initializeGame }) => {
 const isSoundEnabled = JSON.parse(localStorage.getItem('soundPreference'));
-  const { playSound, audioRef } = useSoundManager({ initializeGame, isSoundEnabled });
+const { playSound, audioRef } = useSoundManager({ initializeGame, isSoundEnabled });
 
     const handleButtonClick = () => {
         //si le sound est activé joué le son sinon lancer le jeu 
@@ -13,16 +13,15 @@ const isSoundEnabled = JSON.parse(localStorage.getItem('soundPreference'));
         else {
             initializeGame();
         }
-  };
+    };
 
-  return (
+    return (
     <div>
-      <audio ref={audioRef}></audio>
-      <button id="start-button" onClick={handleButtonClick}>
+        <audio ref={audioRef}></audio>
+        <button id="start-button" onClick={handleButtonClick}>
         ▶
-      </button>
+        </button>
     </div>
-  );
+    );
 };
-
 export default BtnPlay;

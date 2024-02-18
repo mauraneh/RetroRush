@@ -11,7 +11,7 @@ const useTicTacToeLogic = () => {
     ["", "", ""],
     ["", "", ""],
   ]);
-/// Par défaut, le niveau est "facile"
+  /// Par défaut, le niveau est "facile"
   const [botDifficulty, setBotDifficulty] = useState("easy");
 
   // Symbole du joueur humain
@@ -46,15 +46,17 @@ const useTicTacToeLogic = () => {
   const gameName = "TicTacToe - Game";
 
   useEffect(() => {
-    localStorage.setItem(`${userNickname}_TicTacToe_bestScore`, bestScore.toString());
+    localStorage.setItem(
+      `${userNickname}_TicTacToe_bestScore`,
+      bestScore.toString()
+    );
   }, [bestScore, userNickname]);
-  
-   
+
   // Mettre à jour difficultés
-const setDifficulty = (difficulty) => {
-  setBotDifficulty(difficulty);
-  setIsGameActive(false);
-};
+  const setDifficulty = (difficulty) => {
+    setBotDifficulty(difficulty);
+    setIsGameActive(false);
+  };
 
   // Affiche le contenu de la grille
   const displayBoard = () => {
@@ -75,7 +77,7 @@ const setDifficulty = (difficulty) => {
   };
 
   // Ajoute des gestionnaires d'événements aux cellules
- const addClickEventHandlers = () => {
+  const addClickEventHandlers = () => {
     if (!isGameActive) {
       return;
     }
@@ -127,7 +129,7 @@ const setDifficulty = (difficulty) => {
     return false;
   };
 
-  // Vérifie s'il y a un match nul
+  // Vérifie s'il y a un match nul ou si toutes les cases sont remplies
   const checkDraw = () => {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -139,7 +141,7 @@ const setDifficulty = (difficulty) => {
     return true;
   };
 
-   // Gère le tour du bot
+  // Gère le tour du bot
   const botTurn = () => {
     // Vérification des conditions de fin du jeu
     if (checkWinner(playerSymbol) || checkWinner(botSymbol) || checkDraw()) {
@@ -150,35 +152,35 @@ const setDifficulty = (difficulty) => {
     let bestScore = -Infinity;
     let bestMove;
 
-// Exploration de tous les coups possibles
-for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 3; j++) {
-    // Vérification si la cellule est vide
-    if (board[i][j] === "") {
-      // Simulation du coup du bot dans la cellule
-      board[i][j] = botSymbol;
+    // Exploration de tous les coups possibles
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        // Vérification si la cellule est vide
+        if (board[i][j] === "") {
+          // Simulation du coup du bot dans la cellule
+          board[i][j] = botSymbol;
 
-      // Choix en fonction du niveau de difficulté
-      if (botDifficulty === "easy" && Math.random() < 0.5) {
-        bestMove = { row: i, col: j }; // 50% de chance de jouer aléatoirement
-      } else if (botDifficulty === "medium" && Math.random() < 0.8) {
-        bestMove = { row: i, col: j }; // 80% de chance de jouer aléatoirement
-      } else {
-        // Utilisation de l'algorithme minimax pour évaluer le score
-        let score = minimax(board, 0, false);
+          // Choix en fonction du niveau de difficulté
+          if (botDifficulty === "easy" && Math.random() < 0.5) {
+            bestMove = { row: i, col: j }; // 50% de chance de jouer aléatoirement
+          } else if (botDifficulty === "medium" && Math.random() < 0.8) {
+            bestMove = { row: i, col: j }; // 80% de chance de jouer aléatoirement
+          } else {
+            // Utilisation de l'algorithme minimax pour évaluer le score
+            let score = minimax(board, 0, false);
 
-        // Mise à jour du meilleur score et du meilleur coup
-        if (score > bestScore) {
-          bestScore = score;
-          bestMove = { row: i, col: j };
+            // Mise à jour du meilleur score et du meilleur coup
+            if (score > bestScore) {
+              bestScore = score;
+              bestMove = { row: i, col: j };
+            }
+          }
+
+          // Annulation du coup simulé
+          board[i][j] = "";
         }
       }
-
-      // Annulation du coup simulé
-      board[i][j] = "";
     }
-  }
-}
     // Application du meilleur coup du bot
     const { row, col } = bestMove;
     const updatedBoard = [...board];
@@ -195,9 +197,8 @@ for (let i = 0; i < 3; i++) {
     }
   };
 
-
-  // Fonction minimax pour le bot
   const minimax = (board, depth, isMaximizingPlayer) => {
+    // Évalue l'état actuel du plateau et retourne le score s'il y a un vainqueur
     let score = evaluateState();
 
     if (score !== undefined) {
@@ -205,14 +206,18 @@ for (let i = 0; i < 3; i++) {
     }
 
     if (isMaximizingPlayer) {
+      // Si c'est le tour du bot (maximizing player)
       let bestScore = -Infinity;
 
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           if (board[i][j] === "") {
+            // Simule le coup du bot et appelle récursivement minimax pour évaluer l'état résultant
             board[i][j] = botSymbol;
             let score = minimax(board, depth + 1, false);
-            board[i][j] = "";
+            board[i][j] = ""; // Annule le coup simulé
+
+            // Met à jour le meilleur score en prenant le maximum entre le score actuel et le meilleur score précédent
             bestScore = Math.max(score, bestScore);
           }
         }
@@ -220,14 +225,18 @@ for (let i = 0; i < 3; i++) {
 
       return bestScore;
     } else {
+      // Si c'est le tour du joueur (minimizing player)
       let bestScore = Infinity;
 
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           if (board[i][j] === "") {
+            // Simule le coup du joueur et appelle récursivement minimax pour évaluer l'état résultant
             board[i][j] = playerSymbol;
             let score = minimax(board, depth + 1, true);
-            board[i][j] = "";
+            board[i][j] = ""; // Annule le coup simulé
+
+            // Met à jour le meilleur score en prenant le minimum entre le score actuel et le meilleur score précédent
             bestScore = Math.min(score, bestScore);
           }
         }
@@ -251,9 +260,8 @@ for (let i = 0; i < 3; i++) {
   };
 
   // Fonction générique pour gérer la fin du jeu
- const handleGameEnd = (message, setScore, type) => {
+  const handleGameEnd = (message, setScore, type) => {
     setTimeout(() => {
-      // Mettre à jour le meilleur score si le score actuel est supérieur
       setIsGameActive(false);
       setAlert({ show: true, type: type, message: message });
       setScore((prevScore) => prevScore + 1);
@@ -268,9 +276,9 @@ for (let i = 0; i < 3; i++) {
       setBoard(updatedBoard);
 
       if (checkWinner(playerSymbol)) {
-            if ( playerWins + 1 > bestScore) {
-      setBestScore(playerWins + 1);
-    }
+        if (playerWins + 1 > bestScore) {
+          setBestScore(playerWins + 1);
+        }
         handleGameEnd("Tu as gagné !", setPlayerWins, "win");
       } else if (checkDraw()) {
         handleGameEnd("Match Nul !", setDraws, "error");

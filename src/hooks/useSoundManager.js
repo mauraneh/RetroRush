@@ -1,8 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 const useSoundsManager = ({ initializeGame, isSoundEnabled }) => {
   const audioRef = useRef();
-
   const playSound = async (src) => {
     try {
       if (isSoundEnabled) {
@@ -18,17 +17,17 @@ const useSoundsManager = ({ initializeGame, isSoundEnabled }) => {
         // Définir le volume à 1 (plein volume)
         audioRef.current.volume = 1;
 
-          // Ajouter une promesse pour gérer la fin de la lecture du son
-       await audioRef.current.play().then(() => {
+        // Ajouter une promesse pour gérer la fin de la lecture du son
+        await audioRef.current.play().then(() => {
           // Vérifier si les effets sonores sont activés et s'il existe une fonction d'initialisation du jeu
           if (isSoundEnabled && initializeGame !== undefined) {
             // Appeler la fonction d'initialisation du jeu
             initializeGame();
           }
         });
-      } 
+      }
     } catch (error) {
-      console.error('Erreur de lecture du son:', error);
+      console.error("Erreur de lecture du son:", error);
     }
   };
 
