@@ -1,8 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const CloseButton = ({ active, onClose }) => {
   return (
-    !active && <button className="brightlessbuton" onClick={onClose}>Fermer</button>
+    (!active || active === "soundEffects") && (
+      <button className="brightlessbuton" onClick={onClose}>
+        Fermer
+      </button>
+    )
   );
 };
 

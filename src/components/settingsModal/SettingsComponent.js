@@ -5,7 +5,12 @@ import CloseButton from "./CloseButton";
 import BrightnessButton from "./BrightnessButton";
 import SoundEffectsButton from "./SoundEffectsButton";
 
-const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
+const SettingsModal = ({
+  userNickname,
+  onClose,
+  onEditUsername,
+  handleClick,
+}) => {
   // State pour gérer le bouton actif et d'autres états
   const [activeButton, setActiveButton] = useState(null);
   const [newUsername, setNewUsername] = useState(userNickname);
@@ -21,22 +26,26 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
 
   // Fonction pour gérer le clic sur les boutons
   const handleButtonClick = (buttonName) => {
+    handleClick();
     setActiveButton(buttonName === activeButton ? null : buttonName);
   };
 
   // Fonction pour gérer la modification du nom d'utilisateur
   const handleEditUsername = () => {
+    handleClick();
     onEditUsername(newUsername);
   };
 
   // Fonction pour gérer le changement de luminosité
   const handleBrightnessChange = (value) => {
+    handleClick();
     const brightnessValue = Math.max(30, value);
     setBrightnessValue(brightnessValue);
   };
 
   // Fonction pour gérer le retour en arrière
   const handleReturn = () => {
+    handleClick();
     setActiveButton(null);
   };
 
@@ -68,14 +77,15 @@ const SettingsModal = ({ userNickname, onClose, onEditUsername }) => {
         onReturn={handleReturn}
       />
       {/* Composant SoundEffectsToggle */}
-      <SoundEffectsButton
-        key={Date.now()}
-        active={activeButton}
-        onClick={() => handleButtonClick("soundEffects")}
-        isSoundEnabled={isSoundEnabled}
-        onToggle={handleSoundToggle}
-        onReturn={handleReturn}
-      />
+      {activeButton !== "user" && activeButton !== "brightness" && (
+        <SoundEffectsButton
+          active={activeButton}
+          onClick={() => handleButtonClick("soundEffects")}
+          isSoundEnabled={isSoundEnabled}
+          onToggle={handleSoundToggle}
+          onReturn={handleReturn}
+        />
+      )}
       {/* Composant CloseButton */}
       <CloseButton active={activeButton} onClose={onClose} />
     </div>

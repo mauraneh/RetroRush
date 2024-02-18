@@ -10,12 +10,12 @@ const SoundEffectsButton = ({
   onReturn,
 }) => {
   const handleClick = () => {
-    // Inverse la valeur de la préférence de son
+    onClick();
     onToggle();
   };
   return (
     <div
-      className={`sound-effects ${active === "soundEffects" ? "active" : ""}`}
+      className={`soundEffects ${active === "soundEffects" ? "active" : ""}`}
     >
       <div className="icon-and-label" onClick={handleClick}>
         <img
@@ -25,13 +25,6 @@ const SoundEffectsButton = ({
         />
         <span>Effets Sonores</span>
       </div>
-      {active === "soundEffects" && (
-        <div>
-          <button className="brightlessbuton" onClick={onReturn}>
-            Retour
-          </button>
-        </div>
-      )}
     </div>
   );
 };
