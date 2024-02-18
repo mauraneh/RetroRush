@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
-import useSoundManager from "../hooks/useSoundManager";
-
+import useSoundsManager from "../hooks/useSoundManager";
 const Score = ({ isGameActive, isGameLost, isGameWin, score, bestScore,
     tictactoe, playerWins, draws, botWins }) => {
     let scoreBoardStyle, gameMessage;
     const isSoundEnabled = JSON.parse(localStorage.getItem('soundPreference'));
-  const { playSound } = useSoundManager({ isSoundEnabled });
+  const { playSound } = useSoundsManager({ isSoundEnabled });
 
     
     // changer d'audio dès que les valeurs de isGameLost et isGameWin se mette à jour
