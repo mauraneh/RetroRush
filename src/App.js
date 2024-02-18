@@ -10,7 +10,8 @@ import TicTacToeGame from "./screens/TicTacToeGame";
 import BreakOut from "./screens/BreakOut";
 import Tetris from "./screens/Tetris";
 import { SpeedProvider } from "./Context/Speedcontext";
-import {TetrisProvider} from "./Context/TetrisContext";
+import { TetrisProvider } from "./Context/TetrisContext";
+import useSoundsManager from "./hooks/useSoundManager";
 
 
 function App() {
@@ -36,8 +37,14 @@ function App() {
 function EnterNickname() {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
+  const isSoundEnabled = JSON.parse(localStorage.getItem('soundPreference') || 'true');
+  const { playSound, audioRef } = useSoundsManager({isSoundEnabled });
+
 
   const handleEnter = () => {
+    if (isSoundEnabled) {
+      playSound('/assets/sounds/click.mp3');
+    }
     if (nickname) {
       localStorage.setItem("userNickname", nickname);
     } else {
@@ -58,6 +65,7 @@ function EnterNickname() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
+          <audio ref={audioRef}></audio>
           <button className="app-button" onClick={handleEnter}>
             Enter
           </button>

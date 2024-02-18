@@ -18,11 +18,8 @@ const useSoundsManager = ({ initializeGame, isSoundEnabled }) => {
         // Définir le volume à 1 (plein volume)
         audioRef.current.volume = 1;
 
-        // Lancer la lecture du son
-        await audioRef.current.play();
-
-        // Ajouter une promesse pour gérer la fin de la lecture du son
-        audioRef.current.play().then(() => {
+          // Ajouter une promesse pour gérer la fin de la lecture du son
+       await audioRef.current.play().then(() => {
           // Vérifier si les effets sonores sont activés et s'il existe une fonction d'initialisation du jeu
           if (isSoundEnabled && initializeGame !== undefined) {
             // Appeler la fonction d'initialisation du jeu
