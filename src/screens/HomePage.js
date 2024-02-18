@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import logo from '../assets/images/logoRR.png';
 import snakeImage from '../assets/images/snakes.png';
@@ -28,12 +28,14 @@ function HomePage() {
       setUserNickname(newUsername);
     };
 
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-  };
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows: true,
+    };
 
   const games = [
     { img: snakeImage, link: "/snake", name: "Snake" },
@@ -52,6 +54,7 @@ function HomePage() {
           <img src={settingsIcon} alt="Settings"/>
         </button>
       </div>
+      <h2 className='subtitle-hp'>Mini Jeux Rétro</h2>
 
       {showSettings && (
           <SettingsModal
@@ -62,20 +65,20 @@ function HomePage() {
       )}
 
       <div className='container-carousel'>
-        <h2 className='subtitle-hp'>Mini Jeux Rétro</h2>
         <div className="slider-container">
-          <Slider {...settings}>
-            {games.map((game, index) => (
-              <div key={index} className='card'>
-                <img src={game.img} alt={game.name} className="card-image"/>
-                <Link to={game.link}>
-                  <button className='jouer-button'>Jouez</button>
-                </Link>
-              </div>
-            ))}
-          </Slider>
+        <Slider {...settings}>
+              {games.map((game, index) => (
+                <div key={index} className="game-card">
+                  <img className='card-image' src={game.img} alt={game.name}/>
+                  <Link to={game.link} className="jouer-link">
+                    <button className='jouer-button play-card'>Jouez</button>
+                  </Link>
+                </div>
+              ))}
+            </Slider>
         </div>
       </div>
+
       <Link to="/">
         <button className='retour-button button'>Retour</button>
       </Link>
